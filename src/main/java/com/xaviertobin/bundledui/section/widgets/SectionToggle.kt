@@ -13,7 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,11 +27,11 @@ fun SectionToggle(
     first: Boolean = false,
     last: Boolean = false,
     onToggled: (Boolean) -> Unit,
-) = SectionTextDescription(
+) = SectionTitleDescription(
         first = first,
         last = last,
         onClick = { onToggled(!toggledOn) },
-        text = text.capitalize(Locale.current),
+        title = text.capitalize(Locale.current),
         description = description,
         verticalPadding = 4.dp,
         contentEnd = {

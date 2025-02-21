@@ -62,7 +62,7 @@ fun SectionButtonSheet(
         last = last,
         selected = selected,
         modifier = modifier,
-        text = text,
+        title = text,
         description = description,
         icon = icon,
         tone = tone,
