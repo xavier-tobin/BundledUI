@@ -5,29 +5,34 @@
 
 ## Why?
 
-The Material3 library for Jetpack Compose is a powerful, flexible component suite for building
-beautiful Compose UIs, but it is comprised of atomic components that usually require wrapping and
-management of padding, margin and modifiers in order to create a consistent, beautiful UI.
+Material3 is a powerful suite of components for building beautiful Compose UIs, but it is comprised
+of [atom](http://atomicdesign.bradfrost.com/chapter-2/)
+components that require wrapping and management of padding, margin and modifiers in order to
+create a consistent, beautiful UI.
 
-Bundled UI is a higher level library, wrapping Material3 components with a consistent structure.
+Bundled UI is a higher-level library, built on top of Material3, that 
 
-Benefits
+### Benefits
 
 - Lightweight abstraction, minimal dependencies
 - Easy to use, hard to mis-use
 - Almost no padding or margin management required
 
-# Section
 
-A Section is a card with a few additional properties and features, including:
+# Components
 
-* onClick support
-* Tone support
-* focus support
-* disabled support
-* selected support (i.e can be toggled on/off)
+## Section
+
+A Section is the building block of organisms in Bundled UI. It is a simple card with the following features:
+
+* `onClick`/`onLongClick` support
+* `Tone` support (i.e. positive, warning, negative, etc.)
+* `focus` support (i.e. can be focused based on keyboard/mouse input)
+* `disabled` support
+* `selected` support (i.e can be toggled on/off)
 * Automatic margin and padding management
 * Orientation
+* `first` and `last` parameters to manage grouping, spacing and border-radius of neighbouring sections
 
 To build your UI, all you need to do is group related Sections, and correctly set the first and last
 parameters.
