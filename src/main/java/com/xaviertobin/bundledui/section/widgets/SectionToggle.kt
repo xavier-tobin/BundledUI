@@ -33,7 +33,7 @@ fun SectionToggle(
         last = last,
         onClick = { onToggled(!toggledOn) },
         text = text.capitalize(Locale.current),
-        description = description?.let { AnnotatedString(it) },
+        description = description,
         verticalPadding = 4.dp,
         contentEnd = {
             Switch(

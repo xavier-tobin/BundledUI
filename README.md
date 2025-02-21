@@ -1,6 +1,6 @@
-Bundled UI for Jetpack Compose
+# Bundled UI for Jetpack Compose
 
-A radically simple Material 3 UI design system, built for Bundled Notes.
+> A radically simple Material 3 UI design system, built for [Bundled Notes](https://play.google.com/store/apps/details?id=com.xaviertobin.noted).
 
 ## Why?
 

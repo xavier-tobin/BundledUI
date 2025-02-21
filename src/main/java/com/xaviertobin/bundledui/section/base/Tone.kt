@@ -24,7 +24,7 @@ fun textWarningColor() = MaterialTheme.colorScheme.onSurfaceVariant.blend(
 @Composable
 fun textErrorColor() =MaterialTheme.colorScheme.onSurfaceVariant.blend(
     to = MaterialTheme.colorScheme.error,
-    by = 0.4f
+    by = 0.6f
 )
 
 // Vivid is for small, eye-catching components - like a button

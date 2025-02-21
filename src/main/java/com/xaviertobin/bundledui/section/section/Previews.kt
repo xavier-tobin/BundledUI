@@ -6,7 +6,9 @@ import androidx.compose.material.icons.rounded.Stars
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.xaviertobin.bundledui.section.base.Tone
-import com.xaviertobin.bundledui.section.widgets.SectionButton
+import com.xaviertobin.bundledui.section.widgets.SectionHeader
+import com.xaviertobin.bundledui.section.widgets.SectionTextDescription
+import com.xaviertobin.bundledui.section.widgets.SectionTextDescriptionIcon
 
 
 @Preview
@@ -14,7 +16,7 @@ import com.xaviertobin.bundledui.section.widgets.SectionButton
 fun SectionButtonPreview() {
     Column {
         // normally
-        SectionButton(
+        SectionTextDescriptionIcon(
             first = true,
             text = "Button that does something",
             description = "Description for button that does something",
@@ -22,11 +24,10 @@ fun SectionButtonPreview() {
             loadingFromClick = true
         ) {}
 
-        SectionButton(
+        Section(
             text = "Another button that does something",
             description = "Description for another button that does something",
             icon = Icons.Rounded.Stars,
-            tone = Tone.POSITIVE
         ) {}
 
         SectionButton(
@@ -36,11 +37,14 @@ fun SectionButtonPreview() {
             selected = true
         ) {}
 
+        SectionHeader("Buttons with different tones")
         SectionButton(
+            first = true,
             last = true,
-            text = "Another button that does something",
-            description = "Description for another button that does something",
-            icon = Icons.Rounded.Stars
+            text = "Warning",
+            description = "Warning",
+            icon = Icons.Rounded.Stars,
+            tone = Tone.WARNING
         ) {}
 
     }

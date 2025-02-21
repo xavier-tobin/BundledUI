@@ -15,16 +15,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.xaviertobin.bundledui.section.base.ComposableFunction
 import com.xaviertobin.bundledui.section.base.Tone
 import com.xaviertobin.bundledui.section.section.Section
 import com.xaviertobin.bundledui.section.base.UnitFunction
 import com.xaviertobin.bundledui.section.base.iconColorForTone
 import com.xaviertobin.bundledui.section.section.sectionTextColorForTone
 
+
+@Composable
+fun LoadingOrIcon(
+    loadingFromClick: Boolean,
+    icon: ImageVector,
+    tone: Tone,
+    iconDescription: String
+) {
+    if (loadingFromClick) {
+        CircularProgressIndicator(
+            modifier = Modifier
+                .padding(end = 6.dp)
+                .size(24.dp)
+        )
+    } else {
+        Icon(
+            modifier = Modifier.padding(end = 6.dp),
+            imageVector = icon,
+            contentDescription = iconDescription,
+            tint = iconColorForTone(tone)
+        )
+    }
+}
 
 @Composable
 fun SectionTextDescriptionIcon(
@@ -47,27 +70,19 @@ fun SectionTextDescriptionIcon(
 
     SectionTextDescription(
         text = textString,
-        description = description?.let { AnnotatedString(stringResource(description)) },
+        description = description?.let { stringResource(it) },
         first = first,
         last = last,
         selected = selected,
         tone = tone,
-        textColor =  textColor,
+        textColor = textColor,
         contentEnd = {
-            if (loadingFromClick) {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .padding(end = 6.dp)
-                        .size(24.dp)
-                )
-            } else {
-                Icon(
-                    modifier = Modifier.padding(end = 6.dp),
-                    imageVector = icon,
-                    contentDescription = textString,
-                    tint = iconColorForTone(tone)
-                )
-            }
+            LoadingOrIcon(
+                loadingFromClick = loadingFromClick,
+                icon = icon,
+                tone = tone,
+                iconDescription = textString
+            )
         },
         modifier = modifier,
         verticalPadding = verticalPadding,
@@ -81,7 +96,7 @@ fun SectionTextDescriptionIcon(
 fun SectionTextDescriptionIcon(
     text: String,
     modifier: Modifier = Modifier,
-    description: AnnotatedString? = null,
+    description: String? = null,
     first: Boolean = false,
     last: Boolean = false,
     selected: Boolean = false,
@@ -102,20 +117,12 @@ fun SectionTextDescriptionIcon(
         tone = tone,
         textColor = textColor,
         contentEnd = {
-            if (loadingFromClick) {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .padding(end = 6.dp)
-                        .size(24.dp)
-                )
-            } else {
-                Icon(
-                    modifier = Modifier.padding(end = 6.dp),
-                    imageVector = icon,
-                    contentDescription = text,
-                    tint = iconColorForTone(tone)
-                )
-            }
+            LoadingOrIcon(
+                loadingFromClick = loadingFromClick,
+                icon = icon,
+                tone = tone,
+                iconDescription = text
+            )
         },
         modifier = modifier,
         verticalPadding = verticalPadding,
@@ -129,13 +136,16 @@ fun SectionTextDescriptionIcon(
 fun SectionTextDescription(
     text: String,
     modifier: Modifier = Modifier,
-    description: AnnotatedString? = null,
+    description: String? = null,
     first: Boolean = false,
     last: Boolean = false,
     selected: Boolean = false,
     tone: Tone = Tone.NEUTRAL,
     textColor: Color = sectionTextColorForTone(selected, tone),
-    contentEnd: @Composable () -> Unit,
+    contentStart: ComposableFunction? = null,
+    contentEnd: ComposableFunction? = null,
+    contentTop: ComposableFunction? = null,
+    contentBottom: ComposableFunction? = null,
     verticalPadding: Dp = 8.dp,
     onClick: UnitFunction? = null,
     onLongClick: UnitFunction? = null,
@@ -155,6 +165,7 @@ fun SectionTextDescription(
                 top = verticalPadding, bottom = verticalPadding
             )
         ) {
+            contentStart?.invoke()
             Column(
                 modifier = Modifier
                     .padding(
@@ -163,6 +174,7 @@ fun SectionTextDescription(
                     )
                     .weight(1f)
             ) {
+                contentTop?.invoke()
                 Text(
                     text = text,
                     style = MaterialTheme.typography.bodyLarge,
@@ -179,8 +191,9 @@ fun SectionTextDescription(
                         textAlign = TextAlign.Start,
                     )
                 }
+                contentBottom?.invoke()
             }
-            contentEnd()
+            contentEnd?.invoke()
         }
     }
 }
