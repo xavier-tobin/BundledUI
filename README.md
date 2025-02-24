@@ -7,8 +7,7 @@
 
 ## Why?
 
-Material3 is a powerful suite of components for building beautiful Compose UIs, but it is comprised
-of [atom](http://atomicdesign.bradfrost.com/chapter-2/)
+Material3 is a powerful suite of components for building beautiful Compose UIs, but many of the interactive components are [atom-level](http://atomicdesign.bradfrost.com/chapter-2/)
 components that require wrapping and regular management of padding, margin and modifiers in order to
 create a consistent, beautiful UI.
 
@@ -19,9 +18,6 @@ Bundled UI is a higher-level library, built on top of Material3, that
 - Lightweight abstraction, minimal dependencies
 - Easy to use, hard to mis-use
 - Almost no padding or margin management required
-
-
-# Components
 
 ## Section
 
@@ -38,13 +34,3 @@ A Section is the building block of organisms in Bundled UI. It is a simple card 
 
 To build your UI, all you need to do is group related Sections, and correctly set the first and last
 parameters.
-
-SectionText
-
-A SectionText is a section that wraps a text and subtext compo
-
-- [ ] Section
-- [ ] SectionTitleDescription
-- [ ] SectionTitleDescriptionIcon
-- [ ] SectionToggle
-- [ ] 
