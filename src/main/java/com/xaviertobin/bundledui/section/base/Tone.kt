@@ -48,7 +48,7 @@ fun vividContainerColorForTone(tone: Tone) = when (tone) {
 fun containerColorForTone(tone: Tone) = when (tone) {
     Tone.POSITIVE -> MaterialTheme.colorScheme.primary
     Tone.NEUTRAL -> MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)
-    Tone.NEGATIVE -> MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp).blend(
+    Tone.NEGATIVE -> MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp).blend(
         to = Color.Red,
         by = 0.05f
     )
