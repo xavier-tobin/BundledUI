@@ -10,7 +10,6 @@ enum class Tone {
     NEGATIVE, WARNING, NEUTRAL, POSITIVE,
 }
 
-//#ffb624
 val baseWarningColor = Color(
     0xffffb624
 )
@@ -22,19 +21,10 @@ fun textWarningColor() = MaterialTheme.colorScheme.onSurfaceVariant.blend(
 )
 
 @Composable
-fun textErrorColor() =MaterialTheme.colorScheme.onSurfaceVariant.blend(
+fun textErrorColor() = MaterialTheme.colorScheme.onSurfaceVariant.blend(
     to = MaterialTheme.colorScheme.error,
-    by = 0.6f
+    by = 0.5f
 )
-
-// Vivid is for small, eye-catching components - like a button
-@Composable
-fun vividContainerColorForTone(tone: Tone) = when (tone) {
-    Tone.POSITIVE -> MaterialTheme.colorScheme.primary
-    Tone.NEUTRAL -> MaterialTheme.colorScheme.surfaceColorAtElevation(8.dp)
-    Tone.NEGATIVE -> textErrorColor()
-    Tone.WARNING -> MaterialTheme.colorScheme.errorContainer
-}
 
 @Composable
 fun vividTextColorForTone(tone: Tone) = when (tone) {
@@ -44,14 +34,23 @@ fun vividTextColorForTone(tone: Tone) = when (tone) {
     Tone.WARNING -> MaterialTheme.colorScheme.error
 }
 
-// Standard, this is for sections
+// Vivid container colours are for small, primary, eye-catching components - like a button
+@Composable
+fun vividContainerColorForTone(tone: Tone) = when (tone) {
+    Tone.POSITIVE -> MaterialTheme.colorScheme.primary
+    Tone.NEUTRAL -> MaterialTheme.colorScheme.surfaceColorAtElevation(8.dp)
+    Tone.NEGATIVE -> textErrorColor()
+    Tone.WARNING -> MaterialTheme.colorScheme.errorContainer
+}
+
+// Standard container colours are for large, neutral components - like Sections
 @Composable
 fun containerColorForTone(tone: Tone) = when (tone) {
     Tone.POSITIVE -> MaterialTheme.colorScheme.primary
     Tone.NEUTRAL -> MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)
     Tone.NEGATIVE -> MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp).blend(
         to = Color.Red,
-        by = 0.1f
+        by = 0.05f
     )
     Tone.WARNING -> MaterialTheme.colorScheme.surfaceColorAtElevation(8.dp).blend(
         to = baseWarningColor,

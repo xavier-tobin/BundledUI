@@ -60,7 +60,7 @@ fun SectionButton(
     selected = selected,
     modifier = modifier,
     title = title,
-    description = description.toString(),
+    description = description,
     onLongClick = onLongClick,
     tone = tone,
     textColor = textColor,

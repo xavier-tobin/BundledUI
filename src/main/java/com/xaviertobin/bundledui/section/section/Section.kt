@@ -24,17 +24,16 @@ import com.xaviertobin.bundledui.section.base.firstLastCorners
 import com.xaviertobin.bundledui.section.base.textColorForTone
 
 
-fun defaultSectionOuterPaddingValues(
+fun defaultVerticalSectionMarginValues(
     last: Boolean = false,
 ) = PaddingValues(bottom = if (last) 16.dp else 2.dp, top = 2.dp)
 
-fun defaultSectionInnerPaddingValues(
+fun defaultVerticalSectionPaddingValues(
     first: Boolean = false,
     last: Boolean = false,
-    verticalExtra: Dp = 0.dp,
 ) = PaddingValues(
-    top = (if (first) 10.dp else 8.dp) + verticalExtra,
-    bottom = (if (last) 10.dp else 8.dp) + verticalExtra,
+    top = if (first) 10.dp else 8.dp,
+    bottom = if (last) 10.dp else 8.dp,
     start = 22.dp,
     end = 22.dp
 )
@@ -65,10 +64,11 @@ fun Section(
     modifier: Modifier = Modifier,
     first: Boolean = false,
     last: Boolean = false,
+    orientation: SectionOrientation = SectionOrientation.VERTICAL,
     focused: Boolean = false,
     selected: Boolean = false,
-    margin: PaddingValues = defaultSectionOuterPaddingValues(last),
-    padding: PaddingValues? = null,
+    margin: PaddingValues = defaultVerticalSectionMarginValues(last),
+    padding: PaddingValues = defaultVerticalSectionPaddingValues(first, last),
     tone: Tone = Tone.NEUTRAL,
     containerColor: Color = sectionContainerColorForTone(selected, focused, tone),
     onClick: (() -> Unit)? = null,
@@ -99,13 +99,14 @@ fun Section(
             .background(containerColor)
             .clip(shape)
             .then(modifier)
-            .padding(
-                padding ?: defaultSectionInnerPaddingValues(
-                    first, last, extraInternalPadding
-                )
-            )
+            .padding(padding)
+            .padding(vertical = extraInternalPadding)
     ) {
         content()
     }
 }
 
+enum class SectionOrientation {
+    VERTICAL,
+    HORIZONTAL
+}
