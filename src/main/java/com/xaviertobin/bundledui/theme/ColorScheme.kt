@@ -1,12 +1,15 @@
 package com.xaviertobin.bundledui.theme
 
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.surfaceColorAtElevation
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.color.DarkerGray
+import com.xaviertobin.bundledui.color.alpha
 import com.xaviertobin.bundledui.color.blend
 import com.xaviertobin.bundledui.color.complementaryColor
 import com.xaviertobin.bundledui.color.dulled
@@ -64,7 +67,7 @@ fun colorBasedColorScheme(
 
     val baseTone = when (theme) {
         BaseTheme.LIGHT -> Color.White
-        BaseTheme.DARK -> Color.DarkerGray
+        BaseTheme.DARK -> Color(0xFF161616)
         BaseTheme.OLED -> Color.Black
     }
 
@@ -80,7 +83,7 @@ fun colorBasedColorScheme(
             primary = actualPrimary,
             secondary = actualPrimary,
             tertiary = actualTertiary,
-            surface = baseTone.blend(actualPrimary, by = 0.005f),
+            surface = baseTone.blend(actualPrimary, by = 0.002f),
             secondaryContainer = baseTone.blend(actualPrimary, by = 0.7f),
             onSecondaryContainer = actualPrimary.blend(baseTone, by = 0.3f),
             onPrimaryContainer = actualPrimary.blend(baseTone, by = 0.3f),
@@ -94,11 +97,11 @@ fun colorBasedColorScheme(
             primary = actualPrimary,
             secondary = actualPrimary,
             tertiary = actualTertiary,
-            surface = baseTone.blend(actualPrimary, by = 0.04f),
+            surface = baseTone.blend(actualPrimary, by = 0.05f),
             secondaryContainer = baseTone.blend(actualPrimary, by = 0.3f),
             onPrimaryContainer = actualPrimary.blend(baseTone, by = 0.4f),
             onSecondaryContainer = actualPrimary.blend(baseTone, by = 0.3f),
-            onSurfaceVariant = contrastTone.blend(actualPrimary, by = 0.3f),
+            onSurfaceVariant = contrastTone.blend(actualPrimary, by = 0.2f),
             onPrimary = baseTone.blend(actualPrimary, by = 0.2f),
             surfaceContainer = actualPrimary.blend(baseTone, by = 0.3f),
             surfaceTint = actualPrimary
@@ -120,6 +123,14 @@ fun colorBasedColorScheme(
     }
 }
 
+val ColorScheme.text: Color
+    @Composable
+    get() = MaterialTheme.colorScheme.onSurfaceVariant
+
+
+val ColorScheme.secondaryText: Color
+    @Composable
+    get() = MaterialTheme.colorScheme.onSurfaceVariant.alpha(0.82f)
 
 /**
  * This is commonly used, easier than specifying the elevation each time
