@@ -10,9 +10,7 @@ built for
 
 <!-- ![Basic italics usage example](images/home_page.png) -->
 
-<img src="images/home_page.png" width="200" />
-<img src="images/settings.png" width="200" />
-<img src="images/create_bundle.png" width="200" />
+<img src="images/all.png" />
 
 ## What's included?
 
