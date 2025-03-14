@@ -10,7 +10,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xaviertobin.bundledui.section.section.Section
-import com.xaviertobin.noted.compose.core.utils.annotated
 
 /**
  * A sheet that displays annotated/styled text in a single Section, usually just for info etc.
@@ -18,7 +17,7 @@ import com.xaviertobin.noted.compose.core.utils.annotated
 @Composable
 fun TextSheet(
     onDismiss: UnitFunction,
-    @StringRes title: Int,
+    title: String,
     text: AnnotatedString,
     fullscreen: Boolean = false,
     extraContent: @Composable UnitFunction? = null
@@ -44,14 +43,14 @@ fun TextSheet(
 @Composable
 fun TextSheet(
     onDismiss: UnitFunction,
-    @StringRes title: Int,
+    title: String,
     text: String,
     fullscreen: Boolean = false,
     extraContent: @Composable UnitFunction? = null
 ) = TextSheet(
     onDismiss = onDismiss,
     title = title,
-    text = text.annotated(),
+    text = AnnotatedString(text),
     fullscreen = fullscreen,
     extraContent = extraContent
 )

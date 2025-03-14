@@ -13,7 +13,7 @@ import com.xaviertobin.bundledui.base.UnitFunction
 
 @Composable
 fun ButtonRow(
-    modifier: Modifier = Modifier.Companion,
+    modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(
         end = 6.dp,
         bottom = 16.dp,

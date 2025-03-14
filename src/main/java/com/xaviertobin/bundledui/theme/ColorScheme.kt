@@ -10,7 +10,6 @@ import com.xaviertobin.bundledui.color.DarkerGray
 import com.xaviertobin.bundledui.color.blend
 import com.xaviertobin.bundledui.color.complementaryColor
 import com.xaviertobin.bundledui.color.dulled
-import com.xaviertobin.bundledui.color.normalizeSaturation
 
 
 /**
@@ -56,11 +55,12 @@ fun defaultLightColorScheme() = lightColorScheme(
  */
 fun colorBasedColorScheme(
     primary: Color,
-    tertiary: Color = primary.complementaryColor().dulled(),
+    tertiary: Color = primary,
     theme: BaseTheme
 ): ColorScheme {
 
-    val actualPrimary = primary.normalizeSaturation()
+    val actualPrimary = primary.dulled(theme)
+    val actualTertiary = tertiary.complementaryColor().dulled(theme)
 
     val baseTone = when (theme) {
         BaseTheme.LIGHT -> Color.White
@@ -79,7 +79,7 @@ fun colorBasedColorScheme(
         BaseTheme.LIGHT -> lightColorScheme(
             primary = actualPrimary,
             secondary = actualPrimary,
-            tertiary = tertiary,
+            tertiary = actualTertiary,
             surface = baseTone.blend(actualPrimary, by = 0.005f),
             secondaryContainer = baseTone.blend(actualPrimary, by = 0.7f),
             onSecondaryContainer = actualPrimary.blend(baseTone, by = 0.3f),
@@ -93,12 +93,12 @@ fun colorBasedColorScheme(
         BaseTheme.DARK -> darkColorScheme(
             primary = actualPrimary,
             secondary = actualPrimary,
-            tertiary = tertiary,
+            tertiary = actualTertiary,
             surface = baseTone.blend(actualPrimary, by = 0.04f),
             secondaryContainer = baseTone.blend(actualPrimary, by = 0.3f),
             onPrimaryContainer = actualPrimary.blend(baseTone, by = 0.4f),
             onSecondaryContainer = actualPrimary.blend(baseTone, by = 0.3f),
-            onSurfaceVariant = contrastTone.blend(actualPrimary, by = 0.2f),
+            onSurfaceVariant = contrastTone.blend(actualPrimary, by = 0.3f),
             onPrimary = baseTone.blend(actualPrimary, by = 0.2f),
             surfaceContainer = actualPrimary.blend(baseTone, by = 0.3f),
             surfaceTint = actualPrimary
@@ -107,7 +107,7 @@ fun colorBasedColorScheme(
         BaseTheme.OLED -> darkColorScheme(
             primary = actualPrimary,
             secondary = actualPrimary,
-            tertiary = tertiary,
+            tertiary = actualTertiary,
             surface = baseTone.blend(actualPrimary, by = 0.04f),
             secondaryContainer = baseTone.blend(actualPrimary, by = 0.3f),
             onPrimaryContainer = actualPrimary.blend(baseTone, by = 0.4f),

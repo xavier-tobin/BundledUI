@@ -11,7 +11,7 @@ import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.section.section.sectionTextColorForTone
 
 /**
- * SectionButtons are large clickable surfaces to designate significant actions, usually on a scrolling page or modal
+ * Remove string res version
  */
 @Composable
 fun SectionButtonSheet(

@@ -14,7 +14,7 @@ import com.xaviertobin.bundledui.base.UnitFunction
 @Composable
 fun IconButton(
     icon: ImageVector,
-    @StringRes contentDescription: Int,
+    contentDescription: String,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.primary,
     onClick: UnitFunction
@@ -22,8 +22,24 @@ fun IconButton(
     IconButton(onClick = onClick, modifier = modifier) {
         Icon(
             imageVector = icon,
-            contentDescription = stringResource(contentDescription),
+            contentDescription = contentDescription,
             tint = tint,
         )
     }
 }
+
+// TODO remove StringRes version
+@Composable
+fun IconButton(
+    icon: ImageVector,
+    @StringRes contentDescription: Int,
+    modifier: Modifier = Modifier,
+    tint: Color = MaterialTheme.colorScheme.primary,
+    onClick: UnitFunction
+) = IconButton(
+    icon = icon,
+    contentDescription = stringResource(contentDescription),
+    modifier = modifier,
+    tint = tint,
+    onClick = onClick
+)
