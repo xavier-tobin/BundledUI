@@ -2,19 +2,24 @@
 
 # Bundled UI for Jetpack Compose
 
-A radically simple, idiomatic Material 3 UI design system, built for
+A radically simple, idiomatic Material 3 UI design system for Jetpack Compose,
+built for
 [Bundled Notes](https://play.google.com/store/apps/details?id=com.xaviertobin.noted).
 
 ## Quick look
 
-![Basic italics usage example](images/home_page.png)
+<!-- ![Basic italics usage example](images/home_page.png) -->
+
+<img src="images/home_page.png" width="200" />
+<img src="images/settings.png" width="200" />
+<img src="images/create_bundle.png" width="200" />
 
 ## What's included?
 
 BundledUI is the design system used in Bundled Notes. It includes a whole suite
 of components and utilities that were required to build the app. In summary:
 
-### The `Section`
+#### `Section`
 
 `Section` is the building block component that is found on almost every page of
 BundledUI (and accordingly, Bundled Notes). It is essentially a card that
@@ -61,11 +66,11 @@ Column {
 
 The above code leads to this layout:
 
-![Basic italics usage example](images/sections_basic.png)
+<img src="images/sections_basic.png" alt="Basic italics usage example" width="300" >
 
 > [!INFO] Note that you don't have to think about padding and margins at all
 > when using sections. The `first` and `last` parameters take care of all that
-> for you - you could easily build a settings page, for example, by layout out a
+> for you - you could easily build a settings page, for example, by laying out a
 > few groups of Sections.
 
 ### Benefits

@@ -19,12 +19,12 @@ import com.xaviertobin.bundledui.color.dulled
  * Creates a usable Material3 ColorScheme with a neutral dark gray tone
  * If OLED, surface is set to black
  */
-fun defaultDarkColorScheme(isOled: Boolean = false): ColorScheme  {
+fun defaultDarkColorScheme(): ColorScheme {
     return darkColorScheme(
         primary = Color.LightGray,
         secondary = Color.LightGray,
         tertiary = Color.LightGray,
-        surface =  if (isOled) Color.Black else Color.DarkGray.blend(Color.Black, by = 0.7f),
+        surface = Color.DarkGray.blend(Color.Black, by = 0.7f),
         secondaryContainer = Color.DarkGray.blend(Color.Black, by = 0.3f),
         onPrimaryContainer = Color.White.blend(Color.LightGray, by = 0.4f),
         onSecondaryContainer = Color.White.blend(Color.LightGray, by = 0.3f),
@@ -123,10 +123,15 @@ fun colorBasedColorScheme(
     }
 }
 
+fun ColorScheme.oledify(): ColorScheme {
+    return this.copy(
+        surface = Color.Black
+    )
+}
+
 val ColorScheme.text: Color
     @Composable
     get() = MaterialTheme.colorScheme.onSurfaceVariant
-
 
 val ColorScheme.secondaryText: Color
     @Composable

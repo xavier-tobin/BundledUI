@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -103,15 +104,17 @@ fun SectionTitleDescription(
                 Text(
                     text = title,
                     style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Medium,
                     color = textColor,
                     textAlign = TextAlign.Start,
                     modifier = Modifier
-                        .padding(bottom = 3.dp)
+                        .padding(bottom = 2.dp)
                 )
                 description?.let {
                     Text(
                         text = description,
                         style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Normal,
                         color = textColor,
                         textAlign = TextAlign.Start,
                     )
