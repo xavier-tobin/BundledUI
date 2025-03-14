@@ -1,4 +1,4 @@
-package com.xaviertobin.bundledui.section.base
+package com.xaviertobin.bundledui.color
 
 import androidx.annotation.FloatRange
 import androidx.compose.ui.graphics.Color
@@ -12,4 +12,9 @@ fun Color.alpha(alpha: Float): Color {
 
 fun Color.blend(to: Color, @FloatRange(0.0, 1.0) by: Float): Color {
     return Color(ColorUtils.blendARGB(this.toArgb(), to.toArgb(), by))
+}
+
+fun Color.isLight(): Boolean {
+    val darkness = 1 - (0.299 * red + 0.587 * green + 0.114 * blue) / 255
+    return darkness < 0.5
 }

@@ -1,4 +1,4 @@
-package com.xaviertobin.bundledui.section.base
+package com.xaviertobin.bundledui.base
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope

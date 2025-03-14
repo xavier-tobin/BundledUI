@@ -1,10 +1,11 @@
-package com.xaviertobin.bundledui.section.base
+package com.xaviertobin.bundledui.base
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.xaviertobin.bundledui.color.blend
 
 enum class Tone {
     NEGATIVE, WARNING, NEUTRAL, POSITIVE,

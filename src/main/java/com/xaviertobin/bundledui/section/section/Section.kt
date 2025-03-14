@@ -18,10 +18,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.xaviertobin.bundledui.section.base.Tone
-import com.xaviertobin.bundledui.section.base.containerColorForTone
-import com.xaviertobin.bundledui.section.base.firstLastCorners
-import com.xaviertobin.bundledui.section.base.textColorForTone
+import com.xaviertobin.bundledui.base.Tone
+import com.xaviertobin.bundledui.base.containerColorForTone
+import com.xaviertobin.bundledui.base.firstLastCornersVertical
+import com.xaviertobin.bundledui.base.textColorForTone
 
 
 fun defaultVerticalSectionMarginValues(
@@ -75,7 +75,7 @@ fun Section(
     onLongClick: (() -> Unit)? = null,
     defaultCornerRadius: Dp = 9.dp,
     pronouncedCornerRadius: Dp = 30.dp,
-    shape: RoundedCornerShape = firstLastCorners(
+    shape: RoundedCornerShape = firstLastCornersVertical(
         first, last, defaultCornerRadius, pronouncedCornerRadius
     ),
     content: @Composable ColumnScope.() -> Unit,

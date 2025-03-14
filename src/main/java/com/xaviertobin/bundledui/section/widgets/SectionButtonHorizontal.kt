@@ -20,8 +20,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xaviertobin.bundledui.section.section.Section
-import com.xaviertobin.bundledui.section.base.UnitFunction
-import com.xaviertobin.bundledui.section.base.smartCornersChip
+import com.xaviertobin.bundledui.base.UnitFunction
+import com.xaviertobin.bundledui.base.firstLastCornersChip
 
 @Composable
 fun SectionButtonHorizontal(
@@ -65,7 +65,7 @@ fun SectionButtonHorizontal(
             top = 5.dp - selectedExtraPadding,
             bottom = 5.dp - selectedExtraPadding,
         ),
-        shape = smartCornersChip(
+        shape = firstLastCornersChip(
             first = first,
             last = last,
             pronouncedCornerRadius = 28.dp + selectedExtraPadding,

@@ -10,9 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.xaviertobin.bundledui.section.base.Tone
-import com.xaviertobin.bundledui.section.base.UnitFunction
-import com.xaviertobin.bundledui.section.base.iconColorForTone
+import com.xaviertobin.bundledui.base.Tone
+import com.xaviertobin.bundledui.base.UnitFunction
+import com.xaviertobin.bundledui.base.iconColorForTone
 import com.xaviertobin.bundledui.section.section.sectionTextColorForTone
 
 
