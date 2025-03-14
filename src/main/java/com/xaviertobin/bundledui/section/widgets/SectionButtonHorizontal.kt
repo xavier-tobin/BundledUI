@@ -19,9 +19,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xaviertobin.bundledui.section.section.Section
 import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.base.firstLastCornersChip
+import com.xaviertobin.bundledui.section.section.Section
 
 @Composable
 fun SectionButtonHorizontal(

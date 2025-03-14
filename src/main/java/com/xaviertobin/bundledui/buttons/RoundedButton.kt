@@ -25,12 +25,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.xaviertobin.bundledui.animations.AnimateInHorizontally
 import com.xaviertobin.bundledui.base.ToggleComposable
 import com.xaviertobin.bundledui.base.Tone
+import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.base.vividContainerColorForTone
 import com.xaviertobin.bundledui.base.vividTextColorForTone
-import com.xaviertobin.bundledui.animations.AnimateInHorizontally
-import com.xaviertobin.bundledui.base.UnitFunction
 
 
 @Composable

@@ -33,8 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xaviertobin.bundledui.section.section.Section
 import com.xaviertobin.bundledui.base.AnimateInSlideDown
+import com.xaviertobin.bundledui.section.section.Section
 
 
 @Composable
