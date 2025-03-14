@@ -66,7 +66,8 @@ The above code leads to this layout:
 
 <img src="images/sections_basic.png" alt="Basic italics usage example" width="300" >
 
-> [!INFO] Note that you don't have to think about padding and margins at all
+> [!INFO]
+> Note that you don't have to think about padding and margins at all
 > when using sections. The `first` and `last` parameters take care of all that
 > for you - you could easily build a settings page, for example, by laying out a
 > few groups of Sections.
