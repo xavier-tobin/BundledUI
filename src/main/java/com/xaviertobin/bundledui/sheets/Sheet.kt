@@ -36,7 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.color.isLight
-import com.xaviertobin.bundledui.section.widgets.SectionToggle
+import com.xaviertobin.bundledui.section.widgets.SectionSwitch
 import com.xaviertobin.bundledui.theme.safeSurface
 
 typealias UnitFunction = () -> Unit
@@ -196,6 +196,6 @@ fun SheetBase(
 @Composable
 fun SheetPreview() {
     Sheet(title = "Theme settings", onDismiss = { /*TODO*/ }) {
-        SectionToggle(text = "Test toggle", toggledOn = true, onToggled = {})
+        SectionSwitch(text = "Test toggle", checked = true, onChecked = {})
     }
 }

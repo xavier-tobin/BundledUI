@@ -10,12 +10,14 @@ import com.xaviertobin.bundledui.base.ToggleComposable
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.section.section.sectionTextColorForTone
 
+
+
 /**
  * Remove string res version
  */
 @Composable
 fun SectionButtonSheet(
-    @StringRes text: Int,
+    @StringRes title: Int,
     icon: ImageVector,
     modifier: Modifier = Modifier,
     @StringRes description: Int,
@@ -26,7 +28,7 @@ fun SectionButtonSheet(
     textColor: Color = sectionTextColorForTone(selected, tone),
     sheetLayout: @Composable (onDismiss: () -> Unit) -> Unit
 ) = SectionButtonSheet(
-    title = stringResource(id = text),
+    title = stringResource(id = title),
     icon = icon,
     modifier = modifier,
     description = stringResource(id = description),

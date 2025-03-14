@@ -20,24 +20,24 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun SectionToggle(
+fun SectionSwitch(
     text: String,
     description: String? = null,
-    toggledOn: Boolean,
+    checked: Boolean,
     first: Boolean = false,
     last: Boolean = false,
-    onToggled: (Boolean) -> Unit,
+    onChecked: (Boolean) -> Unit,
 ) = SectionTitleDescription(
         first = first,
         last = last,
-        onClick = { onToggled(!toggledOn) },
+        onClick = { onChecked(!checked) },
         title = text.capitalize(Locale.current),
         description = description,
         verticalPadding = 4.dp,
         contentEnd = {
             Switch(
-                checked = toggledOn,
-                onCheckedChange = { onToggled(it) },
+                checked = checked,
+                onCheckedChange = { onChecked(it) },
                 colors = SwitchDefaults.colors(
                     uncheckedTrackColor = Color.Transparent,
                     checkedTrackColor = MaterialTheme.colorScheme.tertiary,
@@ -55,17 +55,17 @@ fun SwitchesPreview() {
     var toggledOn2 by remember { mutableStateOf(false) }
 
     Column {
-        SectionToggle(
+        SectionSwitch(
             text = "Enable feature",
-            toggledOn = toggledOn1,
-            onToggled = { toggledOn1 = it },
+            checked = toggledOn1,
+            onChecked = { toggledOn1 = it },
             first = true
         )
 
-        SectionToggle(
+        SectionSwitch(
             text = "Enable a different feature",
-            toggledOn = toggledOn2,
-            onToggled = { toggledOn2 = it },
+            checked = toggledOn2,
+            onChecked = { toggledOn2 = it },
             last = true
         )
 
