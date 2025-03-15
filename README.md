@@ -15,9 +15,28 @@ built for
 ## What's included?
 
 BundledUI is the design system used in Bundled Notes. It includes a whole suite
-of components and utilities that were required to build the app in Jetpack Compose.
+of easy-to-use UI components, and color/theming utilities that were required to build the app in Jetpack
+Compose.
 
-#### `Section`
+__This library is an abstraction around the Compose Material3 library, so you will need to wrap your
+Compose layout in a MaterialTheme to get started:__
+
+```kotlin
+setContent {
+    MaterialTheme {
+        // you can now use BundledUI
+    }
+}
+```
+
+> [!INFORMATION]
+> This library makes building UIs very easy, but it helps to
+> understand
+> the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3).
+> You can use the default MaterialTheme, but BundledUI includes utilities to make custom Material
+> themes (_as seen in Bundled Notes_).
+
+## `Section`
 
 `Section` is a base, Card-like component that is found on almost every page of
 Bundled Notes. It abstracts away almost all fiddling with padding, margin, and
@@ -27,7 +46,7 @@ Though you can use `Section` directly (and make your own `Section` widgets), Bun
 number of UI widgets that are commonly used in Bundled Notes. Most of these are base Material3
 components simply wrapped in a `Section`:
 
-- `SectionTextInput` - A `Section` for entering text._
+- `SectionTextInput` - A `Section` for entering text
 - `SectionTitleDescription` - A `Section` card to display a basic list item
 - `SectionButton` - Based on `SectionTitleDescription`, but clickable and with icon/loading support.
 - `SectionButtonSheet` - A `SectionButton` that opens a `BottomSheet` when clicked.
@@ -78,6 +97,5 @@ The above code leads to this layout:
 > Note that you don't have to think about padding and margins at all when
 > using `Section`. The `first` and `last` parameters take care of all that for
 > you.
-
 
 # More to come... docs are a work in progress
