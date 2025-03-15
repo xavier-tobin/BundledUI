@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.ComposableFunction
 import com.xaviertobin.bundledui.base.UnitFunction
-import com.xaviertobin.bundledui.section.section.Section
+import com.xaviertobin.bundledui.section.base.Section
 
 
 /**

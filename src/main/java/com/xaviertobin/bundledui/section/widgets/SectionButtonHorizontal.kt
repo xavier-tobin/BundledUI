@@ -1,6 +1,5 @@
 package com.xaviertobin.bundledui.section.widgets
 
-import androidx.annotation.StringRes
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,14 +14,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.base.firstLastCornersChip
-import com.xaviertobin.bundledui.section.section.Section
+import com.xaviertobin.bundledui.section.base.Section
 
+
+// TODO remove in favour of using SectionButton with orientation = horizontal
 @Composable
 fun SectionButtonHorizontal(
     text: String,
@@ -103,30 +103,4 @@ fun SectionButtonHorizontal(
             }
         }
     }
-}
-
-/**
- * SectionButtons are large clickable surfaces to designate significant actions, usually on a scrolling page or modal
- */
-@Composable
-fun SectionButtonHorizontal(
-    @StringRes text: Int,
-    @StringRes description: Int? = null,
-    icon: ImageVector,
-    first: Boolean = false,
-    last: Boolean = false,
-    selected: Boolean = false,
-    warning: Boolean = false,
-    onClick: UnitFunction,
-) {
-    SectionButtonHorizontal(
-        first = first,
-        last = last,
-        onClick = onClick,
-        selected = selected,
-        text = stringResource(id = text),
-        description = if (description != null) stringResource(id = description) else null,
-        icon = icon,
-        warning = warning
-    )
 }

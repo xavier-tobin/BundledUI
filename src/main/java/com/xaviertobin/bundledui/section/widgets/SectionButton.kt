@@ -1,43 +1,16 @@
 package com.xaviertobin.bundledui.section.widgets
 
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.base.UnitFunction
-import com.xaviertobin.bundledui.base.iconColorForTone
-import com.xaviertobin.bundledui.section.section.sectionTextColorForTone
+import com.xaviertobin.bundledui.section.base.SectionDefaults
+import com.xaviertobin.bundledui.section.extras.LoadingOrIcon
+import com.xaviertobin.bundledui.section.base.sectionTextColorForTone
 
-
-@Composable
-fun LoadingOrIcon(
-    loadingFromClick: Boolean,
-    icon: ImageVector,
-    tone: Tone,
-    iconDescription: String
-) {
-    if (loadingFromClick) {
-        CircularProgressIndicator(
-            modifier = Modifier
-                .padding(end = 6.dp)
-                .size(24.dp)
-        )
-    } else {
-        Icon(
-            modifier = Modifier.padding(end = 6.dp),
-            imageVector = icon,
-            contentDescription = iconDescription,
-            tint = iconColorForTone(tone)
-        )
-    }
-}
 
 @Composable
 fun SectionButton(
@@ -69,7 +42,11 @@ fun SectionButton(
             loadingFromClick = loadingFromClick,
             icon = icon,
             tone = tone,
-            iconDescription = title
+            iconDescription = title,
+            tint = SectionDefaults.iconColor(
+                selected = selected,
+                tone = tone
+            )
         )
     }
 )

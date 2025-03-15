@@ -1,6 +1,5 @@
 package com.xaviertobin.bundledui.sheets
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -9,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xaviertobin.bundledui.section.section.Section
+import com.xaviertobin.bundledui.section.base.Section
 
 /**
  * A sheet that displays annotated/styled text in a single Section, usually just for info etc.

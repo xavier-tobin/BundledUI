@@ -1,4 +1,4 @@
-package com.xaviertobin.bundledui.widgets
+package com.xaviertobin.bundledui.section.widgets
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
@@ -28,7 +28,7 @@ import com.xaviertobin.bundledui.base.vividContainerColorForTone
 import com.xaviertobin.bundledui.base.vividTextColorForTone
 import com.xaviertobin.bundledui.buttons.ButtonRow
 import com.xaviertobin.bundledui.buttons.RoundedButton
-import com.xaviertobin.bundledui.section.section.Section
+import com.xaviertobin.bundledui.section.base.Section
 
 
 /**
@@ -97,7 +97,6 @@ fun AlertBox(
                 )
             }
         }
-
 
         Text(
             text = description,

@@ -1,4 +1,4 @@
-package com.xaviertobin.bundledui.section.section
+package com.xaviertobin.bundledui.section.base
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons

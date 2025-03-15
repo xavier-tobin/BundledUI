@@ -21,8 +21,7 @@ fun SectionHeader(
 @Composable
 fun SectionHeader(
        header: String,
-) {
-    Text(
+) = Text(
         modifier = Modifier.padding(start = 26.dp, top = 10.dp, bottom = 6.dp),
         text = header,
         style = MaterialTheme.typography.labelLarge,
@@ -30,4 +29,3 @@ fun SectionHeader(
         fontWeight = FontWeight.Medium,
         textAlign = TextAlign.Start,
     )
-}

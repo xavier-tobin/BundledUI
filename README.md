@@ -1,4 +1,4 @@
-> IN PROGRESS
+> IN PROGRESS - This library is not yet distributed and the docs are a work in progress.
 
 # Bundled UI for Jetpack Compose
 
@@ -10,22 +10,30 @@ built for
 
 <!-- ![Basic italics usage example](images/home_page.png) -->
 
-<img src="images/all.png" />
+<img src="images/all.png"  alt="Screenshots of the library being used in Bundled Notes"/>
 
 ## What's included?
 
 BundledUI is the design system used in Bundled Notes. It includes a whole suite
-of components and utilities that were required to build the app. In summary:
+of components and utilities that were required to build the app in Jetpack Compose.
 
 #### `Section`
 
-`Section` is the building block component that is found on almost every page of
-BundledUI (and accordingly, Bundled Notes). It is essentially a card that
-abstracts away all fiddling with padding, margin, and modifiers.
+`Section` is a base, Card-like component that is found on almost every page of
+Bundled Notes. It abstracts away almost all fiddling with padding, margin, and
+modifiers, as well as supporting "Tone", orientation, clicks, enabled/selected states, and focus.
 
-`Section` is built with DRY (don't repeat yourself) principles in mind. Once you
-know how to use one `Section`, you know how to use the entire suite of Section
-widgets included in the library, and it becomes trivial to build layouts.
+Though you can use `Section` directly (and make your own `Section` widgets), BundledUI includes a
+number of UI widgets that are commonly used in Bundled Notes. Most of these are base Material3
+components simply wrapped in a `Section`:
+
+- `SectionTextInput` - A `Section` for entering text._
+- `SectionTitleDescription` - A `Section` card to display a basic list item
+- `SectionButton` - Based on `SectionTitleDescription`, but clickable and with icon/loading support.
+- `SectionButtonSheet` - A `SectionButton` that opens a `BottomSheet` when clicked.
+- `SectionSwitch` - A `SectionTitleDescription` with a switch on the end.
+- `SectionSlider` - A `Section` with a slider.
+- `SectionAlert` - A `Section` designed to alert the user in varying tones.
 
 All you have to do to get started is group related `Sections`, and set their
 `first` and `last` params:
@@ -33,31 +41,31 @@ All you have to do to get started is group related `Sections`, and set their
 ```kotlin
 Column {
 
-  SectionHeader("Theme")
+    SectionHeader("Theme")
 
-  SectionSwitch(
-      first = true,
-      text = "Enable Material You",
-      description = "Tint the theme ",
-      checked = isChecked,
-      onChecked = { isChecked = it }
-  )
+    SectionSwitch(
+        first = true,
+        text = "Enable Material You",
+        description = "Tint the theme ",
+        checked = isChecked,
+        onChecked = { isChecked = it }
+    )
 
-  SectionButton(
-      text = R.string.theme,
-      description = R.string.change_theme_settings,
-      icon = Icons.Rounded.WbSunny,
-      onClick = { /* toggle between themes*/ }
-  )
+    SectionButton(
+        text = R.string.theme,
+        description = R.string.change_theme_settings,
+        icon = Icons.Rounded.WbSunny,
+        onClick = { /* toggle between themes*/ }
+    )
 
-  SectionButtonSheet(
-      title = "Font options",
-      description = "Choose fonts and text size",
-      icon = Icons.Rounded.FontDownload,
-      last = true,
-  ) { onDismiss ->
-      FontSettingsSheet(onDismiss = onDismiss)
-  }
+    SectionButtonSheet(
+        title = "Font options",
+        description = "Choose fonts and text size",
+        icon = Icons.Rounded.FontDownload,
+        last = true,
+    ) { onDismiss ->
+        FontSettingsSheet(onDismiss = onDismiss)
+    }
 
 }
 ```
@@ -66,34 +74,10 @@ The above code leads to this layout:
 
 <img src="images/sections_basic.png" alt="Basic italics usage example" width="300" >
 
-> [!TIP]
+> [!INFORMATION]
 > Note that you don't have to think about padding and margins at all when
-> using sections. The `first` and `last` parameters take care of all that for
-> you - you could easily build a settings page, for example, by laying out a few
-> groups of Sections.
+> using `Section`. The `first` and `last` parameters take care of all that for
+> you.
 
-### Benefits
 
-- Lightweight abstraction, minimal dependencies
-- Easy to use, hard to mis-use
-- Almost no padding or margin management required
-
-## Section
-
-A Section is the building block of almost all organisms in Bundled UI. It is a
-simple card with the following features:
-
-To build your UI, all you need to do is group related `Section`s, and correctly
-set the first and last parameters.
-
-# Why ?
-
-Material3 is a powerful suite of components for building beautiful Compose UIs,
-but many of the interactive widgets are
-[atom-level](http://atomicdesign.bradfrost.com/chapter-2/) components that
-require wrapping and regular management of padding, margin and modifiers in
-order to create a consistent, beautiful UI.
-
-BundledUI is intended to be an out-of-the-box solution for building beautiful,
-consistent Material3 UIs. It is intentionally opinionated - designed to be
-extendable, easy to use, and hard to mis-use.
+# More to come... docs are a work in progress

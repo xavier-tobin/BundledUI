@@ -22,5 +22,3 @@ fun AnimateInSlideDown(
     content = content,
     modifier = modifier
 )
-
-

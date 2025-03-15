@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.xaviertobin.bundledui.base.ToggleComposable
 import com.xaviertobin.bundledui.base.Tone
-import com.xaviertobin.bundledui.section.section.sectionTextColorForTone
+import com.xaviertobin.bundledui.section.base.sectionTextColorForTone
 
 
 
