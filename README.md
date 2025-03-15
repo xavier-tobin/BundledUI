@@ -29,7 +29,7 @@ setContent {
 }
 ```
 
-> [!INFORMATION]
+> [!NOTE]
 > This library makes building UIs very easy, but it helps to
 > understand
 > the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3).
@@ -93,7 +93,7 @@ The above code leads to this layout:
 
 <img src="images/sections_basic.png" alt="Basic italics usage example" width="300" >
 
-> [!INFORMATION]
+> [!NOTE]
 > Note that you don't have to think about padding and margins at all when
 > using `Section`. The `first` and `last` parameters take care of all that for
 > you.
