@@ -2,7 +2,7 @@
 
 # Bundled UI for Jetpack Compose
 
-A radically simple, idiomatic Material 3 UI design system for Jetpack Compose,
+A simple, idiomatic Material 3 UI design system for Jetpack Compose,
 built for
 [Bundled Notes](https://play.google.com/store/apps/details?id=com.xaviertobin.noted).
 
