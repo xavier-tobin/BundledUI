@@ -14,27 +14,24 @@ built for
 
 ## What's included?
 
-BundledUI is the design system used in Bundled Notes. It includes a whole suite
-of easy-to-use UI components, and color/theming utilities that were required to build the app in Jetpack
-Compose.
+BundledUI is the design system used in Bundled Notes. It includes a suite of easy-to-use UI
+components and all the theming utilities required to create gorgeous Material You apps.
 
-__This library is an abstraction around the Compose Material3 library, so you will need to wrap your
-Compose layout in a MaterialTheme to get started:__
+__This library is an abstraction around the Compose Material3 library. It will work with a
+regular `MaterialTheme` wrapper, but to take advantage of the rich theming available (including
+OLED & Dark themes), wrap your app in `BundledUITheme`:__
 
 ```kotlin
 setContent {
-    MaterialTheme {
+    BundledUITheme(theme = BaseTheme.Dark) {
         // you can now use BundledUI
     }
 }
 ```
 
-> [!NOTE]
-> This library makes building UIs very easy, but it helps to
-> understand
-> the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3).
-> You can use the default MaterialTheme, but BundledUI includes utilities to make custom Material
-> themes (_as seen in Bundled Notes_).
+> [!TIP]
+> It helps to
+> understand the basics of the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3).
 
 ## `Section`
 
@@ -94,7 +91,7 @@ The above code leads to this layout:
 <img src="images/sections_basic.png" alt="Basic italics usage example" width="300" >
 
 > [!NOTE]
-> Note that you don't have to think about padding and margins at all when
+> You don't have to think about padding and margins at all when
 > using `Section`. The `first` and `last` parameters take care of all that for
 > you.
 
