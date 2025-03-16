@@ -51,11 +51,11 @@ fun containerColorForTone(tone: Tone) = when (tone) {
     Tone.NEUTRAL -> MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)
     Tone.NEGATIVE -> MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp).blend(
         to = Color.Red,
-        by = 0.05f
+        by = 0.06f
     )
     Tone.WARNING -> MaterialTheme.colorScheme.surfaceColorAtElevation(8.dp).blend(
         to = baseWarningColor,
-        by = 0.1f
+        by = 0.13f
     )
 }
 

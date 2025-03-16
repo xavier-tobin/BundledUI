@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.FontDownload
+import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Stars
+import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material.icons.rounded.WbSunny
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -18,8 +20,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.Tone
-import com.xaviertobin.bundledui.color.deintensify
 import com.xaviertobin.bundledui.color.randomAestheticColor
+import com.xaviertobin.bundledui.section.widgets.DismissOptions
+import com.xaviertobin.bundledui.section.widgets.SectionAlert
 import com.xaviertobin.bundledui.section.widgets.SectionButton
 import com.xaviertobin.bundledui.section.widgets.SectionButtonSheet
 import com.xaviertobin.bundledui.section.widgets.SectionHeader
@@ -29,10 +32,11 @@ import com.xaviertobin.bundledui.theme.BundledUITheme
 
 
 @Composable
-private fun BundledUIPreview(
-    content: @Composable () -> Unit
+private fun ThemedPreview(
+    theme: BaseTheme = BaseTheme.LIGHT,
+    content: @Composable () -> Unit,
 ) {
-    BundledUITheme(theme = BaseTheme.LIGHT, overrideColor = Color.randomAestheticColor()) {
+    BundledUITheme(theme = theme, overrideColor = Color.randomAestheticColor()) {
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.surface)
@@ -46,7 +50,7 @@ private fun BundledUIPreview(
 @Preview
 @Composable
 fun SectionButtonPreview() {
-    Column {
+    ThemedPreview {
         // normally
         SectionButton(
             first = true,
@@ -73,11 +77,18 @@ fun SectionButtonPreview() {
         SectionHeader("Buttons with different tones")
         SectionButton(
             first = true,
-            last = true,
             title = "Warning",
             description = "Warning",
             icon = Icons.Rounded.Stars,
             tone = Tone.WARNING
+        ) {}
+
+        SectionButton(
+            last = true,
+            title = "Warning",
+            description = "Warning",
+            icon = Icons.Rounded.Stars,
+            tone = Tone.NEGATIVE
         ) {}
 
     }
@@ -89,7 +100,20 @@ fun SettingsPreview() {
 
     var isChecked by remember { mutableStateOf(true) }
 
-    BundledUIPreview {
+    ThemedPreview(
+        theme = BaseTheme.DARK
+    ) {
+
+        SectionAlert(
+            title = "Settings",
+            description = "You can easily ",
+            icon = Icons.Rounded.Info,
+            tone = Tone.POSITIVE,
+            dismissOptions = DismissOptions(
+                text = "Dismiss",
+                onClick = { /* dismiss */ }
+            )
+        )
 
         SectionHeader("Theme")
 

@@ -28,6 +28,7 @@ fun BundledUITheme(
     theme: BaseTheme = BaseTheme.LIGHT,
     overrideColor: Color? = null,
     enableMaterialYouIfAvailable: Boolean = true,
+    transparentSystemBars: Boolean = true,
     invertStatusBarColorsForNonOled: Boolean = false,
     typography: @Composable (colorScheme: ColorScheme) -> Typography = { MaterialTheme.typography },
     shapes: Shapes = MaterialTheme.shapes,
@@ -52,7 +53,7 @@ fun BundledUITheme(
     }
 
     val view = LocalView.current
-    if (!view.isInEditMode) {
+    if (!view.isInEditMode && transparentSystemBars) {
         SideEffect {
             val window = (view.context as Activity).window
             WindowCompat.setDecorFitsSystemWindows(window, false)

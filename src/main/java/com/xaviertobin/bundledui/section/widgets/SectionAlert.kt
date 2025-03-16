@@ -75,7 +75,7 @@ fun SectionAlert(
                     text = it,
                     modifier = Modifier
                         .padding(
-                            top = 11.dp,
+                            top = 10.dp,
                             end = 12.dp,
                         )
                         .weight(1f),
@@ -91,7 +91,8 @@ fun SectionAlert(
                     imageVector = it,
                     contentDescription = title ?: description,
                     modifier = Modifier.padding(
-                        top = 6.dp,
+                        top = 8.dp,
+                        end = 3.dp
                     ),
                     tint = iconColor
                 )
@@ -129,6 +130,6 @@ fun SectionAlert(
 }
 
 data class DismissOptions(
-    @StringRes val text: Int,
+    val text: String,
     val onClick: UnitFunction,
 )

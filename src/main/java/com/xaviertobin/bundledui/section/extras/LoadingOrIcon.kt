@@ -24,7 +24,8 @@ fun LoadingOrIcon(
         CircularProgressIndicator(
             modifier = Modifier.Companion
                 .padding(end = 6.dp)
-                .size(24.dp)
+                .size(24.dp),
+            color = tint
         )
     } else {
         Icon(

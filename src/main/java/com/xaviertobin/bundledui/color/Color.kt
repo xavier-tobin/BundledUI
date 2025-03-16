@@ -7,9 +7,10 @@ val Color.Companion.DarkerGray: Color
     get() = Color(0xFF222222)
 
 
-fun test ( ){
+fun test() {
     Color.DarkGray
 }
+
 val Color.Companion.LighterGray
     get() = Color(0xFFE0E0E0)
 
@@ -33,7 +34,7 @@ fun Color.adjustTo(saturation: Float = 0.7f, brightness: Float = 0.7f): Color {
     ).toComposeColor()
 }
 
-fun Color.adjust(relativeSaturationBy: Float = 0.0f, relativeBrightnessBy: Float = 0.0f ): Color {
+fun Color.adjust(relativeSaturationBy: Float = 0.0f, relativeBrightnessBy: Float = 0.0f): Color {
     val current = this.toHsb()
 
     return current.copy(
@@ -58,18 +59,18 @@ fun Color.getIntensityReduction(degree: Float = 0.25f) =
 
 fun Color.dulled(forTheme: BaseTheme): Color {
     // Want to add more saturation and brightness depending on the brightness of the color (i.e. green)
-    val intensityGivenColor = this.getIntensityReduction()
+    val intensityGivenColor = this.getIntensityReduction(0.4f)
 
     val saturation = when (forTheme) {
-        BaseTheme.LIGHT -> 0.75f - intensityGivenColor
+        BaseTheme.LIGHT -> 0.9f - intensityGivenColor
         BaseTheme.DARK -> 0.7f - intensityGivenColor
         BaseTheme.OLED -> 0.85f - intensityGivenColor
     }
 
     val brightness = when (forTheme) {
-        BaseTheme.LIGHT -> 0.75f
-        BaseTheme.DARK -> 0.95f
-        BaseTheme.OLED -> 0.85f
+        BaseTheme.LIGHT -> 0.75f - intensityGivenColor
+        BaseTheme.DARK -> 0.95f - intensityGivenColor
+        BaseTheme.OLED -> 0.85f - intensityGivenColor
     }
 
     return this.toHsb().copy(
