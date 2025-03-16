@@ -31,8 +31,7 @@ setContent {
 
 > [!TIP]
 > It can help to understand the basics of
->
-the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3)
+> the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3)
 
 ## `Section`
 
