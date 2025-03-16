@@ -39,7 +39,7 @@ import com.xaviertobin.bundledui.section.base.Section
  * In Bundled Notes, this is used around a hint system to explain functionality
  */
 @Composable
-fun AlertBox(
+fun SectionAlert(
     description: String,
     title: String? = null,
     icon: ImageVector? = null,

@@ -196,6 +196,6 @@ fun SheetBase(
 @Composable
 fun SheetPreview() {
     Sheet(title = "Theme settings", onDismiss = { /*TODO*/ }) {
-        SectionSwitch(text = "Test toggle", checked = true, onChecked = {})
+        SectionSwitch(title = "Test toggle", checked = true, onChecked = {})
     }
 }

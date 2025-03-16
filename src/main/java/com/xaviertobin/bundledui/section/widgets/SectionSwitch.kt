@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SectionSwitch(
-    text: String,
+    title: String,
     description: String? = null,
     checked: Boolean,
     first: Boolean = false,
@@ -31,7 +31,7 @@ fun SectionSwitch(
         first = first,
         last = last,
         onClick = { onChecked(!checked) },
-        title = text.capitalize(Locale.current),
+        title = title.capitalize(Locale.current),
         description = description,
         verticalPadding = 4.dp,
         contentEnd = {
@@ -56,14 +56,14 @@ fun SwitchesPreview() {
 
     Column {
         SectionSwitch(
-            text = "Enable feature",
+            title = "Enable feature",
             checked = toggledOn1,
             onChecked = { toggledOn1 = it },
             first = true
         )
 
         SectionSwitch(
-            text = "Enable a different feature",
+            title = "Enable a different feature",
             checked = toggledOn2,
             onChecked = { toggledOn2 = it },
             last = true

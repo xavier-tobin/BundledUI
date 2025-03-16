@@ -99,7 +99,6 @@ fun SectionTextInput(
     val isError = errorMessage != null
     val indicatorColors = sectionTextInputIndicatorColors(isError)
 
-
     Section(
         first = first,
         last = last,
@@ -270,8 +269,8 @@ data class IndicatorColors(
 )
 
 val sectionTextInputContentPadding = PaddingValues(
-    top = 10.dp,
-    bottom = 16.dp,
+    top = 8.dp,
+    bottom = 14.dp,
     start = 4.dp,
     end = 4.dp
 )
@@ -350,7 +349,6 @@ private fun SectionTextInputSlidingLabel(
 
 @Preview(
     showBackground = true,
-    showSystemUi = true
 )
 @Composable
 fun SectionTextInputPreview() {

@@ -12,34 +12,6 @@ import com.xaviertobin.bundledui.section.base.sectionTextColorForTone
 
 
 
-/**
- * Remove string res version
- */
-@Composable
-fun SectionButtonSheet(
-    @StringRes title: Int,
-    icon: ImageVector,
-    modifier: Modifier = Modifier,
-    @StringRes description: Int,
-    first: Boolean = false,
-    last: Boolean = false,
-    selected: Boolean = false,
-    tone: Tone = Tone.NEUTRAL,
-    textColor: Color = sectionTextColorForTone(selected, tone),
-    sheetLayout: @Composable (onDismiss: () -> Unit) -> Unit
-) = SectionButtonSheet(
-    title = stringResource(id = title),
-    icon = icon,
-    modifier = modifier,
-    description = stringResource(id = description),
-    first = first,
-    last = last,
-    selected = selected,
-    tone = tone,
-    textColor = textColor,
-    sheetLayout = sheetLayout
-)
-
 @Composable
 fun SectionButtonSheet(
     title: String,

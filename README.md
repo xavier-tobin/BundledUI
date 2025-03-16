@@ -31,7 +31,8 @@ setContent {
 
 > [!TIP]
 > It helps to
-> understand the basics of the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3).
+> understand the basics of
+> the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3).
 
 ## `Section`
 
@@ -39,7 +40,7 @@ setContent {
 Bundled Notes. It abstracts away almost all fiddling with padding, margin, and
 modifiers, as well as supporting "Tone", orientation, clicks, enabled/selected states, and focus.
 
-Though you can use the base `Section` directly (and make your own `Section` widgets), BundledUI includes a
+Though you can use the base `Section` directly, BundledUI includes a
 number of `Section` components that are commonly used in Bundled Notes:
 
 - `SectionTextInput` - A `Section` for entering text
@@ -58,28 +59,28 @@ Column {
 
     SectionHeader("Theme")
 
-    SectionSwitch(
-        first = true,
-        text = "Enable Material You",
-        description = "Tint the theme ",
-        checked = isChecked,
-        onChecked = { isChecked = it }
-    )
-
     SectionButton(
-        text = R.string.theme,
-        description = R.string.change_theme_settings,
+        first = true,
+        title = "Theme",
+        description = "Choose between light, dark and OLED themes",
         icon = Icons.Rounded.WbSunny,
         onClick = { /* toggle between themes*/ }
     )
 
+    SectionSwitch(
+        title = "Enable Material You",
+        description = "Tint theme based on wallpaper",
+        checked = isChecked,
+        onChecked = { isChecked = it }
+    )
+
     SectionButtonSheet(
-        title = "Font options",
+        last = true,
+        title = "Font scale",
         description = "Choose fonts and text size",
         icon = Icons.Rounded.FontDownload,
-        last = true,
     ) { onDismiss ->
-        FontSettingsSheet(onDismiss = onDismiss)
+        // FontSettingsSheet(onDismiss)
     }
 
 }
@@ -88,6 +89,9 @@ Column {
 The above code leads to this layout:
 
 <img src="images/sections_basic.png" alt="Basic italics usage example" width="300" >
+
+__In BundledUI, almost everything is a `Section` - you can make many layouts just by using
+the include Section components and even creating your own.__
 
 > [!NOTE]
 > You don't have to think about padding and margins at all when
