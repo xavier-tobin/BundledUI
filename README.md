@@ -2,7 +2,7 @@
 
 # Bundled UI for Jetpack Compose
 
-A radically simple, idiomatic Material 3 UI design system for Jetpack Compose,
+A simple, idiomatic Material 3 UI design system for Jetpack Compose,
 built for
 [Bundled Notes](https://play.google.com/store/apps/details?id=com.xaviertobin.noted).
 
@@ -39,9 +39,8 @@ setContent {
 Bundled Notes. It abstracts away almost all fiddling with padding, margin, and
 modifiers, as well as supporting "Tone", orientation, clicks, enabled/selected states, and focus.
 
-Though you can use `Section` directly (and make your own `Section` widgets), BundledUI includes a
-number of UI widgets that are commonly used in Bundled Notes. Most of these are base Material3
-components simply wrapped in a `Section`:
+Though you can use the base `Section` directly (and make your own `Section` widgets), BundledUI includes a
+number of `Section` components that are commonly used in Bundled Notes:
 
 - `SectionTextInput` - A `Section` for entering text
 - `SectionTitleDescription` - A `Section` card to display a basic list item
