@@ -30,8 +30,7 @@ setContent {
 ```
 
 > [!TIP]
-> It helps to
-> understand the basics of
+> It can help to understand the basics of
 > the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3).
 
 ## `Section`
@@ -98,4 +97,11 @@ the include Section components and even creating your own.__
 > using `Section`. The `first` and `last` parameters take care of all that for
 > you.
 
-# More to come... docs are a work in progress
+# Theming
+
+>More to come... docs are a work in progress
+
+# Extras
+
+>More to come... docs are a work in progress
+
