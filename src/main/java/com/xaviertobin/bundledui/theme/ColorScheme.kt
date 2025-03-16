@@ -52,18 +52,23 @@ fun defaultLightColorScheme() = lightColorScheme(
 )
 
 
+data class CustomMaterialYouColors(
+    val primary: Color,
+    val tertiary: Color = primary,
+)
+
+
 /**
  * Creates a light/dark/oled Material3 ColorScheme with a given primary and tertiary tone
  * If not supplied, the tertiary color is set to a complementary color from the primary color
  */
-fun colorBasedColorScheme(
-    primary: Color,
-    tertiary: Color = primary,
-    theme: BaseTheme
+fun customColorScheme(
+    colors: CustomMaterialYouColors,
+    theme: BaseTheme,
 ): ColorScheme {
 
-    val actualPrimary = primary.dulled(theme)
-    val actualTertiary = tertiary.complementaryColor().dulled(theme)
+    val actualPrimary = colors.primary.dulled(theme)
+    val actualTertiary = colors.tertiary.complementaryColor().dulled(theme)
 
     val baseTone = when (theme) {
         BaseTheme.LIGHT -> Color.White
@@ -111,7 +116,7 @@ fun colorBasedColorScheme(
             primary = actualPrimary,
             secondary = actualPrimary,
             tertiary = actualTertiary,
-            surface = baseTone.blend(actualPrimary, by = 0.04f),
+            surface = baseTone.blend(actualPrimary, by = 0.05f),
             secondaryContainer = baseTone.blend(actualPrimary, by = 0.3f),
             onPrimaryContainer = actualPrimary.blend(baseTone, by = 0.4f),
             onSecondaryContainer = actualPrimary.blend(baseTone, by = 0.3f),

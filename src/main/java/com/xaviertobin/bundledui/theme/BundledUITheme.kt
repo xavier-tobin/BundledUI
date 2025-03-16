@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
@@ -26,7 +25,7 @@ import androidx.core.view.WindowCompat
 @Composable
 fun BundledUITheme(
     theme: BaseTheme = BaseTheme.LIGHT,
-    overrideColor: Color? = null,
+    themeColors: CustomMaterialYouColors? = null,
     enableMaterialYouIfAvailable: Boolean = true,
     transparentSystemBars: Boolean = true,
     invertStatusBarColorsForNonOled: Boolean = false,
@@ -39,7 +38,7 @@ fun BundledUITheme(
     val context = LocalContext.current
 
     val colorScheme by remember(
-        key1 = theme to overrideColor,
+        key1 = theme to themeColors,
         key2 = isMaterialYouEnabled,
     ) {
         derivedStateOf {
@@ -47,7 +46,7 @@ fun BundledUITheme(
                 context = context,
                 theme = theme,
                 isMaterialYouEnabled = isMaterialYouEnabled,
-                overrideColor = overrideColor
+                customMaterialYouColors = themeColors
             )
         }
     }
@@ -77,19 +76,18 @@ fun BundledUITheme(
 }
 
 
-
 @SuppressLint("NewApi")
 fun getColorScheme(
     context: Context,
     isMaterialYouEnabled: Boolean,
     theme: BaseTheme,
-    overrideColor: Color? = null,
+    customMaterialYouColors: CustomMaterialYouColors? = null,
 ): ColorScheme {
 
-    if (overrideColor != null) {
-        return colorBasedColorScheme(
-            primary = overrideColor,
-            theme = theme
+    if (customMaterialYouColors != null) {
+        return customColorScheme(
+            colors = customMaterialYouColors,
+            theme = theme,
         )
     }
 

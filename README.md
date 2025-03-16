@@ -31,7 +31,8 @@ setContent {
 
 > [!TIP]
 > It can help to understand the basics of
-> the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3).
+>
+the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3)
 
 ## `Section`
 
@@ -99,9 +100,36 @@ the include Section components and even creating your own.__
 
 # Theming
 
->More to come... docs are a work in progress
+Theming in BundledUI is based on the standard `MaterialTheme`, but with a light wrapper to support:
+
+- OLED themes
+- Disabling/enabling Material You
+- Custom Material You colors (beta)
+- Status bar transparency
+- Extensions to improve idiomatic colors
+
+You can configure the theme using the `BundledUITheme` composable as mentioned above:
+
+```kotlin
+
+// get the current theme from your preferences, check if system is dark theme etc.
+val currentTheme = getTheme()
+
+setContent {
+    BundledUITheme(
+        theme = currentTheme,
+        themeColors = CustomMaterialYouColors(primary = overrideColor),
+        typography = { colorScheme ->
+            // you can override typography here
+        }
+    ) {
+        // you can now use BundledUI
+    }
+}
+
+```
 
 # Extras
 
->More to come... docs are a work in progress
+> More to come... docs are a work in progress
 

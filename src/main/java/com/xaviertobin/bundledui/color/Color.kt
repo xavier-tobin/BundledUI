@@ -63,14 +63,14 @@ fun Color.dulled(forTheme: BaseTheme): Color {
 
     val saturation = when (forTheme) {
         BaseTheme.LIGHT -> 0.9f - intensityGivenColor
-        BaseTheme.DARK -> 0.7f - intensityGivenColor
+        BaseTheme.DARK -> 0.75f - intensityGivenColor
         BaseTheme.OLED -> 0.85f - intensityGivenColor
     }
 
     val brightness = when (forTheme) {
-        BaseTheme.LIGHT -> 0.75f - intensityGivenColor
+        BaseTheme.LIGHT -> 0.8f - intensityGivenColor
         BaseTheme.DARK -> 0.95f - intensityGivenColor
-        BaseTheme.OLED -> 0.85f - intensityGivenColor
+        BaseTheme.OLED -> 0.75f - intensityGivenColor
     }
 
     return this.toHsb().copy(
