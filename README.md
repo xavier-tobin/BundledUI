@@ -14,16 +14,16 @@ built for
 
 ## What's included?
 
-BundledUI is the design system used in Bundled Notes. It is comprised of three simple, key parts for creating gorgeous Material You apps:
+BundledUI is the design system used in Bundled Notes. It is comprised of three key parts for creating gorgeous Material You apps:
 1. The `BundledUITheme` wrapper
 2. The `Section` component
-3. Additional components, animations and utilities
+3. A small suite of extra components, animations and utilities
 
 ## Step 1: Theming
 
-__This library is an abstraction around the Compose Material3 library. It will work with a
-regular `MaterialTheme` wrapper, but to take advantage of the rich theming available (including
-OLED & Dark themes), wrap your app in `BundledUITheme`:__
+The theming in this library is an abstraction around the Compose Material3 library. It will work with a
+regular `MaterialTheme` wrapper, but to take advantage of the rich theming options available (including
+OLED & Dark themes, and auto-system themes), wrap your app in `BundledUITheme`:
 
 ```kotlin
 setContent {
@@ -37,7 +37,7 @@ setContent {
 > It's helpful to understand the basics of
 > the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3)
 
-## Step2: The `Section`
+## Step 2: The `Section`
 
 `Section` is a base, Card-like component that is found on almost every page of
 Bundled Notes. It abstracts away almost all fiddling with padding, margin, and
@@ -101,38 +101,7 @@ the included Section components and even creating your own.__
 > using `Section`. The `first` and `last` parameters take care of all that for
 > you.
 
-# Theming
-
-Theming in BundledUI is based on the standard `MaterialTheme`, but with a light wrapper to support:
-
-- OLED themes
-- Disabling/enabling Material You
-- Custom Material You colors (beta)
-- Status bar transparency
-- Extensions to improve idiomatic colors
-
-You can configure the theme using the `BundledUITheme` composable as mentioned above:
-
-```kotlin
-
-// get the current theme from your preferences, check if system is dark theme etc.
-val currentTheme = getTheme()
-
-setContent {
-    BundledUITheme(
-        theme = currentTheme,
-        themeColors = CustomMaterialYouColors(primary = overrideColor),
-        typography = { colorScheme ->
-            // you can override typography here
-        }
-    ) {
-        // you can now use BundledUI
-    }
-}
-
-```
-
-# Extras
+# Step 3: Extras, animations and utilities
 
 > More to come... docs are a work in progress
 
