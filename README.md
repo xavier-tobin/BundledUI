@@ -14,8 +14,12 @@ built for
 
 ## What's included?
 
-BundledUI is the design system used in Bundled Notes. It includes a suite of easy-to-use UI
-components and all the theming utilities required to create gorgeous Material You apps.
+BundledUI is the design system used in Bundled Notes. It is comprised of three simple, key parts for creating gorgeous Material You apps:
+1. The `BundledUITheme` wrapper
+2. The `Section` component
+3. Additional components, animations and utilities
+
+## Step 1: Theming
 
 __This library is an abstraction around the Compose Material3 library. It will work with a
 regular `MaterialTheme` wrapper, but to take advantage of the rich theming available (including
@@ -30,14 +34,14 @@ setContent {
 ```
 
 > [!TIP]
-> It can help to understand the basics of
+> It's helpful to understand the basics of
 > the [Compose Material3 library](https://developer.android.com/develop/ui/compose/designsystems/material3)
 
-## `Section`
+## Step2: The `Section`
 
 `Section` is a base, Card-like component that is found on almost every page of
 Bundled Notes. It abstracts away almost all fiddling with padding, margin, and
-modifiers, as well as supporting "Tone", orientation, clicks, enabled/selected states, and focus.
+modifiers, as well as supporting tone, orientation, clicks, enabled/selected states, and focus.
 
 Though you can use the base `Section` directly, BundledUI includes a
 number of `Section` components that are commonly used in Bundled Notes:
@@ -90,7 +94,7 @@ The above code leads to this layout:
 <img src="images/sections_basic.png" alt="Basic italics usage example" width="300" >
 
 __In BundledUI, almost everything is a `Section` - you can make many layouts just by using
-the include Section components and even creating your own.__
+the included Section components and even creating your own.__
 
 > [!NOTE]
 > You don't have to think about padding and margins at all when
