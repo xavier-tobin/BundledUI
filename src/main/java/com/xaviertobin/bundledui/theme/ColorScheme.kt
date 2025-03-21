@@ -102,7 +102,7 @@ fun customColorScheme(
             primary = actualPrimary,
             secondary = actualPrimary,
             tertiary = actualTertiary,
-            surface = baseTone.blend(actualPrimary, by = 0.05f),
+            surface = baseTone.blend(actualPrimary, by = 0.01f),
             secondaryContainer = baseTone.blend(actualPrimary, by = 0.3f),
             onPrimaryContainer = actualPrimary.blend(baseTone, by = 0.4f),
             onSecondaryContainer = actualPrimary.blend(baseTone, by = 0.3f),

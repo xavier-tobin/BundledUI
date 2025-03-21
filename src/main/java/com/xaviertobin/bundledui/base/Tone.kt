@@ -39,7 +39,7 @@ fun vividTextColorForTone(tone: Tone) = when (tone) {
 @Composable
 fun vividContainerColorForTone(tone: Tone) = when (tone) {
     Tone.POSITIVE -> MaterialTheme.colorScheme.primary
-    Tone.NEUTRAL -> MaterialTheme.colorScheme.surfaceColorAtElevation(8.dp)
+    Tone.NEUTRAL -> MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)
     Tone.NEGATIVE -> textErrorColor()
     Tone.WARNING -> MaterialTheme.colorScheme.errorContainer
 }

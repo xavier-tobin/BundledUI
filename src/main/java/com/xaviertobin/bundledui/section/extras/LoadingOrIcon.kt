@@ -15,24 +15,38 @@ import com.xaviertobin.bundledui.base.iconColorForTone
 @Composable
 fun LoadingOrIcon(
     loadingFromClick: Boolean,
-    icon: ImageVector,
+    icon: ImageVector? = null,
     tone: Tone,
     iconDescription: String,
     tint: Color = iconColorForTone(tone)
 ) {
     if (loadingFromClick) {
         CircularProgressIndicator(
-            modifier = Modifier.Companion
-                .padding(end = 6.dp)
-                .size(24.dp),
-            color = tint
+            modifier = Modifier
+                .padding(start = 10.dp)
+                .size(20.dp),
+            color = tint,
+            strokeWidth = 3.dp
         )
-    } else {
-        Icon(
-            modifier = Modifier.Companion.padding(end = 6.dp),
-            imageVector = icon,
-            contentDescription = iconDescription,
+    } else if (icon != null) {
+        EndIcon(
+            icon = icon,
+            iconDescription = iconDescription,
             tint = tint
         )
     }
 }
+
+@Composable
+fun EndIcon(
+    icon: ImageVector,
+    tint: Color,
+    iconDescription: String,
+) = Icon(
+    imageVector = icon,
+    contentDescription = iconDescription,
+    tint = tint,
+    modifier = Modifier
+        .padding(start = 10.dp)
+        .size(20.dp)
+)

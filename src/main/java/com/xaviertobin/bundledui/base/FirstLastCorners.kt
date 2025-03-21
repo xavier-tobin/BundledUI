@@ -11,7 +11,7 @@ fun firstLastCornersVertical(
     first: Boolean = false,
     last: Boolean = false,
     defaultCornerRadius: Dp = 9.dp,
-    pronouncedCornerRadius: Dp = 30.dp,
+    pronouncedCornerRadius: Dp = 32.dp,
 ): RoundedCornerShape {
     val topCorners = if (first) pronouncedCornerRadius else defaultCornerRadius
     val bottomCorners = if (last) pronouncedCornerRadius else defaultCornerRadius

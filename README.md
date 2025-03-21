@@ -46,13 +46,13 @@ modifiers, as well as supporting tone, orientation, clicks, enabled/selected sta
 Though you can use the base `Section` directly, BundledUI includes a
 number of `Section` components that are commonly used in Bundled Notes:
 
-- `SectionTextInput` - A `Section` for entering text
-- `SectionTitleDescription` - A `Section` card to display a basic list item
-- `SectionButton` - Based on `SectionTitleDescription`, but clickable and with icon/loading support.
-- `SectionButtonSheet` - A `SectionButton` that opens a `BottomSheet` when clicked.
-- `SectionSwitch` - A `SectionTitleDescription` with a switch on the end.
-- `SectionSlider` - A `Section` with a slider.
-- `SectionAlert` - A `Section` designed to alert the user in varying tones.
+- `SectionTextInput`
+- `SectionTitleDescription` (list item)
+- `SectionButton` (clickable, with icon + loading)
+- `SectionButtonSheet` (opens sheet when clicked, with icon)
+- `SectionSwitch` (on/off switch)
+- `SectionSlider` (slider with values/steps)
+- `SectionAlert` (alert with icon, tones, dismiss action)
 
 All you have to do to get started is group related `Sections`, and set their
 `first` and `last` params:
@@ -91,7 +91,7 @@ Column {
 
 The above code leads to this layout:
 
-<img src="images/sections_basic.png" alt="Basic italics usage example" width="300" >
+<img src="images/sections_basic.png" alt="Basic italics usage example" width="450px" >
 
 __In BundledUI, almost everything is a `Section` - you can make many layouts just by using
 the included Section components and even creating your own.__

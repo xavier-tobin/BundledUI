@@ -1,6 +1,7 @@
 package com.xaviertobin.bundledui.color
 
 import androidx.compose.ui.graphics.Color
+import androidx.core.graphics.ColorUtils
 import com.xaviertobin.bundledui.theme.BaseTheme
 
 val Color.Companion.DarkerGray: Color
@@ -43,10 +44,19 @@ fun Color.adjust(relativeSaturationBy: Float = 0.0f, relativeBrightnessBy: Float
     ).toComposeColor()
 }
 
+fun Color.deintensifySaturation(by: Float = 0.12f): Color {
+    return this.adjust(
+        relativeSaturationBy = -this.getIntensityReduction(by),
+    )
+}
 
-/**
- * Reduces the brightness and saturation of a color based off its relative brightness/saturation
- */
+fun Color.deintensifyBrightness(by: Float = 0.12f): Color {
+    return this.adjust(
+        relativeBrightnessBy = -this.getIntensityReduction(by),
+    )
+}
+
+
 fun Color.deintensify(by: Float = 0.12f): Color {
     return this.adjust(
         relativeBrightnessBy = -this.getIntensityReduction(by),
@@ -55,22 +65,31 @@ fun Color.deintensify(by: Float = 0.12f): Color {
 }
 
 fun Color.getIntensityReduction(degree: Float = 0.25f) =
-    (((0.299 * this.red) + (0.587 * this.green) + (0.114 * this.blue)) * degree).toFloat()
+    (((0.199 * this.red) + (0.587 * this.green) + (0.214 * this.blue)) * degree).toFloat()
 
-fun Color.dulled(forTheme: BaseTheme): Color {
+fun Int.modifyColorForTheme(theme: BaseTheme): Int {
+    return when (theme) {
+        BaseTheme.LIGHT -> this
+        BaseTheme.DARK -> ColorUtils.blendARGB(this, android.graphics.Color.DKGRAY, 0.6f)
+        BaseTheme.OLED -> ColorUtils.blendARGB(this, android.graphics.Color.BLACK, 0.7f)
+    }
+}
+
+
+fun Color.dulled(forTheme: BaseTheme, by: Float = 0.4f): Color {
     // Want to add more saturation and brightness depending on the brightness of the color (i.e. green)
-    val intensityGivenColor = this.getIntensityReduction(0.4f)
+    val intensityGivenColor = this.getIntensityReduction(by)
 
     val saturation = when (forTheme) {
-        BaseTheme.LIGHT -> 0.9f - intensityGivenColor
-        BaseTheme.DARK -> 0.75f - intensityGivenColor
-        BaseTheme.OLED -> 0.85f - intensityGivenColor
+        BaseTheme.LIGHT -> 0.86f - intensityGivenColor
+        BaseTheme.DARK -> 0.8f - intensityGivenColor
+        BaseTheme.OLED -> 0.87f - intensityGivenColor
     }
 
     val brightness = when (forTheme) {
-        BaseTheme.LIGHT -> 0.8f - intensityGivenColor
+        BaseTheme.LIGHT -> 0.84f - intensityGivenColor
         BaseTheme.DARK -> 0.95f - intensityGivenColor
-        BaseTheme.OLED -> 0.75f - intensityGivenColor
+        BaseTheme.OLED -> 0.9f - intensityGivenColor
     }
 
     return this.toHsb().copy(
@@ -81,20 +100,16 @@ fun Color.dulled(forTheme: BaseTheme): Color {
 
 fun Color.Companion.randomAestheticColor(): Color {
 
-    val brightnessRange = 0.9f..1f
-
-    val saturationRange = 0.6f..1f
-
     var hue: Float
     do {
         hue = (0f..360f).random()
-    } while (hue in 48f..78f)
+    } while (hue in 50f..70f)
 
     return HSBColor(
         hue = hue.toFloat(),
-        saturation = saturationRange.random(),
-        brightness = brightnessRange.random()
-    ).toComposeColor()
+        saturation = (0.55f..0.93f).random(),
+        brightness = (0.8f..0.9f).random()
+    ).toComposeColor().deintensifyBrightness(by = 0.1f)
 }
 
 fun ClosedFloatingPointRange<Float>.random(): Float {
