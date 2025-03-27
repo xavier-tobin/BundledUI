@@ -3,6 +3,8 @@ package com.xaviertobin.bundledui.theme
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
 
 /**
  * In reality, themes involve other settings or properties, like tint or system respect settings.
@@ -18,6 +20,31 @@ enum class BaseTheme {
     LIGHT,
     DARK,
     OLED
+}
+
+enum class BaseThemeSetting {
+    LIGHT,
+    DARK,
+    OLED,
+    SYSTEM_PREFER_DARK,
+    SYSTEM_PREFER_OLED
+}
+
+@Composable
+fun getBaseThemeFromSetting(setting: BaseThemeSetting): BaseTheme {
+
+    return when (setting) {
+        BaseThemeSetting.LIGHT -> BaseTheme.LIGHT
+        BaseThemeSetting.DARK -> BaseTheme.DARK
+        BaseThemeSetting.OLED -> BaseTheme.OLED
+        BaseThemeSetting.SYSTEM_PREFER_DARK -> {
+            if (isSystemInDarkTheme()) BaseTheme.DARK else BaseTheme.LIGHT
+        }
+        BaseThemeSetting.SYSTEM_PREFER_OLED -> {
+            if (isSystemInDarkTheme()) BaseTheme.OLED else BaseTheme.LIGHT
+        }
+    }
+
 }
 
 /**

@@ -20,11 +20,11 @@ import com.xaviertobin.bundledui.section.widgets.SectionHeader
 
 @Composable
 fun ThemedPreview(
-    theme: BaseTheme = BaseTheme.LIGHT,
+    theme: BaseThemeSetting = BaseThemeSetting.LIGHT,
     content: @Composable () -> Unit,
 ) {
     BundledUITheme(
-        theme = theme,
+        themeSetting = theme,
         themeColors = CustomMaterialYouColors(primary = Color.randomAestheticColor())
     ) {
         Column(
@@ -38,9 +38,9 @@ fun ThemedPreview(
 }
 
 @Composable
-private fun SectionGroupPreview(baseTheme: BaseTheme) {
+private fun SectionGroupPreview(baseThemeSetting: BaseThemeSetting) {
     ThemedPreview(
-        theme = baseTheme
+        theme = baseThemeSetting
     ) {
         // normally
         SectionButton(
@@ -81,12 +81,12 @@ private fun SectionGroupPreview(baseTheme: BaseTheme) {
 
 @Preview
 @Composable
-fun SettingsPreviewLight()  = SectionGroupPreview(BaseTheme.LIGHT)
+fun SettingsPreviewLight()  = SectionGroupPreview(BaseThemeSetting.LIGHT)
 
 @Preview
 @Composable
-fun SettingsPreviewDark()  = SectionGroupPreview(BaseTheme.DARK)
+fun SettingsPreviewDark()  = SectionGroupPreview(BaseThemeSetting.DARK)
 
 @Preview
 @Composable
-fun SettingsPreviewOLED()  = SectionGroupPreview(BaseTheme.OLED)
+fun SettingsPreviewOLED()  = SectionGroupPreview(BaseThemeSetting.OLED)

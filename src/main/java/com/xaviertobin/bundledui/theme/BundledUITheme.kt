@@ -1,6 +1,5 @@
 package com.xaviertobin.bundledui.theme
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.Build
@@ -11,7 +10,9 @@ import androidx.compose.material3.Typography
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -22,9 +23,11 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 
+val LocalBaseTheme = compositionLocalOf { BaseTheme.DARK }
+
 @Composable
 fun BundledUITheme(
-    theme: BaseTheme = BaseTheme.LIGHT,
+    themeSetting: BaseThemeSetting = BaseThemeSetting.LIGHT,
     themeColors: CustomMaterialYouColors? = null,
     enableMaterialYouIfAvailable: Boolean = true,
     transparentSystemBars: Boolean = true,
@@ -33,19 +36,19 @@ fun BundledUITheme(
     shapes: Shapes = MaterialTheme.shapes,
     content: @Composable () -> Unit,
 ) {
-    val isMaterialYouEnabled =
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && enableMaterialYouIfAvailable
     val context = LocalContext.current
+    val theme = getBaseThemeFromSetting(themeSetting)
 
     val colorScheme by remember(
-        key1 = theme to themeColors,
-        key2 = isMaterialYouEnabled,
+        key1 = theme,
+        key2 = themeColors,
+        key3 = enableMaterialYouIfAvailable,
     ) {
         derivedStateOf {
             getColorScheme(
                 context = context,
                 theme = theme,
-                isMaterialYouEnabled = isMaterialYouEnabled,
+                isMaterialYouEnabled = enableMaterialYouIfAvailable,
                 customMaterialYouColors = themeColors
             )
         }
@@ -67,16 +70,17 @@ fun BundledUITheme(
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = typography(colorScheme),
-        shapes = shapes,
-        content = content,
-    )
+    CompositionLocalProvider(LocalBaseTheme provides theme) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = typography(colorScheme),
+            shapes = shapes,
+            content = content,
+        )
+    }
 }
 
 
-@SuppressLint("NewApi")
 fun getColorScheme(
     context: Context,
     isMaterialYouEnabled: Boolean,
@@ -91,7 +95,7 @@ fun getColorScheme(
         )
     }
 
-    if (isMaterialYouEnabled) {
+    if (isMaterialYouEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         return when (theme) {
             BaseTheme.LIGHT -> dynamicLightColorScheme(context)
             BaseTheme.DARK -> dynamicDarkColorScheme(context)
