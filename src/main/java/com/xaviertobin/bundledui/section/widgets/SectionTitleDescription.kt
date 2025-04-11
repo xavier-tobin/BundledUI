@@ -1,9 +1,9 @@
 package com.xaviertobin.bundledui.section.widgets
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,13 +13,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.ComposableFunction
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.base.UnitFunction
+import com.xaviertobin.bundledui.color.alpha
 import com.xaviertobin.bundledui.section.base.Section
+import com.xaviertobin.bundledui.section.base.SectionDefaults
 import com.xaviertobin.bundledui.section.base.sectionTextColorForTone
+import com.xaviertobin.bundledui.section.extras.EndIcon
 
 
 @Composable
@@ -32,29 +34,26 @@ fun SectionTitleDescriptionIcon(
     selected: Boolean = false,
     tone: Tone = Tone.NEUTRAL,
     textColor: Color = sectionTextColorForTone(selected, tone),
+    enabled: Boolean = true,
     icon: ImageVector,
-    verticalPadding: Dp = 8.dp,
-) {
-    SectionTitleDescription(
-        title = title,
-        description = description,
-        first = first,
-        last = last,
-        selected = selected,
-        tone = tone,
-        textColor = textColor,
-        contentEnd = {
-            Icon(
-                modifier = Modifier.padding(end = 6.dp),
-                imageVector = icon,
-                contentDescription = title,
-                tint = textColor
-            )
-        },
-        modifier = modifier,
-        verticalPadding = verticalPadding,
-    )
-}
+) = SectionTitleDescription(
+    title = title,
+    description = description,
+    first = first,
+    last = last,
+    selected = selected,
+    tone = tone,
+    textColor = textColor,
+    enabled = enabled,
+    contentEnd = {
+        EndIcon(
+            icon = icon,
+            iconDescription = title,
+            color = textColor
+        )
+    },
+    modifier = modifier,
+)
 
 
 @Composable
@@ -71,7 +70,13 @@ fun SectionTitleDescription(
     contentEnd: ComposableFunction? = null,
     contentTop: ComposableFunction? = null,
     contentBottom: ComposableFunction? = null,
-    verticalPadding: Dp = 8.dp,
+    padding: PaddingValues = SectionDefaults.verticalPaddingValues(
+        first = first,
+        last = last,
+        top = 16.dp,
+        bottom = 16.dp
+    ),
+    enabled: Boolean = true,
     onClick: UnitFunction? = null,
     onLongClick: UnitFunction? = null,
 ) {
@@ -82,13 +87,12 @@ fun SectionTitleDescription(
         onLongClick = onLongClick,
         selected = selected,
         tone = tone,
-        modifier = modifier
+        modifier = modifier,
+        enabled = enabled,
+        padding = padding
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(
-                top = verticalPadding, bottom = verticalPadding
-            )
         ) {
             contentStart?.invoke()
             Column(
@@ -107,14 +111,14 @@ fun SectionTitleDescription(
                     color = textColor,
                     textAlign = TextAlign.Start,
                     modifier = Modifier
-                        .padding(bottom = 2.dp)
+                        .padding(bottom = 1.dp)
                 )
                 description?.let {
                     Text(
                         text = description,
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.Normal,
-                        color = textColor,
+                        color = textColor.alpha(0.9f),
                         textAlign = TextAlign.Start,
                     )
                 }

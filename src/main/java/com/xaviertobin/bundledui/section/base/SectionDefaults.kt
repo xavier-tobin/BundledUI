@@ -1,10 +1,14 @@
 package com.xaviertobin.bundledui.section.base
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.base.containerColorForTone
@@ -12,6 +16,7 @@ import com.xaviertobin.bundledui.base.firstLastCornersHorizontal
 import com.xaviertobin.bundledui.base.firstLastCornersVertical
 import com.xaviertobin.bundledui.base.iconColorForTone
 import com.xaviertobin.bundledui.base.textColorForTone
+import com.xaviertobin.bundledui.color.blend
 
 object SectionDefaults {
 
@@ -22,7 +27,7 @@ object SectionDefaults {
     fun paddingValues(
         orientation: SectionOrientation,
         first: Boolean,
-        last: Boolean
+        last: Boolean,
     ): PaddingValues {
         return when (orientation) {
             SectionOrientation.VERTICAL -> verticalPaddingValues(first, last)
@@ -33,21 +38,31 @@ object SectionDefaults {
     fun verticalPaddingValues(
         first: Boolean = false,
         last: Boolean = false,
+        top: Dp = 8.dp,
+        bottom: Dp = 8.dp,
+        start: Dp = 22.dp,
+        end: Dp = 22.dp,
+        firstLastExtra: Dp = 2.dp,
     ) = PaddingValues(
-        top = if (first) 10.dp else 8.dp,
-        bottom = if (last) 10.dp else 8.dp,
-        start = 22.dp,
-        end = 22.dp
+        start = start,
+        end = end,
+        top = if (first) top + firstLastExtra else top,
+        bottom = if (last) bottom + firstLastExtra else bottom,
     )
 
     fun horizontalPaddingValues(
         first: Boolean = false,
         last: Boolean = false,
+        firstLastExtra: Dp = 4.dp,
+        top: Dp = 12.dp,
+        bottom: Dp = 12.dp,
+        start: Dp = 20.dp,
+        end: Dp = 20.dp
     ) = PaddingValues(
-        start = if (first) 24.dp else 20.dp,
-        end = if (last) 24.dp else 20.dp,
-        top = 12.dp,
-        bottom = 12.dp,
+        start = if (first) start + firstLastExtra else start,
+        end = if (last) end + firstLastExtra else end,
+        top = top,
+        bottom = bottom,
     )
 
     /**
@@ -79,13 +94,22 @@ object SectionDefaults {
 
     @Composable
     fun containerColor(selected: Boolean, focused: Boolean, tone: Tone): Color {
-        return if (selected) {
-            MaterialTheme.colorScheme.tertiary
-        } else if (focused) {
-            MaterialTheme.colorScheme.surfaceContainerHigh
-        } else {
-            containerColorForTone(tone)
-        }
+
+        val animatedColor by animateColorAsState(
+            targetValue = if (selected) {
+                MaterialTheme.colorScheme.tertiary
+            } else if (focused) {
+                MaterialTheme.colorScheme.surface.blend(
+                    MaterialTheme.colorScheme.tertiary,
+                    by = 0.2f
+                )
+            } else {
+                containerColorForTone(tone)
+            },
+            animationSpec = tween(durationMillis = 300)
+        )
+
+        return animatedColor
     }
 
     @Composable

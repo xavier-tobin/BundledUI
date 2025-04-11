@@ -13,10 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.capitalize
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.xaviertobin.bundledui.section.base.SectionDefaults
 
 
 @Composable
@@ -28,25 +27,30 @@ fun SectionSwitch(
     last: Boolean = false,
     onChecked: (Boolean) -> Unit,
 ) = SectionTitleDescription(
+    first = first,
+    last = last,
+    onClick = { onChecked(!checked) },
+    title = title,
+    description = description,
+    padding = SectionDefaults.verticalPaddingValues(
         first = first,
         last = last,
-        onClick = { onChecked(!checked) },
-        title = title.capitalize(Locale.current),
-        description = description,
-        verticalPadding = 4.dp,
-        contentEnd = {
-            Switch(
-                checked = checked,
-                onCheckedChange = { onChecked(it) },
-                colors = SwitchDefaults.colors(
-                    uncheckedTrackColor = Color.Transparent,
-                    checkedTrackColor = MaterialTheme.colorScheme.tertiary,
-                    checkedThumbColor = MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)
-                ),
-                modifier = Modifier.padding(end = 4.dp),
-            )
-        }
-    )
+        bottom = 12.dp,
+        top = 12.dp
+    ),
+    contentEnd = {
+        Switch(
+            checked = checked,
+            onCheckedChange = { onChecked(it) },
+            colors = SwitchDefaults.colors(
+                uncheckedTrackColor = Color.Transparent,
+                checkedTrackColor = MaterialTheme.colorScheme.tertiary,
+                checkedThumbColor = MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)
+            ),
+            modifier = Modifier.padding(end = 4.dp),
+        )
+    }
+)
 
 @Preview
 @Composable
@@ -64,6 +68,7 @@ fun SwitchesPreview() {
 
         SectionSwitch(
             title = "Enable a different feature",
+            description = "This is a description",
             checked = toggledOn2,
             onChecked = { toggledOn2 = it },
             last = true

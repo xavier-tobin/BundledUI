@@ -9,10 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.color.DarkerGray
+import com.xaviertobin.bundledui.color.LighterGray
 import com.xaviertobin.bundledui.color.alpha
 import com.xaviertobin.bundledui.color.blend
-import com.xaviertobin.bundledui.color.complementaryColor
 import com.xaviertobin.bundledui.color.dulled
+import com.xaviertobin.bundledui.color.rotateHue
 
 
 /**
@@ -68,17 +69,17 @@ fun customColorScheme(
 ): ColorScheme {
 
     val actualPrimary = colors.primary.dulled(theme)
-    val actualTertiary = colors.tertiary.complementaryColor().dulled(theme)
+    val actualTertiary = colors.tertiary.rotateHue(180f).dulled(theme)
 
     val baseTone = when (theme) {
         BaseTheme.LIGHT -> Color.White
-        BaseTheme.DARK -> Color(0xFF161616)
+        BaseTheme.DARK -> Color(0xFF181818)
         BaseTheme.OLED -> Color.Black
     }
 
     val contrastTone = when (theme) {
         BaseTheme.LIGHT -> Color.DarkerGray
-        BaseTheme.DARK -> Color.White
+        BaseTheme.DARK -> Color.LighterGray
         BaseTheme.OLED -> Color.White
     }
 
@@ -92,7 +93,7 @@ fun customColorScheme(
             secondaryContainer = baseTone.blend(actualPrimary, by = 0.7f),
             onSecondaryContainer = actualPrimary.blend(baseTone, by = 0.3f),
             onPrimaryContainer = actualPrimary.blend(baseTone, by = 0.3f),
-            onSurfaceVariant = contrastTone.blend(actualPrimary, by = 0.28f),
+            onSurfaceVariant = contrastTone.blend(actualTertiary, by = 0.28f),
             onPrimary = baseTone.blend(actualPrimary, by = 0.2f),
             surfaceContainer = actualPrimary.blend(baseTone, by = 0.4f),
             surfaceTint = actualPrimary
@@ -106,7 +107,7 @@ fun customColorScheme(
             secondaryContainer = baseTone.blend(actualPrimary, by = 0.3f),
             onPrimaryContainer = actualPrimary.blend(baseTone, by = 0.4f),
             onSecondaryContainer = actualPrimary.blend(baseTone, by = 0.3f),
-            onSurfaceVariant = contrastTone.blend(actualPrimary, by = 0.2f),
+            onSurfaceVariant = contrastTone.blend(actualTertiary, by = 0.18f),
             onPrimary = baseTone.blend(actualPrimary, by = 0.2f),
             surfaceContainer = actualPrimary.blend(baseTone, by = 0.3f),
             surfaceTint = actualPrimary
@@ -116,7 +117,7 @@ fun customColorScheme(
             primary = actualPrimary,
             secondary = actualPrimary,
             tertiary = actualTertiary,
-            surface = baseTone.blend(actualPrimary, by = 0.05f),
+            surface = baseTone,
             secondaryContainer = baseTone.blend(actualPrimary, by = 0.3f),
             onPrimaryContainer = actualPrimary.blend(baseTone, by = 0.4f),
             onSecondaryContainer = actualPrimary.blend(baseTone, by = 0.3f),
@@ -140,7 +141,7 @@ val ColorScheme.text: Color
 
 val ColorScheme.secondaryText: Color
     @Composable
-    get() = MaterialTheme.colorScheme.onSurfaceVariant.alpha(0.82f)
+    get() = MaterialTheme.colorScheme.onSurfaceVariant.alpha(0.85f)
 
 /**
  * This is commonly used, easier than specifying the elevation each time

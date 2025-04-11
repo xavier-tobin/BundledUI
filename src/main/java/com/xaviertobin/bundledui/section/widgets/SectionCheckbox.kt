@@ -1,12 +1,9 @@
 package com.xaviertobin.bundledui.section.widgets
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,11 +11,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.capitalize
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.xaviertobin.bundledui.base.Tone
+import com.xaviertobin.bundledui.section.base.SectionDefaults
 import com.xaviertobin.bundledui.theme.ThemedPreview
 
 
@@ -29,27 +25,43 @@ fun SectionCheckbox(
     checked: Boolean,
     first: Boolean = false,
     last: Boolean = false,
+    errorMessage: String? = null,
+    enabled: Boolean = true,
     onChecked: (Boolean) -> Unit,
 ) = SectionTitleDescription(
     first = first,
     last = last,
     onClick = { onChecked(!checked) },
-    title = title.capitalize(Locale.current),
+    title = title,
     description = description,
-    verticalPadding = 4.dp,
+    padding = SectionDefaults.verticalPaddingValues(
+        first = first,
+        last = last,
+        start = 16.dp,
+    ),
+    enabled = enabled,
+    tone = if (errorMessage != null) {
+        Tone.NEGATIVE
+    } else {
+        Tone.NEUTRAL
+    },
     contentStart = {
         Checkbox(
             checked = checked,
             onCheckedChange = { onChecked(it) },
             colors = CheckboxDefaults.colors(
-
                 checkedColor = MaterialTheme.colorScheme.tertiary,
                 uncheckedColor = MaterialTheme.colorScheme.tertiary,
                 checkmarkColor = MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)
             ),
-            modifier = Modifier.padding(end = 4.dp),
-
+            modifier = Modifier.padding(end = 4.dp)
+        )
+    },
+    contentBottom = {
+            SectionErrorMessage(
+                errorMessage = errorMessage,
             )
+
     }
 )
 
@@ -69,6 +81,7 @@ fun SectionCheckboxPreview() {
 
         SectionCheckbox(
             title = "Enable a different feature",
+            description = "Click here",
             checked = toggledOn2,
             onChecked = { toggledOn2 = it },
             last = true

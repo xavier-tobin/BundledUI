@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.xaviertobin.bundledui.animations.AnimateInHorizontally
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.base.iconColorForTone
 
@@ -18,35 +20,43 @@ fun LoadingOrIcon(
     icon: ImageVector? = null,
     tone: Tone,
     iconDescription: String,
-    tint: Color = iconColorForTone(tone)
+    tint: Color = iconColorForTone(tone),
+    size: Dp = 24.dp,
+    endPadding: Dp = 6.dp
 ) {
-    if (loadingFromClick) {
-        CircularProgressIndicator(
-            modifier = Modifier
-                .padding(start = 10.dp)
-                .size(20.dp),
-            color = tint,
-            strokeWidth = 3.dp
-        )
-    } else if (icon != null) {
-        EndIcon(
-            icon = icon,
-            iconDescription = iconDescription,
-            tint = tint
-        )
+    AnimateInHorizontally(visible = loadingFromClick || icon != null) {
+        if (loadingFromClick) {
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .padding(start = 10.dp, end = endPadding)
+                    .size(size),
+                color = tint,
+                strokeWidth = 3.dp
+            )
+        } else if (icon != null) {
+            EndIcon(
+                icon = icon,
+                iconDescription = iconDescription,
+                color = tint,
+                size = size,
+                endPadding = endPadding
+            )
+        }
     }
 }
 
 @Composable
 fun EndIcon(
     icon: ImageVector,
-    tint: Color,
+    color: Color,
     iconDescription: String,
+    size: Dp = 24.dp,
+    endPadding: Dp = 6.dp
 ) = Icon(
     imageVector = icon,
     contentDescription = iconDescription,
-    tint = tint,
+    tint = color,
     modifier = Modifier
-        .padding(start = 10.dp)
-        .size(20.dp)
+        .padding(start = 10.dp, end = endPadding)
+        .size(size)
 )

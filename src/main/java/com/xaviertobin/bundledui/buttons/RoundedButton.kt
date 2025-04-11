@@ -27,7 +27,6 @@ import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.base.vividContainerColorForTone
 import com.xaviertobin.bundledui.base.vividTextColorForTone
-import com.xaviertobin.bundledui.color.alpha
 import com.xaviertobin.bundledui.section.extras.EndIcon
 import com.xaviertobin.bundledui.section.extras.LoadingOrIcon
 
@@ -121,7 +120,9 @@ fun RoundedLoadingButton(
                 tint = textColor,
                 icon = icon,
                 iconDescription = text,
-                tone = tone
+                tone = tone,
+                size = 20.dp,
+                endPadding = 0.dp
             )
         }
     )
@@ -150,8 +151,10 @@ fun RoundedButton(
     endContent = {
         EndIcon(
             icon = icon,
-            tint = textColor,
-            iconDescription = text
+            color = textColor,
+            iconDescription = text,
+            size = 20.dp,
+            endPadding = 0.dp
         )
     }
 )

@@ -6,9 +6,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xaviertobin.bundledui.section.base.Section
+import com.xaviertobin.bundledui.theme.secondaryText
 
 /**
  * A sheet that displays annotated/styled text in a single Section, usually just for info etc.
@@ -28,7 +30,8 @@ fun TextSheet(
                 modifier = Modifier.padding(vertical = 10.dp),
                 text = text,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.secondaryText,
+                fontWeight = FontWeight.Medium,
                 fontSize = 15.sp
             )
         }

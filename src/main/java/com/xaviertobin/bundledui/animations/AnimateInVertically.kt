@@ -13,7 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AnimateUpDown(
+fun AnimateInVertically(
     modifier: Modifier = Modifier.clip(RoundedCornerShape(28.dp)),
     visible: Boolean = true,
     content: @Composable (AnimatedVisibilityScope.() -> Unit)

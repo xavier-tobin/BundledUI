@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
@@ -36,6 +37,7 @@ fun Section(
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),
     containerColor: Color = SectionDefaults.containerColor(selected, focused, tone),
+    enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
@@ -50,6 +52,7 @@ fun Section(
             modifier = modifier,
             first = first,
             last = last,
+            enabled = enabled,
             orientation = orientation,
             tone = tone,
             focused = focused,
@@ -81,6 +84,7 @@ fun SectionRow(
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),
     containerColor: Color = SectionDefaults.containerColor(selected, focused, tone),
+    enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
     content: @Composable RowScope.() -> Unit,
@@ -95,6 +99,7 @@ fun SectionRow(
             modifier = modifier,
             first = first,
             last = last,
+            enabled = enabled,
             orientation = orientation,
             tone = tone,
             focused = focused,
@@ -113,13 +118,13 @@ fun SectionRow(
 }
 
 
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Modifier.section(
     modifier: Modifier = Modifier,
     first: Boolean = false,
     last: Boolean = false,
+    enabled: Boolean = true,
     orientation: SectionOrientation = SectionOrientation.VERTICAL,
     tone: Tone = Tone.NEUTRAL,
     focused: Boolean = false,
@@ -136,7 +141,7 @@ fun Modifier.section(
     .padding(margin)
     .clip(shape)
     .combinedClickable(
-        enabled = onClick != null || onLongClick != null,
+        enabled = enabled && (onClick != null || onLongClick != null),
         onClick = { onClick?.invoke() },
         onLongClick = { onLongClick?.invoke() }
     )
@@ -150,4 +155,7 @@ fun Modifier.section(
             SectionOrientation.VERTICAL -> PaddingValues(vertical = extraInternalPadding)
             SectionOrientation.HORIZONTAL -> PaddingValues(horizontal = extraInternalPadding)
         }
+    )
+    .alpha(
+        if (enabled) 1f else 0.5f
     )

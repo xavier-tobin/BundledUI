@@ -1,5 +1,6 @@
 package com.xaviertobin.bundledui.section.widgets
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -31,7 +32,6 @@ import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.contentType
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
@@ -42,9 +42,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xaviertobin.bundledui.animations.AnimateInSlideDown
+import com.xaviertobin.bundledui.animations.AnimateInVertically
+import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.buttons.IconButton
 import com.xaviertobin.bundledui.section.base.Section
+import com.xaviertobin.bundledui.section.base.SectionDefaults
 import com.xaviertobin.bundledui.section.base.SectionRow
 import com.xaviertobin.bundledui.theme.ThemedPreview
 
@@ -76,21 +78,26 @@ fun SectionTextInput(
     Section(
         first = first,
         last = last,
-        padding = PaddingValues(
+        padding = SectionDefaults.verticalPaddingValues(
+            first = first,
+            last = last,
             start = 22.dp,
             top = 4.dp,
             end = 22.dp,
             bottom = 10.dp
         ),
         focused = focused,
-        modifier = Modifier.alpha(if (enabled) 1f else 0.5f)
+        enabled = enabled,
+        tone = if (isError) {
+            Tone.NEGATIVE
+        } else {
+            Tone.NEUTRAL
+        }
     ) {
 
         SectionTextInputSlidingLabel(
             label = label,
-            required = required,
-            isError = isError,
-            errorMessage = errorMessage
+            required = required
         )
 
         BasicTextField(
@@ -112,8 +119,8 @@ fun SectionTextInput(
             interactionSource = interactionSource,
             keyboardOptions = keyboardOptions,
             enabled = enabled,
-        ) { innerTextField ->
 
+            ) { innerTextField ->
             TextFieldDefaults.DecorationBox(
                 value = value,
                 interactionSource = interactionSource,
@@ -122,11 +129,16 @@ fun SectionTextInput(
                 singleLine = singleLine,
                 isError = isError,
                 enabled = enabled,
-                colors = sectionTextInputColors(indicatorColors),
+                colors = sectionTextInputColors(),
                 placeholder = { SectionTextInputPlaceholder(placeholder, fontSize) },
                 contentPadding = sectionTextInputContentPadding,
             )
         }
+
+        SectionErrorMessage(
+            errorMessage = errorMessage,
+            isError = isError
+        )
     }
 }
 
@@ -153,7 +165,9 @@ fun SectionPasswordInput(
     SectionRow(
         first = first,
         last = last,
-        padding = PaddingValues(
+        padding = SectionDefaults.verticalPaddingValues(
+            first = first,
+            last = last,
             start = 22.dp,
             top = 4.dp,
             end = 22.dp,
@@ -161,14 +175,17 @@ fun SectionPasswordInput(
         ),
         focused = focused,
         modifier = Modifier.alpha(if (enabled) 1f else 0.5f),
+        tone = if (isError) {
+            Tone.NEGATIVE
+        } else {
+            Tone.NEUTRAL
+        }
     ) {
         Column(modifier = Modifier.weight(1f)) {
 
             SectionTextInputSlidingLabel(
                 label = label,
-                required = required,
-                isError = isError,
-                errorMessage = errorMessage
+                required = required
             )
 
             SecureTextField(
@@ -194,10 +211,15 @@ fun SectionPasswordInput(
                     keyboardType = KeyboardType.Password
                 ),
                 enabled = enabled,
-                colors = sectionTextInputColors(indicatorColors),
+                colors = sectionTextInputColors(),
                 placeholder = { SectionTextInputPlaceholder(placeholder, fontSize) },
                 isError = isError,
                 contentPadding = sectionTextInputContentPadding
+            )
+
+            SectionErrorMessage(
+                errorMessage = errorMessage,
+                isError = isError
             )
         }
 
@@ -219,14 +241,15 @@ fun SectionPasswordInput(
 
 @Composable
 private fun sectionTextInputColors(
-    indicatorColors: IndicatorColors
 ) = TextFieldDefaults.colors(
     focusedContainerColor = Color.Transparent,
     unfocusedContainerColor = Color.Transparent,
-    focusedIndicatorColor = indicatorColors.focused,
-    unfocusedIndicatorColor = indicatorColors.unfocused,
+    focusedIndicatorColor = Color.Transparent,
+    unfocusedIndicatorColor = Color.Transparent,
     errorContainerColor = Color.Transparent,
     disabledContainerColor = Color.Transparent,
+    errorIndicatorColor = Color.Transparent,
+    disabledIndicatorColor = Color.Transparent,
 )
 
 @Composable
@@ -279,11 +302,12 @@ fun Modifier.sectionTextInput(
             unfocusedContainerColor = Color.Transparent
         ),
         unfocusedIndicatorLineThickness = 2.dp,
-        focusedIndicatorLineThickness = 3.dp
+        focusedIndicatorLineThickness = 3.dp,
     )
     .onFocusChanged {
         onFocusChanged(it.isFocused)
     }
+    .animateContentSize()
 
 @Composable
 private fun SectionTextInputPlaceholder(placeholder: String? = null, fontSize: TextUnit) {
@@ -299,11 +323,28 @@ private fun SectionTextInputPlaceholder(placeholder: String? = null, fontSize: T
 }
 
 @Composable
+fun SectionErrorMessage(
+    errorMessage: String?,
+    isError: Boolean = errorMessage != null,
+) {
+    AnimateInVertically(visible = isError, modifier = Modifier) {
+        Text(
+            text = errorMessage ?: "",
+            modifier = Modifier.padding(
+                top = 8.dp,
+                start = 0.dp,
+                bottom = 0.dp
+            ),
+            color = MaterialTheme.colorScheme.error,
+            fontSize = 14.sp,
+        )
+    }
+}
+
+@Composable
 private fun SectionTextInputSlidingLabel(
     label: String,
     required: Boolean,
-    isError: Boolean,
-    errorMessage: String?
 ) {
     Row {
         Text(
@@ -319,18 +360,6 @@ private fun SectionTextInputSlidingLabel(
             style = MaterialTheme.typography.titleMedium,
             fontSize = 14.sp
         )
-        AnimateInSlideDown(visible = isError) {
-            Text(
-                text = errorMessage ?: "",
-                Modifier.padding(
-                    top = 4.dp,
-                    start = 4.dp,
-                    bottom = 0.dp
-                ),
-                color = MaterialTheme.colorScheme.error,
-                fontSize = 14.sp,
-            )
-        }
     }
 }
 

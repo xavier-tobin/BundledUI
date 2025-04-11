@@ -35,8 +35,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.xaviertobin.bundledui.color.isLight
 import com.xaviertobin.bundledui.section.widgets.SectionSwitch
+import com.xaviertobin.bundledui.theme.BaseTheme
+import com.xaviertobin.bundledui.theme.LocalBaseTheme
 import com.xaviertobin.bundledui.theme.safeSurface
 
 typealias UnitFunction = () -> Unit
@@ -159,12 +160,13 @@ fun SheetBase(
         confirmValueChange = { return@rememberModalBottomSheetState userDismissible || it == SheetValue.Expanded }
     )
     val expanded = modalSheetState.targetValue == SheetValue.Expanded
+    val fullscreenExpanded = expanded && fullscreen
     val roundedCornerRadius by animateDpAsState(
-        targetValue = if (expanded && fullscreen) 0.dp else 36.dp,
+        targetValue = if (fullscreenExpanded) 0.dp else 36.dp,
         label = "roundedCornerRadius"
     )
 
-    val isLightTheme = MaterialTheme.colorScheme.surface.isLight()
+    val isLightTheme = LocalBaseTheme.current == BaseTheme.LIGHT
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -184,8 +186,8 @@ fun SheetBase(
         containerColor = MaterialTheme.colorScheme.safeSurface(),
         tonalElevation = 0.dp,
         properties = properties ?: ModalBottomSheetProperties(
-            isAppearanceLightNavigationBars = isLightTheme,
-            isAppearanceLightStatusBars = isLightTheme
+            isAppearanceLightNavigationBars = isLightTheme && !fullscreenExpanded,
+            isAppearanceLightStatusBars = isLightTheme && !fullscreenExpanded
         )
     ) {
         content(modalSheetState.targetValue)
