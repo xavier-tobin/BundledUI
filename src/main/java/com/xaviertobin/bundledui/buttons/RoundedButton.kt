@@ -1,6 +1,5 @@
 package com.xaviertobin.bundledui.buttons
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
@@ -18,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,7 +36,7 @@ val RoundedButtonPadding = PaddingValues(
 )
 
 @Composable
-fun RoundedButton(
+fun RoundedButtonBase(
     text: String,
     modifier: Modifier = Modifier,
     tone: Tone = Tone.NEUTRAL,
@@ -71,29 +69,6 @@ fun RoundedButton(
     }
 }
 
-// TODO move to app, StringRes version
-@Composable
-fun RoundedButton(
-    @StringRes text: Int,
-    modifier: Modifier = Modifier,
-    tone: Tone = Tone.NEUTRAL,
-    containerColor: Color = vividContainerColorForTone(tone),
-    textColor: Color = vividTextColorForTone(tone),
-    enabled: Boolean = true,
-    contentPadding: PaddingValues = RoundedButtonPadding,
-    endContent: (@Composable () -> Unit)? = null,
-    onClick: UnitFunction,
-) = RoundedButton(
-    text = stringResource(id = text),
-    modifier = modifier,
-    tone = tone,
-    containerColor = containerColor,
-    textColor = textColor,
-    enabled = enabled,
-    contentPadding = contentPadding,
-    endContent = endContent,
-    onClick = onClick
-)
 
 @Composable
 fun RoundedLoadingButton(
@@ -106,26 +81,26 @@ fun RoundedLoadingButton(
     icon: ImageVector? = null,
     loading: Boolean = false,
     onClick: UnitFunction,
-) = RoundedButton(
-        text = if (loading) loadingText else text,
-        modifier = modifier,
-        tone = tone,
-        containerColor = containerColor,
-        onClick = onClick,
-        enabled = !loading,
-        textColor = textColor,
-        endContent = {
-            LoadingOrIcon(
-                loadingFromClick = loading,
-                tint = textColor,
-                icon = icon,
-                iconDescription = text,
-                tone = tone,
-                size = 20.dp,
-                endPadding = 0.dp
-            )
-        }
-    )
+) = RoundedButtonBase(
+    text = if (loading) loadingText else text,
+    modifier = modifier,
+    tone = tone,
+    containerColor = containerColor,
+    onClick = onClick,
+    enabled = !loading,
+    textColor = textColor,
+    endContent = {
+        LoadingOrIcon(
+            loadingFromClick = loading,
+            tint = textColor,
+            icon = icon,
+            iconDescription = text,
+            tone = tone,
+            size = 20.dp,
+            endPadding = 0.dp
+        )
+    }
+)
 
 
 @Composable
@@ -137,9 +112,9 @@ fun RoundedButton(
     containerColor: Color = vividContainerColorForTone(tone),
     textColor: Color = vividTextColorForTone(tone),
     contentPadding: PaddingValues = RoundedButtonPadding,
-    icon: ImageVector,
+    icon: ImageVector? = null,
     onClick: UnitFunction,
-) = RoundedButton(
+) = RoundedButtonBase(
     text = text,
     modifier = modifier,
     tone = tone,
@@ -149,53 +124,25 @@ fun RoundedButton(
     enabled = enabled,
     textColor = textColor,
     endContent = {
-        EndIcon(
-            icon = icon,
-            color = textColor,
-            iconDescription = text,
-            size = 20.dp,
-            endPadding = 0.dp
-        )
+        icon?.let {
+            EndIcon(
+                icon = icon,
+                color = textColor,
+                iconDescription = text,
+                size = 20.dp,
+                endPadding = 0.dp
+            )
+        }
     }
 )
 
-@Composable
-fun RoundedButtonSheet(
-    @StringRes text: Int,
-    modifier: Modifier = Modifier,
-    tone: Tone = Tone.NEUTRAL,
-    endContent: (() -> Unit)? = null,
-    containerColor: Color = vividContainerColorForTone(tone),
-    textColor: Color = vividTextColorForTone(tone),
-    contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
-    sheetLayout: @Composable (onDismiss: () -> Unit) -> Unit
-) {
-    ToggleComposable(
-        defaultContent = { onShow ->
-            RoundedButton(
-                text = text,
-                modifier = modifier,
-                tone = tone,
-                endContent = endContent,
-                containerColor = containerColor,
-                textColor = textColor,
-                contentPadding = contentPadding
-            ) {
-                onShow()
-            }
-        },
-        enabledContent = { onDismiss ->
-            sheetLayout.invoke(onDismiss)
-        }
-    )
-}
 
 @Composable
 fun RoundedButtonSheet(
     text: String,
     modifier: Modifier = Modifier,
     tone: Tone = Tone.NEUTRAL,
-    icon: ImageVector,
+    icon: ImageVector? = null,
     containerColor: Color = vividContainerColorForTone(tone),
     textColor: Color = vividTextColorForTone(tone),
     contentPadding: PaddingValues = RoundedButtonPadding,

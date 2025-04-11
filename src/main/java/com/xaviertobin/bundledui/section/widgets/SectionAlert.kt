@@ -1,6 +1,5 @@
 package com.xaviertobin.bundledui.section.widgets
 
-import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
