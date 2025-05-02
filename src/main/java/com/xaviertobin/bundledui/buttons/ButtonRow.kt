@@ -23,7 +23,7 @@ fun ButtonRow(
 ) {
     Row(
         verticalAlignment = Alignment.Companion.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End),
+        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
         modifier = Modifier.Companion
             .then(modifier)
             .fillMaxWidth()

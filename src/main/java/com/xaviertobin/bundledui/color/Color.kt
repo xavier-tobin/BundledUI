@@ -87,23 +87,21 @@ fun Color.dulled(forTheme: BaseTheme, by: Float = 0.4f): Color {
     ).toComposeColor()
 }
 
-
 fun Color.Companion.randomAestheticColor(): Color {
+    val style = listOf("pastel", "vibrant", "other").random()
+    val niceHueRanges = listOf(0f..35f, 75f..360f)
 
-    var hue: Float
-    do {
-        hue = (0f..360f).random()
-    } while (hue in 30f..70f)
-
-    val differential = (0.0f..0.4f).random()
+    val (saturation, brightness) = when (style) {
+        "pastel" -> Pair((0.38f..0.55f).random(), (0.85f..0.9f).random())
+        "vibrant" -> Pair((0.6f..0.9f).random(), (0.7f..0.85f).random())
+        else -> Pair((0.4f..0.6f).random(), (0.6f..0.9f).random())
+    }
 
     return HSBColor(
-        hue = hue,
-        saturation = 0.6f + differential,
-        brightness = 0.8f + (0.0f..0.2f).random()
-    )
-        .toComposeColor()
-        .deintensifyBrightness(by = 0.2f)
+        hue = niceHueRanges.random().random(),
+        saturation = saturation,
+        brightness = brightness
+    ).toComposeColor()
 }
 
 fun ClosedFloatingPointRange<Float>.random(): Float {

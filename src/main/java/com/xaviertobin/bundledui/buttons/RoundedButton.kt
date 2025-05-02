@@ -147,8 +147,7 @@ fun RoundedButtonSheet(
     textColor: Color = vividTextColorForTone(tone),
     contentPadding: PaddingValues = RoundedButtonPadding,
     sheetLayout: @Composable (onDismiss: () -> Unit) -> Unit
-) {
-    ToggleComposable(
+) = ToggleComposable(
         defaultContent = { onShow ->
             RoundedButton(
                 text = text,
@@ -164,7 +163,7 @@ fun RoundedButtonSheet(
         },
         enabledContent = sheetLayout
     )
-}
+
 
 @Preview
 @Composable
