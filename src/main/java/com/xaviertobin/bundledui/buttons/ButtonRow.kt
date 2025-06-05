@@ -1,8 +1,8 @@
 package com.xaviertobin.bundledui.buttons
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,9 +21,10 @@ fun ButtonRow(
     ),
     content: @Composable RowScope.() -> Unit,
 ) {
-    Row(
-        verticalAlignment = Alignment.Companion.CenterVertically,
+
+    FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
+        verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
         modifier = Modifier.Companion
             .then(modifier)
             .fillMaxWidth()

@@ -14,10 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.base.containerColorForTone
@@ -78,9 +76,8 @@ fun SectionAlert(
                             end = 12.dp,
                         )
                         .weight(1f),
-                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.5.sp),
+                    style = MaterialTheme.typography.titleSmall,
                     textAlign = TextAlign.Start,
-                    fontWeight = FontWeight.SemiBold,
                     color = textColor,
                 )
             }
@@ -105,8 +102,7 @@ fun SectionAlert(
                     top = 12.dp,
                     bottom = 10.dp
                 ),
-            style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.5.sp),
-            lineHeight = 20.sp,
+            style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Start,
             color = textColor,
         )

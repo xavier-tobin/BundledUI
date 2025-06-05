@@ -5,6 +5,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.sp
 
 fun buildCustomTypography(
@@ -63,26 +64,27 @@ fun buildCustomTypography(
         ),
         titleSmall = TextStyle(
             fontFamily = font,
-            fontWeight = FontWeight.Medium,
-            fontSize = 16.sp * fontScale,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 17.sp * fontScale,
             color = colorScheme.onSurfaceVariant
         ),
         bodyLarge = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Medium,
-            fontSize = 15.sp * fontScale,
+            fontSize = 16.sp * fontScale,
             color = colorScheme.onSurfaceVariant
         ),
         bodyMedium = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
-            fontSize = 14.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            fontSize = 15.sp * fontScale,
+            color = colorScheme.onSurfaceVariant,
+            lineHeight = 20.sp * fontScale
         ),
         bodySmall = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
-            fontSize = 16.sp * fontScale,
+            fontSize = 14.sp * fontScale,
             color = colorScheme.onSurfaceVariant
         ),
         labelLarge = TextStyle(

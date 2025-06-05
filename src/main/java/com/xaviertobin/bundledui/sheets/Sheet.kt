@@ -3,6 +3,7 @@ package com.xaviertobin.bundledui.sheets
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -79,16 +80,17 @@ fun Sheet(
                                 end = horizontalPadding,
                                 bottom = 22.dp
                             )
-                    } else if (usesKeyboard) {
+                    } else  {
                         Modifier
                             .verticalScroll(rememberScrollState())
                             .padding(WindowInsets.navigationBars.asPaddingValues())
                             .padding(start = horizontalPadding, end = horizontalPadding)
-                    } else {
-                        Modifier
-                            .padding(WindowInsets.navigationBars.asPaddingValues())
-                            .padding(start = horizontalPadding, end = horizontalPadding)
                     }
+//                    else {
+//                        Modifier
+//                            .padding(WindowInsets.navigationBars.asPaddingValues())
+//                            .padding(start = horizontalPadding, end = horizontalPadding)
+//                    }
                 )
         ) {
 
@@ -175,11 +177,19 @@ fun SheetBase(
         sheetGesturesEnabled = userDismissible,
         dragHandle = {
             if (!fullscreen) {
-                BottomSheetDefaults.DragHandle(
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                        alpha = 0.3f
+                if (userDismissible) {
+                    BottomSheetDefaults.DragHandle(
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
+                            alpha = 0.3f
+                        )
                     )
-                )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(28.dp)
+                    )
+                }
             }
         },
         contentWindowInsets = contentWindowInsets,
@@ -188,7 +198,8 @@ fun SheetBase(
         properties = properties ?: ModalBottomSheetProperties(
             isAppearanceLightNavigationBars = isLightTheme && !fullscreenExpanded,
             isAppearanceLightStatusBars = isLightTheme && !fullscreenExpanded
-        )
+        ),
+
     ) {
         content(modalSheetState.targetValue)
     }
