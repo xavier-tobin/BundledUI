@@ -35,8 +35,8 @@ fun SectionSwitch(
     padding = SectionDefaults.verticalPaddingValues(
         first = first,
         last = last,
-        bottom = 12.dp,
-        top = 12.dp
+        bottom = 3.dp,
+        top = 3.dp
     ),
     contentEnd = {
         Switch(

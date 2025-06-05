@@ -4,15 +4,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.ComposableFunction
 import com.xaviertobin.bundledui.base.Tone
@@ -73,8 +80,8 @@ fun SectionTitleDescription(
     padding: PaddingValues = SectionDefaults.verticalPaddingValues(
         first = first,
         last = last,
-        top = 16.dp,
-        bottom = 16.dp
+        top = 5.dp,
+        bottom = 5.dp
     ),
     enabled: Boolean = true,
     onClick: UnitFunction? = null,
@@ -89,7 +96,7 @@ fun SectionTitleDescription(
         tone = tone,
         modifier = modifier,
         enabled = enabled,
-        padding = padding
+        padding = padding,
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -99,7 +106,9 @@ fun SectionTitleDescription(
                 modifier = Modifier
                     .padding(
                         start = 4.dp,
-                        end = 10.dp
+                        end = 10.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
                     )
                     .weight(1f)
             ) {
@@ -111,7 +120,7 @@ fun SectionTitleDescription(
                     color = textColor,
                     textAlign = TextAlign.Start,
                     modifier = Modifier
-                        .padding(bottom = 1.dp)
+                        .padding(bottom = 2.dp, top = 2.dp)
                 )
                 description?.let {
                     Text(
@@ -120,11 +129,40 @@ fun SectionTitleDescription(
                         fontWeight = FontWeight.Normal,
                         color = textColor.alpha(0.9f),
                         textAlign = TextAlign.Start,
+                        modifier = Modifier
+                            .padding(bottom = 2.dp)
                     )
                 }
                 contentBottom?.invoke()
             }
             contentEnd?.invoke()
         }
+    }
+}
+
+
+@Preview
+@Composable
+fun SectionTitleDescriptionsPreview() {
+    var toggledOn1 by remember { mutableStateOf(false) }
+    var toggledOn2 by remember { mutableStateOf(false) }
+
+    Column {
+
+        SectionButton(title = "Button", icon = Icons.Rounded.Add, first = true) { }
+        SectionSwitch(
+            title = "Enable feature",
+            checked = toggledOn1,
+            onChecked = { toggledOn1 = it },
+        )
+
+        SectionSwitch(
+            title = "Enable a different feature",
+            description = "This is a description",
+            checked = toggledOn2,
+            onChecked = { toggledOn2 = it },
+            last = true
+        )
+
     }
 }

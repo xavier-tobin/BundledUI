@@ -124,7 +124,7 @@ fun customColorScheme(
             onSurfaceVariant = contrastTone.blend(actualPrimary, by = 0.2f),
             onPrimary = baseTone.blend(actualPrimary, by = 0.2f),
             surfaceContainer = actualPrimary.blend(baseTone, by = 0.3f),
-            surfaceTint = actualPrimary
+            surfaceTint = colors.primary
         )
     }
 }

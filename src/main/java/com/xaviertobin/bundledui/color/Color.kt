@@ -59,8 +59,8 @@ fun Color.getIntensityReduction(degree: Float = 0.25f) =
 fun Int.modifyColorForTheme(theme: BaseTheme): Int {
     return when (theme) {
         BaseTheme.LIGHT -> this
-        BaseTheme.DARK -> ColorUtils.blendARGB(this, android.graphics.Color.DKGRAY, 0.7f)
-        BaseTheme.OLED -> ColorUtils.blendARGB(this, android.graphics.Color.BLACK, 0.7f)
+        BaseTheme.DARK -> ColorUtils.blendARGB(this, android.graphics.Color.DKGRAY, 0.65f)
+        BaseTheme.OLED -> ColorUtils.blendARGB(this, android.graphics.Color.BLACK, 0.62f)
     }
 }
 
@@ -94,7 +94,7 @@ fun Color.Companion.randomAestheticColor(): Color {
     val (saturation, brightness) = when (style) {
         "pastel" -> Pair((0.38f..0.55f).random(), (0.85f..0.9f).random())
         "vibrant" -> Pair((0.6f..0.9f).random(), (0.7f..0.85f).random())
-        else -> Pair((0.4f..0.6f).random(), (0.6f..0.9f).random())
+        else -> Pair((0.5f..0.8f).random(), (0.6f..0.9f).random())
     }
 
     return HSBColor(

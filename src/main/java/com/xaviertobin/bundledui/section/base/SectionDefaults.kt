@@ -106,7 +106,7 @@ object SectionDefaults {
             } else {
                 containerColorForTone(tone)
             },
-            animationSpec = tween(durationMillis = 300)
+            animationSpec = tween(durationMillis = 200)
         )
 
         return animatedColor
@@ -145,9 +145,16 @@ enum class SectionOrientation {
 
 @Composable
 fun sectionTextColorForTone(selected: Boolean, tone: Tone): Color {
-    return if (selected) {
-        MaterialTheme.colorScheme.surface
-    } else {
-        textColorForTone(tone)
-    }
+
+    val animatedColor by animateColorAsState(
+        targetValue = if (selected) {
+            MaterialTheme.colorScheme.surface
+        } else {
+            textColorForTone(tone)
+        },
+        animationSpec = tween(durationMillis = 200)
+    )
+
+    return animatedColor
+
 }
