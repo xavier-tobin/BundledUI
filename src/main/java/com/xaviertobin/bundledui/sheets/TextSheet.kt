@@ -29,10 +29,8 @@ fun TextSheet(
             Text(
                 modifier = Modifier.padding(vertical = 10.dp),
                 text = text,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.secondaryText,
-                fontWeight = FontWeight.Medium,
-                fontSize = 15.sp
             )
         }
     }

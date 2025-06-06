@@ -125,7 +125,7 @@ fun SectionTitleDescription(
                 description?.let {
                     Text(
                         text = description,
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.bodySmall,
                         fontWeight = FontWeight.Normal,
                         color = textColor.alpha(0.9f),
                         textAlign = TextAlign.Start,

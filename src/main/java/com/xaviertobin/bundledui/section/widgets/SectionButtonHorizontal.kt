@@ -95,7 +95,7 @@ fun SectionButtonHorizontal(
                     modifier = Modifier
                         .padding(top = 2.dp),
                     text = description,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodySmall,
                     color = textColor,
                     textAlign = TextAlign.Start,
                     fontSize = 11.sp

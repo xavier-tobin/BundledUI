@@ -16,9 +16,7 @@ import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.section.base.Section
 
 
-/**
- * SectionButtons are large clickable surfaces to designate significant actions, usually on a scrolling page or modal
- */
+// TODO move to section title description
 @Composable
 fun SectionSlider(
     text: String,
@@ -51,7 +49,7 @@ fun SectionSlider(
         description?.let {
             Text(
                 text = description,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Start,
                 modifier = Modifier.padding(start = 4.dp)

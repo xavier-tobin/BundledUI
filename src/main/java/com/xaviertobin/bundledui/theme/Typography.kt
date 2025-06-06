@@ -71,7 +71,7 @@ fun buildCustomTypography(
         bodyLarge = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Medium,
-            fontSize = 16.sp * fontScale,
+            fontSize = 15.sp * fontScale,
             color = colorScheme.onSurfaceVariant
         ),
         bodyMedium = TextStyle(
@@ -79,13 +79,14 @@ fun buildCustomTypography(
             fontWeight = FontWeight.Normal,
             fontSize = 15.sp * fontScale,
             color = colorScheme.onSurfaceVariant,
-            lineHeight = 20.sp * fontScale
+            lineHeight = 18.sp * fontScale
         ),
         bodySmall = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
             fontSize = 14.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            color = colorScheme.onSurfaceVariant,
+            lineHeight = 16.sp * fontScale
         ),
         labelLarge = TextStyle(
             fontFamily = font,

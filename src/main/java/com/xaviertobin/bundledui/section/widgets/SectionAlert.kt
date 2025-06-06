@@ -102,7 +102,7 @@ fun SectionAlert(
                     top = 12.dp,
                     bottom = 10.dp
                 ),
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Start,
             color = textColor,
         )
