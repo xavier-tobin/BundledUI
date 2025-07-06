@@ -1,6 +1,7 @@
 package com.xaviertobin.bundledui.section.base
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -69,6 +70,7 @@ object SectionDefaults {
      * MARGIN
      */
 
+    @Composable
     fun marginValues(orientation: SectionOrientation, last: Boolean): PaddingValues {
         return when (orientation) {
             SectionOrientation.VERTICAL -> verticalMarginValues(last)
@@ -76,12 +78,16 @@ object SectionDefaults {
         }
     }
 
+    @Composable
     fun verticalMarginValues(
         last: Boolean = false,
-    ) = PaddingValues(
-        bottom = if (last) 16.dp else 2.dp,
-        top = 2.dp
-    )
+    ): PaddingValues {
+        val result by animateDpAsState(if (last) 16.dp else 2.dp, label = "verticalMarginValues")
+        return PaddingValues(
+            bottom = result,
+            top = 2.dp
+        )
+    }
 
     fun horizontalMarginValues() = PaddingValues(
         end = 5.dp,
@@ -93,10 +99,10 @@ object SectionDefaults {
      */
 
     @Composable
-    fun containerColor(selected: Boolean, focused: Boolean, tone: Tone): Color {
+    fun containerColor(toggled: Boolean, focused: Boolean, tone: Tone): Color {
 
         val animatedColor by animateColorAsState(
-            targetValue = if (selected) {
+            targetValue = if (toggled) {
                 MaterialTheme.colorScheme.tertiary
             } else if (focused) {
                 MaterialTheme.colorScheme.surface.blend(
@@ -128,6 +134,7 @@ object SectionDefaults {
      * CORNERS
      */
 
+    @Composable
     fun shape(orientation: SectionOrientation, first: Boolean, last: Boolean): RoundedCornerShape {
         return when (orientation) {
             SectionOrientation.VERTICAL -> firstLastCornersVertical(first, last)

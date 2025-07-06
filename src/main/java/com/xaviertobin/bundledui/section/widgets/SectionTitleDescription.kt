@@ -27,6 +27,7 @@ import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.color.alpha
 import com.xaviertobin.bundledui.section.base.Section
 import com.xaviertobin.bundledui.section.base.SectionDefaults
+import com.xaviertobin.bundledui.section.base.SectionOrientation
 import com.xaviertobin.bundledui.section.base.sectionTextColorForTone
 import com.xaviertobin.bundledui.section.extras.EndIcon
 
@@ -72,6 +73,12 @@ fun SectionTitleDescription(
     last: Boolean = false,
     selected: Boolean = false,
     tone: Tone = Tone.NEUTRAL,
+    containerColor: Color = SectionDefaults.containerColor(
+        toggled = selected,
+        focused = false,
+        tone = tone
+    ),
+    orientation: SectionOrientation = SectionOrientation.VERTICAL,
     textColor: Color = sectionTextColorForTone(selected, tone),
     contentStart: ComposableFunction? = null,
     contentEnd: ComposableFunction? = null,
@@ -97,6 +104,8 @@ fun SectionTitleDescription(
         modifier = modifier,
         enabled = enabled,
         padding = padding,
+        containerColor = containerColor,
+        orientation = orientation,
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -107,8 +116,8 @@ fun SectionTitleDescription(
                     .padding(
                         start = 4.dp,
                         end = 10.dp,
-                        top = 8.dp,
-                        bottom = 8.dp
+                        top = 10.dp,
+                        bottom = 10.dp
                     )
                     .weight(1f)
             ) {

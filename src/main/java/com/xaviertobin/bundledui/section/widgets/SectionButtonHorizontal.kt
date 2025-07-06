@@ -56,20 +56,20 @@ fun SectionButtonHorizontal(
         padding = PaddingValues(
             start = if (first) 24.dp else 20.dp,
             end = if (last) 24.dp else 20.dp,
-            top = 12.dp + selectedExtraPadding,
-            bottom = 12.dp + selectedExtraPadding,
+            top = 12.dp,
+            bottom = 12.dp,
         ),
         margin = PaddingValues(
             end = 5.dp + selectedExtraPadding,
             start = selectedExtraPadding,
-            top = 5.dp - selectedExtraPadding,
-            bottom = 5.dp - selectedExtraPadding,
+            top = 5.dp,
+            bottom = 5.dp,
         ),
         shape = firstLastCornersChip(
             first = first,
             last = last,
-            pronouncedCornerRadius = 28.dp + selectedExtraPadding,
-            defaultCornerRadius = 6.dp + selectedExtraPadding
+            pronouncedCornerRadius = 28.dp,
+            defaultCornerRadius = 9.dp
         )
     ) {
 

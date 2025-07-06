@@ -1,6 +1,6 @@
 package com.xaviertobin.bundledui.buttons
 
-import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,10 +18,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 @Composable
 fun IconButtonSheet(
     icon: ImageVector,
-    @StringRes contentDescription: Int,
+    contentDescription: String,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.primary,
-    sheetLayout: @Composable (onDismiss: () -> Unit) -> Unit
+    iconMargin: PaddingValues = IconButtonDefaults.margin,
+    iconPadding: PaddingValues = IconButtonDefaults.padding,
+    sheetLayout: @Composable (onDismiss: () -> Unit) -> Unit,
 ) {
 
     var showSheet by remember { mutableStateOf(false) }
@@ -30,7 +32,9 @@ fun IconButtonSheet(
         contentDescription = contentDescription,
         icon = icon,
         modifier = modifier,
-        tint = tint
+        tint = tint,
+        margin = iconMargin,
+        padding = iconPadding,
     ) {
         showSheet = true
     }

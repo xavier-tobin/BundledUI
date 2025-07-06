@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -95,6 +96,7 @@ fun SectionRow(
     )
 
     Row(
+        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.section(
             modifier = modifier,
             first = first,
@@ -137,8 +139,8 @@ fun Modifier.section(
     onClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
 ) = this
-    .clip(shape)
     .padding(margin)
+    .then(modifier)
     .clip(shape)
     .combinedClickable(
         enabled = enabled && (onClick != null || onLongClick != null),
@@ -147,8 +149,6 @@ fun Modifier.section(
     )
     .focusable(onClick != null)
     .background(containerColor)
-    .clip(shape)
-    .then(modifier)
     .padding(padding)
     .padding(
         when (orientation) {

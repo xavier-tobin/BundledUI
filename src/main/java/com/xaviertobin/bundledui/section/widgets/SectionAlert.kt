@@ -107,15 +107,15 @@ fun SectionAlert(
             color = textColor,
         )
 
-        dismissOptions?.let {
+        dismissOptions?.let { options ->
             ButtonRow(
                 paddingValues = PaddingValues(
                     bottom = 6.dp
                 )
             ) {
                 RoundedButton(
-                    onClick = it.onClick,
-                    text = it.text,
+                    onClick = options.onClick,
+                    text = options.text,
                     containerColor = buttonColor,
                     textColor = vividTextColorForTone(tone)
                 )
