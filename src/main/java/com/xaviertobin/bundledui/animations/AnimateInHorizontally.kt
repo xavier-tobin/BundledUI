@@ -16,6 +16,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 
+const val DAMPING_RATIO_VERY_LOW = 0.85f
+
 @Composable
 fun AnimateInHorizontally(
     modifier: Modifier = Modifier.clip(RoundedCornerShape(28.dp)),
@@ -25,13 +27,15 @@ fun AnimateInHorizontally(
     visible = visible,
     enter = fadeIn() + expandHorizontally(
         animationSpec = spring(
-            stiffness = Spring.StiffnessLow,
+            stiffness = Spring.StiffnessMediumLow,
+            dampingRatio = DAMPING_RATIO_VERY_LOW,
             visibilityThreshold = IntSize.VisibilityThreshold
         )
     ) { -it },
     exit = shrinkHorizontally(
         animationSpec = spring(
-            stiffness = Spring.StiffnessLow,
+            stiffness = Spring.StiffnessMediumLow,
+            dampingRatio = DAMPING_RATIO_VERY_LOW,
             visibilityThreshold = IntSize.VisibilityThreshold
         )
     ) { -it } + fadeOut(),

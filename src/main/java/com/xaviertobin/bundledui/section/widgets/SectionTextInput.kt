@@ -231,7 +231,7 @@ fun SectionPasswordInput(
                 Icons.Filled.VisibilityOff
             },
             modifier = Modifier.align(Alignment.CenterVertically),
-            tint = MaterialTheme.colorScheme.tertiary
+            color = MaterialTheme.colorScheme.tertiary
         ) {
             showPassword = !showPassword
         }

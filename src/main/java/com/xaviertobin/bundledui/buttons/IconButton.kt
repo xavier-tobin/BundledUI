@@ -1,5 +1,6 @@
 package com.xaviertobin.bundledui.buttons
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -26,15 +27,23 @@ fun IconButton(
     icon: ImageVector,
     contentDescription: String,
     modifier: Modifier = Modifier,
-    tint: Color = MaterialTheme.colorScheme.primary,
+    color: Color = MaterialTheme.colorScheme.primary,
     margin: PaddingValues = IconButtonDefaults.margin,
     padding: PaddingValues = IconButtonDefaults.padding,
+    backgroundColor: Color = Color.Transparent,
+    enabled: Boolean = true,
     onClick: UnitFunction
 ) {
     Box(modifier = modifier
         .padding(margin)
         .clip(CircleShape)
-        .clickable {
+        .background(
+            color = backgroundColor,
+            shape = CircleShape
+        )
+        .clickable(
+            enabled= enabled
+        ) {
             onClick()
         }
         .padding(padding)
@@ -42,7 +51,7 @@ fun IconButton(
         Icon(
             imageVector = icon,
             contentDescription = contentDescription,
-            tint = tint,
+            tint = color,
         )
     }
 }

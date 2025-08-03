@@ -145,7 +145,7 @@ fun Modifier.section(
     .combinedClickable(
         enabled = enabled && (onClick != null || onLongClick != null),
         onClick = { onClick?.invoke() },
-        onLongClick = { onLongClick?.invoke() }
+        onLongClick = onLongClick,
     )
     .focusable(onClick != null)
     .background(containerColor)

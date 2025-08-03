@@ -6,9 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.xaviertobin.bundledui.section.base.Section
 import com.xaviertobin.bundledui.theme.secondaryText
 
@@ -21,9 +19,9 @@ fun TextSheet(
     title: String,
     text: AnnotatedString,
     fullscreen: Boolean = false,
-    extraContent: @Composable UnitFunction? = null
+    extraContent: @Composable (() -> Unit)? = null
 ) {
-    Sheet(onDismiss = onDismiss, title = title, fullscreen = fullscreen) {
+    Sheet(onDismiss = onDismiss, title = title, forceFullscreen = fullscreen) {
         Section(first = true, last = true) {
             extraContent?.invoke()
             Text(
@@ -46,7 +44,7 @@ fun TextSheet(
     title: String,
     text: String,
     fullscreen: Boolean = false,
-    extraContent: @Composable UnitFunction? = null
+    extraContent: @Composable (() -> Unit)? = null
 ) = TextSheet(
     onDismiss = onDismiss,
     title = title,

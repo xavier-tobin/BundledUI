@@ -151,5 +151,10 @@ fun ColorScheme.elevatedSurface() = this.surfaceColorAtElevation(12.dp)
 /**
  * This ensures that surface stays OLED-safe
  */
-fun ColorScheme.safeSurface() =
-    if (this.surface == Color.Black) this.surface else this.surfaceColorAtElevation(0.5.dp)
+fun ColorScheme.safeSurface(): Color {
+    return if (this.surface == Color.Black) {
+        Color.Black
+    } else {
+        this.surfaceColorAtElevation(0.5.dp)
+    }
+}

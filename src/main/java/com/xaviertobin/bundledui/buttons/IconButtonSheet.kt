@@ -21,8 +21,9 @@ fun IconButtonSheet(
     contentDescription: String,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.primary,
-    iconMargin: PaddingValues = IconButtonDefaults.margin,
-    iconPadding: PaddingValues = IconButtonDefaults.padding,
+    backgroundColor: Color = Color.Transparent,
+    margin: PaddingValues = IconButtonDefaults.margin,
+    padding: PaddingValues = IconButtonDefaults.padding,
     sheetLayout: @Composable (onDismiss: () -> Unit) -> Unit,
 ) {
 
@@ -31,10 +32,11 @@ fun IconButtonSheet(
     IconButton(
         contentDescription = contentDescription,
         icon = icon,
+        backgroundColor = backgroundColor,
         modifier = modifier,
-        tint = tint,
-        margin = iconMargin,
-        padding = iconPadding,
+        color = tint,
+        margin = margin,
+        padding = padding,
     ) {
         showSheet = true
     }
