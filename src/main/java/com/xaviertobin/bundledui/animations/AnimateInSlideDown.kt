@@ -17,7 +17,7 @@ fun AnimateInSlideDown(
     content: @Composable (AnimatedVisibilityScope.() -> Unit)
 ) = AnimatedVisibility(
     visible = visible,
-    enter = slideInVertically(animationSpec = tween(150)) { -it } + fadeIn(),
+    enter = slideInVertically(animationSpec = tween(150)) { -it } + fadeIn(animationSpec = tween(150)),
     exit = slideOutVertically(animationSpec = tween(150)) { -it } + fadeOut(),
     content = content,
     modifier = modifier

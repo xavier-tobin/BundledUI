@@ -8,8 +8,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.section.base.SectionDefaults
-import com.xaviertobin.bundledui.section.extras.LoadingOrIcon
 import com.xaviertobin.bundledui.section.base.sectionTextColorForTone
+import com.xaviertobin.bundledui.section.extras.LoadingOrIcon
 
 
 @Composable
@@ -22,6 +22,11 @@ fun SectionButton(
     last: Boolean = false,
     selected: Boolean = false,
     tone: Tone = Tone.NEUTRAL,
+    containerColor : Color = SectionDefaults.containerColor(
+        toggled = false,
+        focused = false,
+        tone = tone
+    ),
     textColor: Color = sectionTextColorForTone(selected, tone),
     loadingFromClick: Boolean = false,
     onLongClick: UnitFunction? = null,
@@ -36,6 +41,7 @@ fun SectionButton(
     description = description,
     onLongClick = onLongClick,
     tone = tone,
+    containerColor = containerColor,
     textColor = textColor,
     contentEnd = {
         LoadingOrIcon(

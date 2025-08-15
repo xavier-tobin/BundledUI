@@ -112,7 +112,8 @@ object SectionDefaults {
             } else {
                 containerColorForTone(tone)
             },
-            animationSpec = tween(durationMillis = 200)
+            animationSpec = tween(durationMillis = 200),
+            label = "sectionColor"
         )
 
         return animatedColor

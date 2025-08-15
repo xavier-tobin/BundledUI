@@ -41,6 +41,11 @@ fun SectionTitleDescriptionIcon(
     last: Boolean = false,
     selected: Boolean = false,
     tone: Tone = Tone.NEUTRAL,
+    containerColor: Color = SectionDefaults.containerColor(
+        toggled = selected,
+        focused = false,
+        tone = tone
+    ),
     textColor: Color = sectionTextColorForTone(selected, tone),
     enabled: Boolean = true,
     icon: ImageVector,
@@ -51,6 +56,7 @@ fun SectionTitleDescriptionIcon(
     last = last,
     selected = selected,
     tone = tone,
+    containerColor = containerColor,
     textColor = textColor,
     enabled = enabled,
     contentEnd = {

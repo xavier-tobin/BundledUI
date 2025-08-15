@@ -15,6 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.UnitFunction
+import com.xaviertobin.bundledui.base.firstLastCornersChip
+import com.xaviertobin.bundledui.color.alpha
 
 
 object IconButtonDefaults {
@@ -34,19 +36,69 @@ fun IconButton(
     enabled: Boolean = true,
     onClick: UnitFunction
 ) {
-    Box(modifier = modifier
-        .padding(margin)
-        .clip(CircleShape)
-        .background(
-            color = backgroundColor,
-            shape = CircleShape
+    Box(
+        modifier = modifier
+            .padding(margin)
+            .clip(CircleShape)
+            .background(
+                color = backgroundColor,
+                shape = CircleShape
+            )
+            .clickable(
+                enabled = enabled,
+                onClick = onClick
+            )
+            .padding(padding)
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = contentDescription,
+            tint = color,
         )
-        .clickable(
-            enabled= enabled
-        ) {
-            onClick()
-        }
-        .padding(padding)
+    }
+}
+
+
+@Composable
+fun SectionIconButton(
+    icon: ImageVector,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+    first: Boolean = false,
+    last: Boolean = false,
+    color: Color = MaterialTheme.colorScheme.primary,
+    margin: PaddingValues = PaddingValues(
+        end = 4.dp,
+    ),
+    padding: PaddingValues = PaddingValues(
+        start = if (first) 10.dp else  8.dp,
+        end = if (last) 10.dp else 8.dp,
+        top = 8.dp,
+        bottom = 8.dp
+    ),
+    backgroundColor: Color = MaterialTheme.colorScheme.tertiary.alpha(0.1f),
+    enabled: Boolean = true,
+    onClick: UnitFunction
+) {
+
+    val shape = firstLastCornersChip(
+        first,
+        last,
+    )
+
+    Box(
+        modifier = modifier
+            .padding(margin)
+            .clip(shape)
+            .background(
+                color = backgroundColor,
+                shape = shape
+            )
+            .clickable(
+                enabled = enabled,
+                onClick = onClick
+            )
+            .padding(padding)
     ) {
         Icon(
             imageVector = icon,
