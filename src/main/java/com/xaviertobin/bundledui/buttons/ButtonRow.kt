@@ -28,7 +28,7 @@ fun ButtonRow(
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
         verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
-        modifier = Modifier.Companion
+        modifier = Modifier
             .then(modifier)
             .fillMaxWidth()
             .padding(paddingValues)

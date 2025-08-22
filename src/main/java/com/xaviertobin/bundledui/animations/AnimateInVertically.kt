@@ -49,7 +49,7 @@ fun AnimatedVerticalVisibility(
     exit = fadeOut() + shrinkVertically(
         animationSpec = spring(
             stiffness = Spring.StiffnessMediumLow,
-            dampingRatio = 1f,
+            dampingRatio = 0.7f,
             visibilityThreshold = IntSize.VisibilityThreshold
         )
     ),
