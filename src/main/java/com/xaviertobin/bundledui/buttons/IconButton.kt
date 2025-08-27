@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.base.firstLastCornersChip
+import com.xaviertobin.bundledui.base.maybeClickable
 import com.xaviertobin.bundledui.color.alpha
 
 
@@ -44,7 +45,7 @@ fun IconButton(
                 color = backgroundColor,
                 shape = CircleShape
             )
-            .clickable(
+            .maybeClickable(
                 enabled = enabled,
                 onClick = onClick
             )
