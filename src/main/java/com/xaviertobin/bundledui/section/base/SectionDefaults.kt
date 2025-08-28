@@ -99,10 +99,10 @@ object SectionDefaults {
      */
 
     @Composable
-    fun containerColor(toggled: Boolean, focused: Boolean, tone: Tone): Color {
+    fun containerColor(selected: Boolean, focused: Boolean, tone: Tone): Color {
 
         val animatedColor by animateColorAsState(
-            targetValue = if (toggled) {
+            targetValue = if (selected) {
                 MaterialTheme.colorScheme.tertiary
             } else if (focused) {
                 MaterialTheme.colorScheme.surface.blend(
@@ -112,8 +112,6 @@ object SectionDefaults {
             } else {
                 containerColorForTone(tone)
             },
-            animationSpec = tween(durationMillis = 200),
-            label = "sectionColor"
         )
 
         return animatedColor

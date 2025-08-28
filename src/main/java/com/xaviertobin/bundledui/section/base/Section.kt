@@ -45,7 +45,7 @@ fun Section(
 ) {
 
     val extraInternalPadding by animateDpAsState(
-        if (selected) 8.dp else 0.dp, label = "extraInternalPadding"
+        if (selected) 8.dp else 0.dp
     )
 
     Column(

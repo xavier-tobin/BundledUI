@@ -23,7 +23,7 @@ fun SectionButton(
     selected: Boolean = false,
     tone: Tone = Tone.NEUTRAL,
     containerColor : Color = SectionDefaults.containerColor(
-        toggled = false,
+        selected = selected,
         focused = false,
         tone = tone
     ),

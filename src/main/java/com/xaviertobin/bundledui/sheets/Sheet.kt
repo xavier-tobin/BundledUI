@@ -63,7 +63,7 @@ fun Sheet(
     userDismissible: Boolean = true,
     horizontalPadding: Dp = 22.dp,
     disableScroll: Boolean = false,
-    defaultContentPadding: PaddingValues = PaddingValues(top = 12.dp, start = horizontalPadding, end = horizontalPadding),
+    defaultContentPadding: PaddingValues = PaddingValues(top = 6.dp, start = horizontalPadding, end = horizontalPadding),
     systemContentPadding: PaddingValues = WindowInsets.navigationBars.asPaddingValues(),
     content: @Composable (ColumnScope.() -> Unit),
 ) {
@@ -90,7 +90,7 @@ fun Sheet(
                     .padding(
                         top = 14.dp,
                         start = 40.dp,
-                        bottom = 12.dp
+                        bottom = 10.dp
                     )
             )
         }

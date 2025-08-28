@@ -42,7 +42,7 @@ fun SectionTitleDescriptionIcon(
     selected: Boolean = false,
     tone: Tone = Tone.NEUTRAL,
     containerColor: Color = SectionDefaults.containerColor(
-        toggled = selected,
+        selected = selected,
         focused = false,
         tone = tone
     ),
@@ -80,7 +80,7 @@ fun SectionTitleDescription(
     selected: Boolean = false,
     tone: Tone = Tone.NEUTRAL,
     containerColor: Color = SectionDefaults.containerColor(
-        toggled = selected,
+        selected = selected,
         focused = false,
         tone = tone
     ),
@@ -93,8 +93,8 @@ fun SectionTitleDescription(
     padding: PaddingValues = SectionDefaults.verticalPaddingValues(
         first = first,
         last = last,
-        top = 5.dp,
-        bottom = 5.dp
+        top = 3.dp,
+        bottom = 3.dp
     ),
     enabled: Boolean = true,
     onClick: UnitFunction? = null,
