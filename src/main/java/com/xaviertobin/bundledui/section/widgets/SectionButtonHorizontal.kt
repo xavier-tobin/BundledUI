@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.base.firstLastCornersChip
 import com.xaviertobin.bundledui.section.base.Section
+import com.xaviertobin.bundledui.theme.text
 
 
 // TODO remove in favour of using SectionButton with orientation = horizontal
@@ -40,7 +41,7 @@ fun SectionButtonHorizontal(
     } else if (warning) {
         MaterialTheme.colorScheme.error
     } else {
-        MaterialTheme.colorScheme.onSurfaceVariant
+        MaterialTheme.colorScheme.text
     }
 
     val selectedExtraPadding by animateDpAsState(

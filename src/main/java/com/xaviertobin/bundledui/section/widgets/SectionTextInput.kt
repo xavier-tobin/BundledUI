@@ -49,6 +49,7 @@ import com.xaviertobin.bundledui.section.base.Section
 import com.xaviertobin.bundledui.section.base.SectionDefaults
 import com.xaviertobin.bundledui.section.base.SectionRow
 import com.xaviertobin.bundledui.theme.ThemedPreview
+import com.xaviertobin.bundledui.theme.text
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -259,7 +260,7 @@ fun sectionTextInputIndicatorColors(isError: Boolean): IndicatorColors {
             alpha = 0.6f
         )
     val unfocusedIndicatorColor =
-        if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant.copy(
+        if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.text.copy(
             alpha = 0.2f
         )
 
@@ -315,7 +316,7 @@ private fun SectionTextInputPlaceholder(placeholder: String? = null, fontSize: T
         Text(
             text = placeholder,
             modifier = Modifier.alpha(0.35f),
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = MaterialTheme.colorScheme.text,
             fontSize = fontSize,
             overflow = TextOverflow.Ellipsis
         )

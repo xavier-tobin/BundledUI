@@ -1,11 +1,9 @@
 package com.xaviertobin.bundledui.theme
 
 import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.surfaceColorAtElevation
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.color.DarkerGray
@@ -129,19 +127,24 @@ fun customColorScheme(
     }
 }
 
-fun ColorScheme.oledify(): ColorScheme {
-    return this.copy(
-        surface = Color.Black
+fun ColorScheme.adjustForOled(): ColorScheme {
+    return this.adjust().copy(
+        surface = Color.Black,
     )
 }
 
+fun ColorScheme.adjust(): ColorScheme {
+    return this.copy(
+        onSurface = onSurface.blend(surface, 0.16f).blend(primary, 0.16f)
+    )
+}
+
+
 val ColorScheme.text: Color
-    @Composable
-    get() = MaterialTheme.colorScheme.onSurfaceVariant
+    get() = this.onSurface
 
 val ColorScheme.secondaryText: Color
-    @Composable
-    get() = MaterialTheme.colorScheme.onSurfaceVariant.alpha(0.85f)
+    get() = this.text.alpha(0.85f)
 
 /**
  * This is commonly used, easier than specifying the elevation each time

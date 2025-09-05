@@ -128,14 +128,9 @@ fun SectionTitleDescription(
                     .weight(1f)
             ) {
                 contentTop?.invoke()
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Medium,
-                    color = textColor,
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier
-                        .padding(bottom = 2.dp, top = 2.dp)
+                SectionTitle(
+                    title = title,
+                    textColor = textColor
                 )
                 description?.let {
                     Text(
@@ -153,6 +148,19 @@ fun SectionTitleDescription(
             contentEnd?.invoke()
         }
     }
+}
+
+@Composable
+fun SectionTitle(title: String, textColor: Color) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.bodyLarge,
+        fontWeight = FontWeight.Medium,
+        color = textColor,
+        textAlign = TextAlign.Start,
+        modifier = Modifier
+            .padding(bottom = 2.dp, top = 2.dp)
+    )
 }
 
 

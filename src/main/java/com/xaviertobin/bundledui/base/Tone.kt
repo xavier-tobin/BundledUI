@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.color.blend
+import com.xaviertobin.bundledui.theme.text
 
 enum class Tone {
     NEGATIVE, WARNING, NEUTRAL, POSITIVE,
@@ -16,13 +17,13 @@ val baseWarningColor = Color(
 )
 
 @Composable
-fun textWarningColor() = MaterialTheme.colorScheme.onSurfaceVariant.blend(
+fun textWarningColor() = MaterialTheme.colorScheme.text.blend(
     to = baseWarningColor,
     by = 0.2f
 )
 
 @Composable
-fun textErrorColor() = MaterialTheme.colorScheme.onSurfaceVariant.blend(
+fun textErrorColor() = MaterialTheme.colorScheme.text.blend(
     to = MaterialTheme.colorScheme.error,
     by = 0.5f
 )
@@ -63,7 +64,7 @@ fun containerColorForTone(tone: Tone) = when (tone) {
 @Composable
 fun textColorForTone(tone: Tone) = when (tone) {
     Tone.POSITIVE -> MaterialTheme.colorScheme.surface
-    Tone.NEUTRAL -> MaterialTheme.colorScheme.onSurfaceVariant
+    Tone.NEUTRAL -> MaterialTheme.colorScheme.text
     Tone.NEGATIVE -> textErrorColor()
     Tone.WARNING -> textWarningColor()
 }

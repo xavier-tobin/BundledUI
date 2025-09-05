@@ -49,6 +49,7 @@ import com.xaviertobin.bundledui.section.widgets.SectionSwitch
 import com.xaviertobin.bundledui.theme.BaseTheme
 import com.xaviertobin.bundledui.theme.LocalBaseTheme
 import com.xaviertobin.bundledui.theme.safeSurface
+import com.xaviertobin.bundledui.theme.text
 
 typealias UnitFunction = () -> Unit
 typealias ComposableFunction = @Composable () -> Unit
@@ -84,13 +85,14 @@ fun Sheet(
         if (finalTitle != null) {
             Text(
                 text = finalTitle,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.text,
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier
                     .padding(
                         top = 14.dp,
                         start = 40.dp,
-                        bottom = 10.dp
+                        bottom = 10.dp,
+                        end = 20.dp
                     )
             )
         }
@@ -165,7 +167,7 @@ fun SheetDragHandleShield(
             Spacer(
                 modifier = Modifier
                     .background(
-                        MaterialTheme.colorScheme.onSurfaceVariant.copy(
+                        MaterialTheme.colorScheme.text.copy(
                             alpha = 0.3f
                         ),
                         RoundedCornerShape(6.dp)
