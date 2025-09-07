@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsIgnoringVisibility
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -45,6 +46,7 @@ import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.xaviertobin.bundledui.section.widgets.SectionSwitch
 import com.xaviertobin.bundledui.theme.BaseTheme
 import com.xaviertobin.bundledui.theme.LocalBaseTheme
@@ -59,18 +61,18 @@ typealias ComposableFunction = @Composable () -> Unit
 fun Sheet(
     onDismiss: UnitFunction,
     title: String? = null,
-    plainTitle: String? = null,
     forceFullscreen: Boolean = false,
     userDismissible: Boolean = true,
     horizontalPadding: Dp = 22.dp,
     disableScroll: Boolean = false,
-    defaultContentPadding: PaddingValues = PaddingValues(top = 6.dp, start = horizontalPadding, end = horizontalPadding),
+    defaultContentPadding: PaddingValues = PaddingValues(
+        start = horizontalPadding,
+        end = horizontalPadding,
+        top = 6.dp
+    ),
     systemContentPadding: PaddingValues = WindowInsets.navigationBars.asPaddingValues(),
     content: @Composable (ColumnScope.() -> Unit),
 ) {
-
-    val finalTitle = title ?: plainTitle
-
 
     SheetBase(
         onDismiss = onDismiss,
@@ -82,18 +84,9 @@ fun Sheet(
             SheetDragHandleShield(sheetValue = sheetState, isFullscreen = isFullscreen)
         }
 
-        if (finalTitle != null) {
-            Text(
-                text = finalTitle,
-                color = MaterialTheme.colorScheme.text,
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier
-                    .padding(
-                        top = 14.dp,
-                        start = 40.dp,
-                        bottom = 10.dp,
-                        end = 20.dp
-                    )
+        if (title != null) {
+            SheetTitle(
+                title = title
             )
         }
 
@@ -118,7 +111,7 @@ fun Sheet(
             }
 
 
-            if (finalTitle != null) {
+            if (title != null) {
                 FadeScrollEdge()
             }
         }
@@ -128,7 +121,30 @@ fun Sheet(
 
 
 @Composable
-fun FadeScrollEdge(height: Dp = 6.dp,  color: Color = MaterialTheme.colorScheme.safeSurface()) {
+fun SheetTitle(
+    title: String,
+    padding: PaddingValues = PaddingValues(
+        top = 20.dp,
+        start = 34.dp,
+        bottom = 10.dp,
+        end = 20.dp
+    )
+) {
+    Text(
+        text = title,
+        color = MaterialTheme.colorScheme.text,
+        style = MaterialTheme.typography.titleLarge,
+        modifier = Modifier
+            .padding(padding),
+        autoSize = TextAutoSize.StepBased(maxFontSize = 24.sp, stepSize = 2.sp),
+        maxLines = 3
+    )
+
+}
+
+
+@Composable
+fun FadeScrollEdge(height: Dp = 6.dp, color: Color = MaterialTheme.colorScheme.safeSurface()) {
     Spacer(
         modifier = Modifier
             .background(

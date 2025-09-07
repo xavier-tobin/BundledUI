@@ -120,8 +120,8 @@ fun SectionTitleDescription(
             Column(
                 modifier = Modifier
                     .padding(
-                        start = 4.dp,
-                        end = 10.dp,
+                        start = 0.dp,
+                        end = 0.dp,
                         top = 10.dp,
                         bottom = 10.dp
                     )

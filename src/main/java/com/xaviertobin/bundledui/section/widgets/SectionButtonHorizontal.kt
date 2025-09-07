@@ -26,7 +26,7 @@ import com.xaviertobin.bundledui.theme.text
 // TODO remove in favour of using SectionButton with orientation = horizontal
 @Composable
 fun SectionButtonHorizontal(
-    text: String,
+    title: String,
     description: String? = null,
     icon: ImageVector,
     first: Boolean = false,
@@ -82,11 +82,11 @@ fun SectionButtonHorizontal(
                     .padding(bottom = 8.dp)
                     .size(22.dp),
                 imageVector = icon,
-                contentDescription = description ?: text,
+                contentDescription = description ?: title,
                 tint = if (warning) MaterialTheme.colorScheme.error else if (selected) textColor else MaterialTheme.colorScheme.tertiary
             )
             Text(
-                text = text,
+                text = title,
                 style = MaterialTheme.typography.bodyLarge,
                 color = textColor,
                 textAlign = TextAlign.Start,
