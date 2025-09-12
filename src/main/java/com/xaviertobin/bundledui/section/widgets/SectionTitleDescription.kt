@@ -1,8 +1,11 @@
 package com.xaviertobin.bundledui.section.widgets
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -90,76 +93,159 @@ fun SectionTitleDescription(
     contentEnd: ComposableFunction? = null,
     contentTop: ComposableFunction? = null,
     contentBottom: ComposableFunction? = null,
-    padding: PaddingValues = SectionDefaults.verticalPaddingValues(
-        first = first,
-        last = last,
-        top = 3.dp,
-        bottom = 3.dp
+    padding: PaddingValues = when (orientation) {
+        SectionOrientation.VERTICAL -> SectionDefaults.verticalPaddingValues(
+            first = first,
+            last = last,
+            top = 0.dp,
+            bottom = 0.dp
+        )
+        SectionOrientation.HORIZONTAL -> SectionDefaults.horizontalPaddingValues(
+            first = first,
+            last = last,
+            top = 12.dp,
+            bottom = 12.dp,
+            start = 20.dp,
+            end = 20.dp,
+            firstLastExtra = 8.dp
+        )
+    },
+    margin : PaddingValues = SectionDefaults.marginValues(
+        orientation = orientation,
+        last = last
     ),
     enabled: Boolean = true,
     onClick: UnitFunction? = null,
     onLongClick: UnitFunction? = null,
+) = Section(
+    first = first,
+    last = last,
+    onClick = onClick,
+    onLongClick = onLongClick,
+    selected = selected,
+    tone = tone,
+    modifier = modifier,
+    enabled = enabled,
+    margin = margin,
+    padding = padding,
+    containerColor = containerColor,
+    orientation = orientation,
 ) {
-    Section(
-        first = first,
-        last = last,
-        onClick = onClick,
-        onLongClick = onLongClick,
-        selected = selected,
-        tone = tone,
-        modifier = modifier,
-        enabled = enabled,
-        padding = padding,
-        containerColor = containerColor,
-        orientation = orientation,
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            contentStart?.invoke()
-            Column(
-                modifier = Modifier
-                    .padding(
-                        start = 0.dp,
-                        end = 0.dp,
-                        top = 10.dp,
-                        bottom = 10.dp
-                    )
-                    .weight(1f)
-            ) {
-                contentTop?.invoke()
-                SectionTitle(
-                    title = title,
-                    textColor = textColor
-                )
-                description?.let {
-                    Text(
-                        text = description,
-                        style = MaterialTheme.typography.bodySmall,
-                        fontWeight = FontWeight.Normal,
-                        color = textColor.alpha(0.9f),
-                        textAlign = TextAlign.Start,
-                        modifier = Modifier
-                            .padding(bottom = 2.dp)
-                    )
-                }
-                contentBottom?.invoke()
-            }
-            contentEnd?.invoke()
-        }
+    when (orientation) {
+        SectionOrientation.VERTICAL -> InnerVerticalContent(
+            title = title,
+            description = description,
+            textColor = textColor,
+            contentStart = contentStart,
+            contentEnd = contentEnd,
+            contentTop = contentTop,
+            contentBottom = contentBottom,
+        )
+
+        SectionOrientation.HORIZONTAL -> InnerHorizontalContent(
+            title = title,
+            description = description,
+            textColor = textColor,
+            contentTop = contentEnd,
+            contentBottom = contentBottom,
+        )
     }
 }
 
+
 @Composable
-fun SectionTitle(title: String, textColor: Color) {
+private fun InnerVerticalContent(
+    title: String,
+    description: String?,
+    textColor: Color,
+    contentStart: ComposableFunction?,
+    contentEnd: ComposableFunction?,
+    contentTop: ComposableFunction?,
+    contentBottom: ComposableFunction?,
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        contentStart?.invoke()
+        Column(
+            modifier = Modifier
+                .defaultMinSize(minHeight = 42.dp)
+                .padding(
+                    start = 0.dp,
+                    end = 0.dp,
+                    top = 14.dp,
+                    bottom = 14.dp
+                )
+                .weight(1f),
+            verticalArrangement = Arrangement.Center
+        ) {
+            contentTop?.invoke()
+            SectionTitle(
+                title = title,
+                textColor = textColor,
+                padding = PaddingValues(bottom = 2.dp, top = 2.dp)
+            )
+            description?.let {
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Normal,
+                    color = textColor.alpha(0.9f),
+                    textAlign = TextAlign.Start,
+                    modifier = Modifier
+                        .padding(bottom = 2.dp)
+                )
+            }
+            contentBottom?.invoke()
+        }
+        contentEnd?.invoke()
+    }
+}
+
+
+@Composable
+private fun ColumnScope.InnerHorizontalContent(
+    title: String,
+    description: String?,
+    textColor: Color,
+    contentTop: ComposableFunction?,
+    contentBottom: ComposableFunction?,
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(5.dp)
+    ) {
+        contentTop?.invoke()
+        SectionTitle(
+            title = title,
+            textColor = textColor,
+            padding = PaddingValues()
+        )
+        description?.let {
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodySmall,
+                fontWeight = FontWeight.Normal,
+                color = textColor.alpha(0.9f),
+                textAlign = TextAlign.Start,
+                modifier = Modifier
+                    .padding(bottom = 2.dp)
+            )
+        }
+        contentBottom?.invoke()
+    }
+}
+
+
+@Composable
+fun SectionTitle(title: String, textColor: Color, padding: PaddingValues) {
     Text(
         text = title,
         style = MaterialTheme.typography.bodyLarge,
-        fontWeight = FontWeight.Medium,
-        color = textColor,
         textAlign = TextAlign.Start,
         modifier = Modifier
-            .padding(bottom = 2.dp, top = 2.dp)
+            .padding(padding),
+        color = textColor
     )
 }
 

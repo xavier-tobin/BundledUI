@@ -2,9 +2,7 @@ package com.xaviertobin.bundledui.animations
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.VisibilityThreshold
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -14,47 +12,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AnimateInVertically(
-    clipRadius: Dp = 28.dp,
-    modifier: Modifier = Modifier.clip(RoundedCornerShape(clipRadius)),
-    visible: Boolean = true,
-    content: @Composable (AnimatedVisibilityScope.() -> Unit)
-) = AnimatedVisibility(
-    visible = visible,
-    enter = fadeIn() + expandVertically(),
-    exit = shrinkVertically() + fadeOut(),
-    content = content,
-    modifier = modifier
-)
-
-@Composable
 fun AnimatedVerticalVisibility(
+    visible: Boolean,
     modifier: Modifier = Modifier,
     clipRadius: Dp = 28.dp,
-    visible: Boolean = true,
     content: @Composable (AnimatedVisibilityScope.() -> Unit)
 ) = AnimatedVisibility(
     visible = visible,
-    enter = fadeIn() + expandVertically(
-        animationSpec = spring(
-            stiffness = Spring.StiffnessMediumLow,
-            dampingRatio = 0.7f,
-            visibilityThreshold = IntSize.VisibilityThreshold
-        )
-    ),
-    exit = fadeOut() + shrinkVertically(
-        animationSpec = spring(
-            stiffness = Spring.StiffnessMediumLow,
-            dampingRatio = 0.7f,
-            visibilityThreshold = IntSize.VisibilityThreshold
-        )
-    ),
+    enter = fadeIn(tween(350))
+            + expandVertically(defaultSpring),
+    exit = shrinkVertically(defaultSpring)
+            + fadeOut(tween(350)),
     modifier = Modifier
-        .clip(RoundedCornerShape(clipRadius))
-        .then(modifier),
+        .then(modifier)
+        .clip(RoundedCornerShape(clipRadius)),
     content = content
 )

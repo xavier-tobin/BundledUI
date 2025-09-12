@@ -1,9 +1,11 @@
 package com.xaviertobin.bundledui.sheets
 
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -31,7 +33,9 @@ import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,6 +55,7 @@ import com.xaviertobin.bundledui.section.widgets.SectionSwitch
 import com.xaviertobin.bundledui.theme.BaseTheme
 import com.xaviertobin.bundledui.theme.LocalBaseTheme
 import com.xaviertobin.bundledui.theme.safeSurface
+import com.xaviertobin.bundledui.theme.secondaryText
 import com.xaviertobin.bundledui.theme.text
 
 typealias UnitFunction = () -> Unit
@@ -74,47 +79,51 @@ fun Sheet(
     content: @Composable (ColumnScope.() -> Unit),
 ) {
 
-    SheetBase(
-        onDismiss = onDismiss,
-        forceFullscreen = forceFullscreen,
-        userDismissible = userDismissible,
-    ) { sheetState, isFullscreen ->
+    CompositionLocalProvider(LocalIndication provides ripple(color = MaterialTheme.colorScheme.secondaryText)) {
 
-        if (userDismissible) {
-            SheetDragHandleShield(sheetValue = sheetState, isFullscreen = isFullscreen)
-        }
+        SheetBase(
+            onDismiss = onDismiss,
+            forceFullscreen = forceFullscreen,
+            userDismissible = userDismissible,
+        ) { sheetState, isFullscreen ->
 
-        if (title != null) {
-            SheetTitle(
-                title = title
-            )
-        }
-
-        Box(
-            modifier = Modifier.then(
-                if (isFullscreen) Modifier.fillMaxSize() else Modifier
-            )
-        ) {
-
-            Column(
-                modifier = Modifier
-                    .then(
-                        if (!disableScroll) Modifier.verticalScroll(
-                            rememberScrollState(),
-                        ) else Modifier
-                    )
-                    .padding(systemContentPadding)
-                    .padding(defaultContentPadding)
-
-            ) {
-                content()
+            if (userDismissible) {
+                SheetDragHandleShield(sheetValue = sheetState, isFullscreen = isFullscreen)
             }
-
 
             if (title != null) {
-                FadeScrollEdge()
+                SheetTitle(
+                    title = title
+                )
+            }
+
+            Box(
+                modifier = Modifier.then(
+                    if (isFullscreen) Modifier.fillMaxSize() else Modifier
+                )
+            ) {
+
+                Column(
+                    modifier = Modifier
+                        .then(
+                            if (!disableScroll) Modifier.verticalScroll(
+                                rememberScrollState(),
+                            ) else Modifier
+                        )
+                        .padding(systemContentPadding)
+                        .padding(defaultContentPadding)
+
+                ) {
+                    content()
+                }
+
+
+                if (title != null) {
+                    FadeScrollEdge()
+                }
             }
         }
+
     }
 
 }
@@ -144,12 +153,19 @@ fun SheetTitle(
 
 
 @Composable
-fun FadeScrollEdge(height: Dp = 6.dp, color: Color = MaterialTheme.colorScheme.safeSurface()) {
+fun BoxScope.FadeScrollEdge(
+    height: Dp = 6.dp,
+    color: Color = MaterialTheme.colorScheme.safeSurface(),
+    bottom: Boolean = false,
+) {
     Spacer(
         modifier = Modifier
             .background(
                 brush = Brush.verticalGradient(
-                    colors = listOf(
+                    colors = if (bottom) listOf(
+                        Color.Transparent,
+                        color
+                    ) else listOf(
                         color,
                         Color.Transparent
                     )
@@ -157,6 +173,9 @@ fun FadeScrollEdge(height: Dp = 6.dp, color: Color = MaterialTheme.colorScheme.s
             )
             .fillMaxWidth()
             .height(height)
+            .align(
+                if (bottom) Alignment.BottomCenter else Alignment.TopCenter
+            )
 
     )
 }

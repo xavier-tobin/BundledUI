@@ -92,6 +92,7 @@ object SectionDefaults {
     fun horizontalMarginValues() = PaddingValues(
         end = 5.dp,
         start = 0.dp,
+        bottom = 16.dp
     )
 
     /**

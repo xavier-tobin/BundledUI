@@ -17,29 +17,33 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 
-const val DAMPING_RATIO_VERY_LOW = 0.85f
+const val DAMPING_RATIO_VERY_LOW = 0.75f
 
 @Composable
-fun AnimateInHorizontally(
+fun AnimatedHorizontalVisibility(
+    visible: Boolean,
     modifier: Modifier = Modifier,
     clipRadius: Dp = 28.dp,
-    visible: Boolean = true,
     content: @Composable (AnimatedVisibilityScope.() -> Unit)
 ) = AnimatedVisibility(
     visible = visible,
-    enter = fadeIn() + expandHorizontally(
-        animationSpec = spring(
-            stiffness = Spring.StiffnessLow,
-            dampingRatio = DAMPING_RATIO_VERY_LOW,
-            visibilityThreshold = IntSize.VisibilityThreshold
-        )
-    ) { -it },
-    exit = shrinkHorizontally(
-        animationSpec = spring(
-            stiffness = Spring.StiffnessLow,
-            dampingRatio = DAMPING_RATIO_VERY_LOW,
-            visibilityThreshold = IntSize.VisibilityThreshold
-        )
-    ) { -it } + fadeOut(),
-    modifier = Modifier.clip(RoundedCornerShape(clipRadius)).then(modifier),
-    content = content)
+    enter = defaultHorizontalExpandSpec,
+    exit = defaultHorizontalShrinkSpec,
+    modifier = Modifier
+        .clip(RoundedCornerShape(clipRadius))
+        .then(modifier),
+    content = content
+)
+
+val defaultSpring = spring(
+    stiffness = Spring.StiffnessDefault,
+    dampingRatio = DAMPING_RATIO_VERY_LOW,
+    visibilityThreshold = IntSize.VisibilityThreshold
+)
+
+val Spring.StiffnessDefault
+    get() = 500f
+
+val defaultHorizontalExpandSpec = fadeIn() + expandHorizontally(defaultSpring)
+
+val defaultHorizontalShrinkSpec = shrinkHorizontally(animationSpec = defaultSpring) + fadeOut()

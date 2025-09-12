@@ -57,6 +57,7 @@ fun SectionSlider(
         SectionTitle(
             title = text,
             textColor = MaterialTheme.colorScheme.text,
+            padding = PaddingValues(vertical = 2.dp)
         )
 
         Row(
@@ -82,8 +83,8 @@ fun SectionSlider(
                 ValueBadge(
                     number = (if (value % 1  == 0f) value.toInt() else "%.2f".format(value)).toString(),
                     fontSize = 15.sp,
-//                    backgroundColor = MaterialTheme.colorScheme.tertiary,
-                    color = MaterialTheme.colorScheme.tertiary,
+                    backgroundColor = MaterialTheme.colorScheme.tertiary,
+                    color = MaterialTheme.colorScheme.surface,
                     margin = PaddingValues(start = 8.dp),
                     modifier = Modifier.fillMaxWidth()
                 )

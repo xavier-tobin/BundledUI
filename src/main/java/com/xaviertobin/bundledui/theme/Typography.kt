@@ -70,22 +70,20 @@ fun buildCustomTypography(
         bodyLarge = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Medium,
-            fontSize = 15.sp * fontScale,
+            fontSize = 14.5.sp * fontScale,
             color = colorScheme.text
         ),
         bodyMedium = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
-            fontSize = 15.sp * fontScale,
+            fontSize = 14.sp * fontScale,
             color = colorScheme.text,
-            lineHeight = 17.sp * fontScale
         ),
         bodySmall = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
             fontSize = 13.5.sp * fontScale,
             color = colorScheme.text,
-            lineHeight = 14.sp * fontScale
         ),
         labelLarge = TextStyle(
             fontFamily = font,

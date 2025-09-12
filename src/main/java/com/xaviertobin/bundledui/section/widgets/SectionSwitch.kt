@@ -47,7 +47,7 @@ fun SectionSwitch(
                 checkedTrackColor = MaterialTheme.colorScheme.tertiary,
                 checkedThumbColor = MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)
             ),
-            modifier = Modifier.padding(end = 4.dp),
+            modifier = Modifier.padding(start = 12.dp, end = 4.dp),
         )
     }
 )

@@ -42,7 +42,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xaviertobin.bundledui.animations.AnimateInVertically
+import com.xaviertobin.bundledui.animations.AnimatedVerticalVisibility
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.buttons.IconButton
 import com.xaviertobin.bundledui.section.base.Section
@@ -328,7 +328,7 @@ fun SectionErrorMessage(
     errorMessage: String?,
     isError: Boolean = errorMessage != null,
 ) {
-    AnimateInVertically(visible = isError, modifier = Modifier) {
+    AnimatedVerticalVisibility(visible = isError, modifier = Modifier) {
         Text(
             text = errorMessage ?: "",
             modifier = Modifier.padding(

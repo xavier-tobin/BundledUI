@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -22,12 +23,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.Tone
+import com.xaviertobin.bundledui.base.conditional
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Section(
     modifier: Modifier = Modifier,
+    postModifier: Modifier = Modifier,
     first: Boolean = false,
     last: Boolean = false,
     orientation: SectionOrientation = SectionOrientation.VERTICAL,
@@ -51,6 +54,7 @@ fun Section(
     Column(
         modifier = Modifier.section(
             modifier = modifier,
+            postModifier = postModifier,
             first = first,
             last = last,
             enabled = enabled,
@@ -75,6 +79,7 @@ fun Section(
 @Composable
 fun SectionRow(
     modifier: Modifier = Modifier,
+    postModifier: Modifier = Modifier,
     first: Boolean = false,
     last: Boolean = false,
     orientation: SectionOrientation = SectionOrientation.VERTICAL,
@@ -99,6 +104,7 @@ fun SectionRow(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.section(
             modifier = modifier,
+            postModifier = postModifier,
             first = first,
             last = last,
             enabled = enabled,
@@ -124,6 +130,7 @@ fun SectionRow(
 @Composable
 fun Modifier.section(
     modifier: Modifier = Modifier,
+    postModifier: Modifier = Modifier,
     first: Boolean = false,
     last: Boolean = false,
     enabled: Boolean = true,
@@ -156,6 +163,10 @@ fun Modifier.section(
             SectionOrientation.HORIZONTAL -> PaddingValues(horizontal = extraInternalPadding)
         }
     )
+    .then(postModifier)
     .alpha(
         if (enabled) 1f else 0.5f
     )
+    .conditional(orientation == SectionOrientation.VERTICAL) {
+        fillMaxWidth()
+    }
