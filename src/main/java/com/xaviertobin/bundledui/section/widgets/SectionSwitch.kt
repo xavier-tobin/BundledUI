@@ -35,8 +35,8 @@ fun SectionSwitch(
     padding = SectionDefaults.verticalPaddingValues(
         first = first,
         last = last,
-        bottom = 3.dp,
-        top = 3.dp
+        bottom = 0.dp,
+        top = 0.dp
     ),
     contentEnd = {
         Switch(
@@ -47,7 +47,7 @@ fun SectionSwitch(
                 checkedTrackColor = MaterialTheme.colorScheme.tertiary,
                 checkedThumbColor = MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)
             ),
-            modifier = Modifier.padding(start = 12.dp, end = 4.dp),
+            modifier = Modifier.padding(start = 6.dp, end = 0.dp, top = 2.dp, bottom = 2.dp),
         )
     }
 )

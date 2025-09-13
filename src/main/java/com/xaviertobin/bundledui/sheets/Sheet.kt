@@ -133,7 +133,7 @@ fun Sheet(
 fun SheetTitle(
     title: String,
     padding: PaddingValues = PaddingValues(
-        top = 20.dp,
+        top = 10.dp,
         start = 34.dp,
         bottom = 10.dp,
         end = 20.dp

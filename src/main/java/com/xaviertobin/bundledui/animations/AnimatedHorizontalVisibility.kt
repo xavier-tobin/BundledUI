@@ -46,4 +46,4 @@ val Spring.StiffnessDefault
 
 val defaultHorizontalExpandSpec = fadeIn() + expandHorizontally(defaultSpring)
 
-val defaultHorizontalShrinkSpec = shrinkHorizontally(animationSpec = defaultSpring) + fadeOut()
+val defaultHorizontalShrinkSpec = shrinkHorizontally() + fadeOut()
