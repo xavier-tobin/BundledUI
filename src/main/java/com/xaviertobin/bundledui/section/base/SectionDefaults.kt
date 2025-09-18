@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -100,16 +101,13 @@ object SectionDefaults {
      */
 
     @Composable
-    fun containerColor(selected: Boolean, focused: Boolean, tone: Tone): Color {
+    fun containerColor(selected: Boolean?, focused: Boolean, tone: Tone): Color {
 
         val animatedColor by animateColorAsState(
-            targetValue = if (selected) {
+            targetValue = if (selected == true) {
                 MaterialTheme.colorScheme.tertiary
-            } else if (focused) {
-                MaterialTheme.colorScheme.surface.blend(
-                    MaterialTheme.colorScheme.tertiary,
-                    by = 0.2f
-                )
+            } else if (focused || selected == false) {
+                MaterialTheme.colorScheme.tertiaryTintedSurface()
             } else {
                 containerColorForTone(tone)
             },
@@ -144,6 +142,10 @@ object SectionDefaults {
 
 }
 
+fun ColorScheme.tertiaryTintedSurface(): Color {
+    return surface.blend(tertiary, by = 0.2f)
+}
+
 enum class SectionOrientation {
     VERTICAL,
     HORIZONTAL
@@ -151,10 +153,10 @@ enum class SectionOrientation {
 
 
 @Composable
-fun sectionTextColorForTone(selected: Boolean, tone: Tone): Color {
+fun sectionTextColorForTone(selected: Boolean?, tone: Tone): Color {
 
     val animatedColor by animateColorAsState(
-        targetValue = if (selected) {
+        targetValue = if (selected == true) {
             MaterialTheme.colorScheme.surface
         } else {
             textColorForTone(tone)

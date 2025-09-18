@@ -67,6 +67,7 @@ fun SectionTextInput(
     required: Boolean = false,
     enabled: Boolean = true,
     errorMessage: String? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
     onValueChange: (value: String) -> Unit,
 ) {
@@ -120,8 +121,8 @@ fun SectionTextInput(
             interactionSource = interactionSource,
             keyboardOptions = keyboardOptions,
             enabled = enabled,
-
-            ) { innerTextField ->
+            visualTransformation = visualTransformation
+        ) { innerTextField ->
             TextFieldDefaults.DecorationBox(
                 value = value,
                 interactionSource = interactionSource,
@@ -241,7 +242,7 @@ fun SectionPasswordInput(
 }
 
 @Composable
-private fun sectionTextInputColors(
+fun sectionTextInputColors(
 ) = TextFieldDefaults.colors(
     focusedContainerColor = Color.Transparent,
     unfocusedContainerColor = Color.Transparent,
@@ -311,7 +312,7 @@ fun Modifier.sectionTextInput(
     .animateContentSize()
 
 @Composable
-private fun SectionTextInputPlaceholder(placeholder: String? = null, fontSize: TextUnit) {
+fun SectionTextInputPlaceholder(placeholder: String? = null, fontSize: TextUnit) {
     if (placeholder != null) {
         Text(
             text = placeholder,
@@ -328,7 +329,7 @@ fun SectionErrorMessage(
     errorMessage: String?,
     isError: Boolean = errorMessage != null,
 ) {
-    AnimatedVerticalVisibility(visible = isError, modifier = Modifier) {
+    AnimatedVerticalVisibility(visible = isError, clipRadius = 0.dp) {
         Text(
             text = errorMessage ?: "",
             modifier = Modifier.padding(
@@ -343,7 +344,7 @@ fun SectionErrorMessage(
 }
 
 @Composable
-private fun SectionTextInputSlidingLabel(
+fun SectionTextInputSlidingLabel(
     label: String,
     required: Boolean,
 ) {
@@ -358,7 +359,7 @@ private fun SectionTextInputSlidingLabel(
                 )
                 .weight(1f),
             color = MaterialTheme.colorScheme.tertiary,
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.bodyLarge,
             fontSize = 14.sp
         )
     }

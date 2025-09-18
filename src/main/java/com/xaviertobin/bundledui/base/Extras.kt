@@ -9,7 +9,6 @@ import androidx.compose.ui.unit.dp
 typealias UnitFunction = () -> Unit
 typealias ComposableFunction = @Composable () -> Unit
 
-
 fun Modifier.conditional(
     predicate: Boolean,
     block: Modifier.() -> Modifier

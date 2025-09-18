@@ -42,7 +42,7 @@ fun SectionTitleDescriptionIcon(
     description: String? = null,
     first: Boolean = false,
     last: Boolean = false,
-    selected: Boolean = false,
+    selected: Boolean? = null,
     tone: Tone = Tone.NEUTRAL,
     containerColor: Color = SectionDefaults.containerColor(
         selected = selected,
@@ -80,7 +80,7 @@ fun SectionTitleDescription(
     description: String? = null,
     first: Boolean = false,
     last: Boolean = false,
-    selected: Boolean = false,
+    selected: Boolean? = null,
     tone: Tone = Tone.NEUTRAL,
     containerColor: Color = SectionDefaults.containerColor(
         selected = selected,

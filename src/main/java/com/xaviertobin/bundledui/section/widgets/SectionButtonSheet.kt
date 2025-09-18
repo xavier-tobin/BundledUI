@@ -19,7 +19,7 @@ fun SectionButtonSheet(
     description: String? = null,
     first: Boolean = false,
     last: Boolean = false,
-    selected: Boolean = false,
+    selected: Boolean? = null,
     tone: Tone = Tone.NEUTRAL,
     orientation: SectionOrientation = SectionOrientation.VERTICAL,
     textColor: Color = sectionTextColorForTone(selected, tone),
@@ -53,7 +53,7 @@ fun RowScope.SectionButtonSheet(
     description: String? = null,
     first: Boolean = false,
     last: Boolean = false,
-    selected: Boolean = false,
+    selected: Boolean? = null,
     tone: Tone = Tone.NEUTRAL,
     textColor: Color = sectionTextColorForTone(selected, tone),
     sheetLayout: @Composable (onDismiss: () -> Unit) -> Unit

@@ -51,6 +51,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.xaviertobin.bundledui.base.conditional
 import com.xaviertobin.bundledui.section.widgets.SectionSwitch
 import com.xaviertobin.bundledui.theme.BaseTheme
 import com.xaviertobin.bundledui.theme.LocalBaseTheme
@@ -98,13 +99,14 @@ fun Sheet(
             }
 
             Box(
-                modifier = Modifier.then(
-                    if (isFullscreen) Modifier.fillMaxSize() else Modifier
-                )
+                modifier = Modifier.conditional(isFullscreen) {
+                    Modifier.fillMaxSize()
+                }
             ) {
 
                 Column(
                     modifier = Modifier
+                        .conditional(isFullscreen) { Modifier.fillMaxSize() }
                         .then(
                             if (!disableScroll) Modifier.verticalScroll(
                                 rememberScrollState(),
@@ -134,8 +136,8 @@ fun SheetTitle(
     title: String,
     padding: PaddingValues = PaddingValues(
         top = 10.dp,
-        start = 34.dp,
-        bottom = 10.dp,
+        start = 38.dp,
+        bottom = 12.dp,
         end = 20.dp
     )
 ) {

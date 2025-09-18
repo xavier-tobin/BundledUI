@@ -36,7 +36,7 @@ fun Section(
     orientation: SectionOrientation = SectionOrientation.VERTICAL,
     tone: Tone = Tone.NEUTRAL,
     focused: Boolean = false,
-    selected: Boolean = false,
+    selected: Boolean? = null,
     margin: PaddingValues = SectionDefaults.marginValues(orientation, last),
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),
@@ -48,7 +48,7 @@ fun Section(
 ) {
 
     val extraInternalPadding by animateDpAsState(
-        if (selected) 8.dp else 0.dp
+        if (selected == true) 8.dp else 0.dp
     )
 
     Column(
@@ -85,7 +85,7 @@ fun SectionRow(
     orientation: SectionOrientation = SectionOrientation.VERTICAL,
     tone: Tone = Tone.NEUTRAL,
     focused: Boolean = false,
-    selected: Boolean = false,
+    selected: Boolean? = null,
     margin: PaddingValues = SectionDefaults.marginValues(orientation, last),
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),
@@ -97,7 +97,7 @@ fun SectionRow(
 ) {
 
     val extraInternalPadding by animateDpAsState(
-        if (selected) 8.dp else 0.dp, label = "extraInternalPadding"
+        if (selected == true) 8.dp else 0.dp, label = "extraInternalPadding"
     )
 
     Row(
@@ -137,7 +137,7 @@ fun Modifier.section(
     orientation: SectionOrientation = SectionOrientation.VERTICAL,
     tone: Tone = Tone.NEUTRAL,
     focused: Boolean = false,
-    selected: Boolean = false,
+    selected: Boolean? = null,
     margin: PaddingValues = SectionDefaults.marginValues(orientation, last),
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),

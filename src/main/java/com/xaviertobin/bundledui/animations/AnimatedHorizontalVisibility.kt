@@ -36,7 +36,7 @@ fun AnimatedHorizontalVisibility(
 )
 
 val defaultSpring = spring(
-    stiffness = Spring.StiffnessDefault,
+    stiffness = Spring.StiffnessMediumLow,
     dampingRatio = DAMPING_RATIO_VERY_LOW,
     visibilityThreshold = IntSize.VisibilityThreshold
 )
