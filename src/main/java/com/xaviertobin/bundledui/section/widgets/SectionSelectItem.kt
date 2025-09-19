@@ -102,8 +102,6 @@ fun <T> SectionSelectItem(
             .height(16.dp)
             .fillMaxWidth()
     )
-
-
 }
 
 

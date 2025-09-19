@@ -1,5 +1,6 @@
 package com.xaviertobin.bundledui.sheets
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
@@ -51,6 +52,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.xaviertobin.bundledui.animations.AnimateInFade
 import com.xaviertobin.bundledui.base.conditional
 import com.xaviertobin.bundledui.section.widgets.SectionSwitch
 import com.xaviertobin.bundledui.theme.BaseTheme
@@ -92,9 +94,11 @@ fun Sheet(
                 SheetDragHandleShield(sheetValue = sheetState, isFullscreen = isFullscreen)
             }
 
+
             if (title != null) {
                 SheetTitle(
-                    title = title
+                    title = title,
+                    isFullscreen = isFullscreen
                 )
             }
 
@@ -112,6 +116,7 @@ fun Sheet(
                                 rememberScrollState(),
                             ) else Modifier
                         )
+                        .padding(top = if (isFullscreen) 6.dp else 0.dp)
                         .padding(systemContentPadding)
                         .padding(defaultContentPadding)
 
@@ -134,10 +139,11 @@ fun Sheet(
 @Composable
 fun SheetTitle(
     title: String,
+    isFullscreen: Boolean = false,
     padding: PaddingValues = PaddingValues(
         top = 10.dp,
         start = 38.dp,
-        bottom = 12.dp,
+        bottom = 14.dp,
         end = 20.dp
     )
 ) {
@@ -146,7 +152,8 @@ fun SheetTitle(
         color = MaterialTheme.colorScheme.text,
         style = MaterialTheme.typography.titleLarge,
         modifier = Modifier
-            .padding(padding),
+            .padding(padding)
+            .padding(top = if (isFullscreen) 12.dp else 0.dp),
         autoSize = TextAutoSize.StepBased(maxFontSize = 24.sp, stepSize = 2.sp),
         maxLines = 3
     )
@@ -191,8 +198,7 @@ fun SheetDragHandleShield(
 
     Column(
         modifier = Modifier
-            .height(
-                WindowInsets.statusBarsIgnoringVisibility
+            .height(WindowInsets.statusBarsIgnoringVisibility
                     .asPaddingValues()
                     .calculateTopPadding()
             )
@@ -200,9 +206,10 @@ fun SheetDragHandleShield(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        if (sheetValue != SheetValue.Expanded || !isFullscreen) {
+        AnimateInFade(sheetValue != SheetValue.Expanded || !isFullscreen) {
             Spacer(
                 modifier = Modifier
+                    .animateContentSize()
                     .background(
                         MaterialTheme.colorScheme.text.copy(
                             alpha = 0.3f

@@ -20,7 +20,7 @@ fun ButtonRow(
         start = 6.dp,
         end = 6.dp,
         bottom = 16.dp,
-        top = 16.dp
+        top = 0.dp
     ),
     content: @Composable RowScope.(spacer: @Composable () -> Unit) -> Unit,
 ) {
