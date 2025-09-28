@@ -57,6 +57,9 @@ fun SectionCheckbox(
         first = first,
         last = last,
         start = 16.dp,
+        top = 4.dp,
+        bottom = 4.dp,
+        end = 16.dp,
     ),
     enabled = enabled,
     tone = if (errorMessage != null) {
@@ -72,13 +75,11 @@ fun SectionCheckbox(
         )
     },
     contentBottom = {
-            SectionErrorMessage(
-                errorMessage = errorMessage,
-            )
-
+        SectionErrorMessage(
+            errorMessage = errorMessage,
+        )
     }
 )
-
 
 
 @Composable
@@ -136,7 +137,7 @@ fun EntryCheckbox(
             .maybeClickable(
                 enabled = enabled
             ) {
-                vibration.performHapticFeedback(HapticFeedbackType.ToggleOn )
+                vibration.performHapticFeedback(HapticFeedbackType.ToggleOn)
                 onCheckedChange(!checked)
             }
             .background(

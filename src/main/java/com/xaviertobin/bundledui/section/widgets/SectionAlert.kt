@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Warning
@@ -79,7 +80,7 @@ fun SectionAlert(
                     .padding(
                         top = 12.dp,
                         end = 12.dp,
-                        bottom = 12.dp
+                        bottom = 8.dp
                     )
                     .weight(1f),
                 style = MaterialTheme.typography.titleSmall,
@@ -93,7 +94,7 @@ fun SectionAlert(
                     contentDescription = title,
                     modifier = Modifier.padding(
                         end = 3.dp
-                    ),
+                    ).offset(x = 8.dp, y = (-6).dp),
                     tint = iconColor
                 )
             }

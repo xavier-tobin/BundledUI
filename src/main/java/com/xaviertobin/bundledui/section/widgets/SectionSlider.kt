@@ -49,7 +49,7 @@ fun SectionSlider(
             first = first,
             last = last,
             bottom = 6.dp,
-            start = 26.dp
+            start = 20.dp
         ),
     ) {
 
@@ -57,7 +57,7 @@ fun SectionSlider(
         SectionTitle(
             title = text,
             textColor = MaterialTheme.colorScheme.text,
-            padding = PaddingValues(vertical = 2.dp)
+            padding = PaddingValues(vertical = 2.dp, horizontal = 6.dp)
         )
 
         Row(
