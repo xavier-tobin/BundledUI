@@ -101,7 +101,7 @@ object SectionDefaults {
      */
 
     @Composable
-    fun containerColor(selected: Boolean?, focused: Boolean, tone: Tone): Color {
+    fun containerColor(focused: Boolean, tone: Tone, selected: Boolean? = null): Color {
 
         val animatedColor by animateColorAsState(
             targetValue = if (selected == true) {

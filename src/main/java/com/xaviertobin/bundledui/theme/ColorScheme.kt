@@ -135,7 +135,7 @@ fun ColorScheme.adjustForOled(): ColorScheme {
 
 fun ColorScheme.adjust(): ColorScheme {
     return this.copy(
-        onSurface = onSurface.blend(surface, 0.16f).blend(primary, 0.16f)
+        onSurface = onSurface.blend(surface, 0.15f).blend(primary, 0.2f)
     )
 }
 

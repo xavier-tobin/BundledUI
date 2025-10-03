@@ -40,7 +40,11 @@ fun Section(
     margin: PaddingValues = SectionDefaults.marginValues(orientation, last),
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),
-    containerColor: Color = SectionDefaults.containerColor(selected, focused, tone),
+    containerColor: Color = SectionDefaults.containerColor(
+        selected = selected,
+        focused = focused,
+        tone = tone
+    ),
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
@@ -89,7 +93,11 @@ fun SectionRow(
     margin: PaddingValues = SectionDefaults.marginValues(orientation, last),
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),
-    containerColor: Color = SectionDefaults.containerColor(selected, focused, tone),
+    containerColor: Color = SectionDefaults.containerColor(
+        selected = selected,
+        focused = focused,
+        tone = tone
+    ),
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
@@ -141,7 +149,11 @@ fun Modifier.section(
     margin: PaddingValues = SectionDefaults.marginValues(orientation, last),
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),
-    containerColor: Color = SectionDefaults.containerColor(selected, focused, tone),
+    containerColor: Color = SectionDefaults.containerColor(
+        selected = selected,
+        focused = focused,
+        tone = tone
+    ),
     extraInternalPadding: Dp = 0.dp,
     onClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,

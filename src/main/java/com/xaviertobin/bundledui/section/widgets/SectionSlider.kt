@@ -26,6 +26,8 @@ import com.xaviertobin.bundledui.color.alpha
 import com.xaviertobin.bundledui.section.base.Section
 import com.xaviertobin.bundledui.section.base.SectionDefaults
 import com.xaviertobin.bundledui.theme.text
+import kotlin.math.absoluteValue
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -81,7 +83,7 @@ fun SectionSlider(
 
             Box(modifier= Modifier.width( 70.dp), contentAlignment = Alignment.Center) {
                 ValueBadge(
-                    number = (if (value % 1  == 0f) value.toInt() else "%.2f".format(value)).toString(),
+                    number = (if (value.absoluteValue % 1 < 0.00001f) value.roundToInt() else "%.2f".format(value)).toString(),
                     fontSize = 15.sp,
                     backgroundColor = MaterialTheme.colorScheme.tertiary,
                     color = MaterialTheme.colorScheme.surface,
