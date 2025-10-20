@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
@@ -39,6 +40,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -312,13 +314,18 @@ fun Modifier.sectionTextInput(
     .animateContentSize()
 
 @Composable
-fun SectionTextInputPlaceholder(placeholder: String? = null, fontSize: TextUnit) {
+fun SectionTextInputPlaceholder(
+    placeholder: String? = null,
+    fontSize: TextUnit,
+    extraTopPadding: Dp = 0.dp
+) {
     if (placeholder != null) {
         Text(
             text = placeholder,
-            modifier = Modifier.alpha(0.35f),
+            modifier = Modifier.alpha(0.35f).offset(y = -extraTopPadding ),
             color = MaterialTheme.colorScheme.text,
             fontSize = fontSize,
+            style = MaterialTheme.typography.bodyLarge,
             overflow = TextOverflow.Ellipsis
         )
     }

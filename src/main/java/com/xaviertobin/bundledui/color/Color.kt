@@ -1,6 +1,7 @@
 package com.xaviertobin.bundledui.color
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.core.graphics.ColorUtils
 import com.xaviertobin.bundledui.theme.BaseTheme
 
@@ -73,6 +74,9 @@ fun Color.perceivedLightness(): Float {
     return luminance.coerceIn(0.0f, 1.0f)
 }
 
+fun Color.normalizedLuminance(): Float {
+    return this.hsb().toColor(saturation = 1f, brightness = 1f).luminance()
+}
 
 fun Color.getIntensityReduction(degree: Float = 0.25f) =
     (degree * this.perceivedLightness()).toFloat()

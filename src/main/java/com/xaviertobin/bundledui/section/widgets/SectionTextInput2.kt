@@ -2,7 +2,6 @@ package com.xaviertobin.bundledui.section.widgets
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -13,6 +12,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,8 +30,8 @@ import com.xaviertobin.bundledui.section.base.SectionDefaults
 @Composable
 fun SectionTextInput2(
     value: TextFieldState,
-    label: String,
     modifier: Modifier = Modifier,
+    label: String? = null,
     fontSize: TextUnit = 16.sp,
     placeholder: String? = label,
     singleLine: Boolean = true,
@@ -59,15 +59,15 @@ fun SectionTextInput2(
             first = first,
             last = last,
             start = 22.dp,
-            top = 8.dp,
+            top = 0.dp,
             end = 22.dp,
             bottom = 10.dp
         ),
         focused = focused,
         enabled = enabled,
+        modifier = modifier,
 //        tone = if (isError) Tone.NEGATIVE else Tone.NEUTRAL
     ) {
-
 
 
         TextField(
@@ -84,24 +84,40 @@ fun SectionTextInput2(
                 fontSize = fontSize,
             ),
             interactionSource = interactionSource,
-            label = {
-                SectionTextInput2Label(
-                    label = label,
-                    required = required
-                )
-            },
-
+            label = if (label != null) {
+                {
+                    SectionTextInput2Label(
+                        label = label,
+                        required = required
+                    )
+                }
+            } else null,
             keyboardOptions = keyboardOptions,
             enabled = enabled,
             colors = sectionTextInputColors(),
-            placeholder = { SectionTextInputPlaceholder(placeholder, fontSize) },
+            placeholder = {
+                SectionTextInputPlaceholder(
+                    placeholder = placeholder,
+                    fontSize = fontSize,
+                    extraTopPadding = 2.5.dp
+                )
+            },
             isError = isError,
-            contentPadding = PaddingValues(
-                top = 0.dp,
-                bottom = 10.dp,
-                start = 4.dp,
-                end = 0.dp
-            ),
+            contentPadding = if (label == null) {
+                TextFieldDefaults.contentPaddingWithoutLabel(
+                    top = 16.dp,
+                    bottom = 10.dp,
+                    start = 4.dp,
+                    end = 0.dp
+                )
+            } else {
+                TextFieldDefaults.contentPaddingWithLabel(
+                    top = 4.dp,
+                    bottom = 10.dp,
+                    start = 4.dp,
+                    end = 0.dp
+                )
+            },
             inputTransformation = inputTransformation,
             outputTransformation = outputTransformation,
             lineLimits = TextFieldLineLimits.MultiLine(
@@ -122,20 +138,23 @@ fun SectionTextInput2Label(
     label: String,
     required: Boolean,
 ) {
-        Text(
-            text = label + if (required) "*" else "",
-            color = MaterialTheme.colorScheme.tertiary,
-            style = MaterialTheme.typography.bodyLarge,
-            fontSize = 14.sp,
-            modifier = Modifier.padding(bottom = 6.dp).offset(x = (-4).dp)
-        )
+    Text(
+        text = label + if (required) "*" else "",
+        color = MaterialTheme.colorScheme.tertiary,
+        style = MaterialTheme.typography.bodyLarge,
+        fontSize = 14.sp,
+        modifier = Modifier
+            .padding(bottom = 6.dp)
+            .offset(x = (-4).dp)
+    )
 
 }
 
 @Preview
 @Composable
 private fun SectionTextInput2Preview() {
-    val textFieldState = remember { TextFieldState("Text") }
+    val textFieldState = remember { TextFieldState("") }
+    val textFieldState2 = remember { TextFieldState("P") }
 
     Column {
         SectionTextInput2(
@@ -147,8 +166,7 @@ private fun SectionTextInput2Preview() {
         )
 
         SectionTextInput2(
-            value = textFieldState,
-            label = "Label",
+            value = textFieldState2,
             placeholder = "Placeholder",
             last = true,
             required = true,
