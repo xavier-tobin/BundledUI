@@ -78,9 +78,9 @@ fun SectionAlert(
                 text = title,
                 modifier = Modifier
                     .padding(
-                        top = 12.dp,
+                        top = 10.dp,
                         end = 12.dp,
-                        bottom = 8.dp
+                        bottom = 10.dp
                     )
                     .weight(1f),
                 style = MaterialTheme.typography.titleSmall,
@@ -94,7 +94,7 @@ fun SectionAlert(
                     contentDescription = title,
                     modifier = Modifier.padding(
                         end = 3.dp
-                    ).offset(x = 8.dp, y = (-6).dp),
+                    ).offset(x = 8.dp, y = (-2).dp),
                     tint = iconColor
                 )
             }

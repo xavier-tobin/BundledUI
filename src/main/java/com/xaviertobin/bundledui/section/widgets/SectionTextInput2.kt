@@ -112,7 +112,7 @@ fun SectionTextInput2(
                 )
             } else {
                 TextFieldDefaults.contentPaddingWithLabel(
-                    top = 4.dp,
+                    top = 8.dp,
                     bottom = 10.dp,
                     start = 4.dp,
                     end = 0.dp
@@ -144,7 +144,10 @@ fun SectionTextInput2Label(
         style = MaterialTheme.typography.bodyLarge,
         fontSize = 14.sp,
         modifier = Modifier
-            .padding(bottom = 6.dp)
+            .padding(
+                bottom = 6.dp,
+                start = 4.dp
+            )
             .offset(x = (-4).dp)
     )
 
