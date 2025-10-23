@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.toArgb
 
 data class HSBColor(val hue: Float, val saturation: Float, val brightness: Float)
 
-fun Color.toHsb() : HSBColor {
+fun Color.hsb() : HSBColor {
     val floatArray = FloatArray(3)
     android.graphics.Color.colorToHSV(this.toArgb(), floatArray)
     return HSBColor(

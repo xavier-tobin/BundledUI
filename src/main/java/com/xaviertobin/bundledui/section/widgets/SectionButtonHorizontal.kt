@@ -20,12 +20,13 @@ import androidx.compose.ui.unit.sp
 import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.base.firstLastCornersChip
 import com.xaviertobin.bundledui.section.base.Section
+import com.xaviertobin.bundledui.theme.text
 
 
 // TODO remove in favour of using SectionButton with orientation = horizontal
 @Composable
 fun SectionButtonHorizontal(
-    text: String,
+    title: String,
     description: String? = null,
     icon: ImageVector,
     first: Boolean = false,
@@ -40,7 +41,7 @@ fun SectionButtonHorizontal(
     } else if (warning) {
         MaterialTheme.colorScheme.error
     } else {
-        MaterialTheme.colorScheme.onSurfaceVariant
+        MaterialTheme.colorScheme.text
     }
 
     val selectedExtraPadding by animateDpAsState(
@@ -56,20 +57,20 @@ fun SectionButtonHorizontal(
         padding = PaddingValues(
             start = if (first) 24.dp else 20.dp,
             end = if (last) 24.dp else 20.dp,
-            top = 12.dp + selectedExtraPadding,
-            bottom = 12.dp + selectedExtraPadding,
+            top = 12.dp,
+            bottom = 12.dp,
         ),
         margin = PaddingValues(
             end = 5.dp + selectedExtraPadding,
             start = selectedExtraPadding,
-            top = 5.dp - selectedExtraPadding,
-            bottom = 5.dp - selectedExtraPadding,
+            top = 2.dp,
+            bottom = 16.dp,
         ),
         shape = firstLastCornersChip(
             first = first,
             last = last,
-            pronouncedCornerRadius = 28.dp + selectedExtraPadding,
-            defaultCornerRadius = 6.dp + selectedExtraPadding
+            pronouncedCornerRadius = 28.dp,
+            defaultCornerRadius = 9.dp
         )
     ) {
 
@@ -81,11 +82,11 @@ fun SectionButtonHorizontal(
                     .padding(bottom = 8.dp)
                     .size(22.dp),
                 imageVector = icon,
-                contentDescription = description ?: text,
+                contentDescription = description ?: title,
                 tint = if (warning) MaterialTheme.colorScheme.error else if (selected) textColor else MaterialTheme.colorScheme.tertiary
             )
             Text(
-                text = text,
+                text = title,
                 style = MaterialTheme.typography.bodyLarge,
                 color = textColor,
                 textAlign = TextAlign.Start,

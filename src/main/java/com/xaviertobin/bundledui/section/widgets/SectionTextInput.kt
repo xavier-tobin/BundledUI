@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
@@ -39,16 +40,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xaviertobin.bundledui.animations.AnimateInVertically
+import com.xaviertobin.bundledui.animations.AnimatedVerticalVisibility
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.buttons.IconButton
 import com.xaviertobin.bundledui.section.base.Section
 import com.xaviertobin.bundledui.section.base.SectionDefaults
 import com.xaviertobin.bundledui.section.base.SectionRow
 import com.xaviertobin.bundledui.theme.ThemedPreview
+import com.xaviertobin.bundledui.theme.text
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -66,6 +69,7 @@ fun SectionTextInput(
     required: Boolean = false,
     enabled: Boolean = true,
     errorMessage: String? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
     onValueChange: (value: String) -> Unit,
 ) {
@@ -119,8 +123,8 @@ fun SectionTextInput(
             interactionSource = interactionSource,
             keyboardOptions = keyboardOptions,
             enabled = enabled,
-
-            ) { innerTextField ->
+            visualTransformation = visualTransformation
+        ) { innerTextField ->
             TextFieldDefaults.DecorationBox(
                 value = value,
                 interactionSource = interactionSource,
@@ -231,7 +235,7 @@ fun SectionPasswordInput(
                 Icons.Filled.VisibilityOff
             },
             modifier = Modifier.align(Alignment.CenterVertically),
-            tint = MaterialTheme.colorScheme.tertiary
+            color = MaterialTheme.colorScheme.tertiary
         ) {
             showPassword = !showPassword
         }
@@ -240,7 +244,7 @@ fun SectionPasswordInput(
 }
 
 @Composable
-private fun sectionTextInputColors(
+fun sectionTextInputColors(
 ) = TextFieldDefaults.colors(
     focusedContainerColor = Color.Transparent,
     unfocusedContainerColor = Color.Transparent,
@@ -259,7 +263,7 @@ fun sectionTextInputIndicatorColors(isError: Boolean): IndicatorColors {
             alpha = 0.6f
         )
     val unfocusedIndicatorColor =
-        if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant.copy(
+        if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.text.copy(
             alpha = 0.2f
         )
 
@@ -310,13 +314,18 @@ fun Modifier.sectionTextInput(
     .animateContentSize()
 
 @Composable
-private fun SectionTextInputPlaceholder(placeholder: String? = null, fontSize: TextUnit) {
+fun SectionTextInputPlaceholder(
+    placeholder: String? = null,
+    fontSize: TextUnit,
+    extraTopPadding: Dp = 0.dp
+) {
     if (placeholder != null) {
         Text(
             text = placeholder,
-            modifier = Modifier.alpha(0.35f),
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.alpha(0.35f).offset(y = -extraTopPadding ),
+            color = MaterialTheme.colorScheme.text,
             fontSize = fontSize,
+            style = MaterialTheme.typography.bodyLarge,
             overflow = TextOverflow.Ellipsis
         )
     }
@@ -327,7 +336,7 @@ fun SectionErrorMessage(
     errorMessage: String?,
     isError: Boolean = errorMessage != null,
 ) {
-    AnimateInVertically(visible = isError, modifier = Modifier) {
+    AnimatedVerticalVisibility(visible = isError, clipRadius = 0.dp) {
         Text(
             text = errorMessage ?: "",
             modifier = Modifier.padding(
@@ -342,7 +351,7 @@ fun SectionErrorMessage(
 }
 
 @Composable
-private fun SectionTextInputSlidingLabel(
+fun SectionTextInputSlidingLabel(
     label: String,
     required: Boolean,
 ) {
@@ -357,7 +366,7 @@ private fun SectionTextInputSlidingLabel(
                 )
                 .weight(1f),
             color = MaterialTheme.colorScheme.tertiary,
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.bodyLarge,
             fontSize = 14.sp
         )
     }

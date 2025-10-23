@@ -26,17 +26,17 @@ val fadeOutSpec = tween<Float>(
 fun LazyStaggeredGridItemScope.itemAnimations(): Modifier {
     return Modifier
         .animateItem(
-        fadeInSpec = fadeInSpec,
-        placementSpec = null,
-        fadeOutSpec = fadeOutSpec
-    )
+            fadeInSpec = fadeInSpec,
+            placementSpec = null,
+            fadeOutSpec = fadeOutSpec
+        )
 }
 
 fun LazyItemScope.itemAnimations(): Modifier {
     return Modifier
         .animateItem(
-        fadeInSpec = fadeInSpec,
-        placementSpec = null,
-        fadeOutSpec = fadeOutSpec
-    )
+            fadeInSpec = fadeInSpec,
+            placementSpec = null,
+            fadeOutSpec = fadeOutSpec
+        )
 }

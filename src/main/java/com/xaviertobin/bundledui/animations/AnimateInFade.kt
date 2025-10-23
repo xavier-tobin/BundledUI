@@ -8,10 +8,9 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun AnimateInFade(
-    visible: Boolean = true,
+    visible: Boolean,
     content: @Composable (AnimatedVisibilityScope.() -> Unit)
-) =
-    AnimatedVisibility(
+) = AnimatedVisibility(
         visible = visible,
         enter = fadeIn(),
         exit = fadeOut(),

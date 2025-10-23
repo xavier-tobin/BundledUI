@@ -1,9 +1,11 @@
 package com.xaviertobin.bundledui.section.base
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,10 +40,10 @@ object SectionDefaults {
     fun verticalPaddingValues(
         first: Boolean = false,
         last: Boolean = false,
-        top: Dp = 8.dp,
-        bottom: Dp = 8.dp,
-        start: Dp = 22.dp,
-        end: Dp = 22.dp,
+        top: Dp = 12.dp,
+        bottom: Dp = 12.dp,
+        start: Dp = 26.dp,
+        end: Dp = 26.dp,
         firstLastExtra: Dp = 2.dp,
     ) = PaddingValues(
         start = start,
@@ -69,6 +71,7 @@ object SectionDefaults {
      * MARGIN
      */
 
+    @Composable
     fun marginValues(orientation: SectionOrientation, last: Boolean): PaddingValues {
         return when (orientation) {
             SectionOrientation.VERTICAL -> verticalMarginValues(last)
@@ -76,16 +79,21 @@ object SectionDefaults {
         }
     }
 
+    @Composable
     fun verticalMarginValues(
         last: Boolean = false,
-    ) = PaddingValues(
-        bottom = if (last) 16.dp else 2.dp,
-        top = 2.dp
-    )
+    ): PaddingValues {
+        val result by animateDpAsState(if (last) 16.dp else 2.dp, label = "verticalMarginValues")
+        return PaddingValues(
+            bottom = result,
+            top = 2.dp
+        )
+    }
 
     fun horizontalMarginValues() = PaddingValues(
         end = 5.dp,
         start = 0.dp,
+        bottom = 16.dp
     )
 
     /**
@@ -93,20 +101,16 @@ object SectionDefaults {
      */
 
     @Composable
-    fun containerColor(selected: Boolean, focused: Boolean, tone: Tone): Color {
+    fun containerColor(focused: Boolean, tone: Tone, selected: Boolean? = null): Color {
 
         val animatedColor by animateColorAsState(
-            targetValue = if (selected) {
+            targetValue = if (selected == true) {
                 MaterialTheme.colorScheme.tertiary
-            } else if (focused) {
-                MaterialTheme.colorScheme.surface.blend(
-                    MaterialTheme.colorScheme.tertiary,
-                    by = 0.2f
-                )
+            } else if (focused || selected == false) {
+                MaterialTheme.colorScheme.tertiaryTintedSurface()
             } else {
                 containerColorForTone(tone)
             },
-            animationSpec = tween(durationMillis = 200)
         )
 
         return animatedColor
@@ -128,6 +132,7 @@ object SectionDefaults {
      * CORNERS
      */
 
+    @Composable
     fun shape(orientation: SectionOrientation, first: Boolean, last: Boolean): RoundedCornerShape {
         return when (orientation) {
             SectionOrientation.VERTICAL -> firstLastCornersVertical(first, last)
@@ -137,6 +142,10 @@ object SectionDefaults {
 
 }
 
+fun ColorScheme.tertiaryTintedSurface(): Color {
+    return surface.blend(tertiary, by = 0.2f)
+}
+
 enum class SectionOrientation {
     VERTICAL,
     HORIZONTAL
@@ -144,10 +153,10 @@ enum class SectionOrientation {
 
 
 @Composable
-fun sectionTextColorForTone(selected: Boolean, tone: Tone): Color {
+fun sectionTextColorForTone(selected: Boolean?, tone: Tone): Color {
 
     val animatedColor by animateColorAsState(
-        targetValue = if (selected) {
+        targetValue = if (selected == true) {
             MaterialTheme.colorScheme.surface
         } else {
             textColorForTone(tone)

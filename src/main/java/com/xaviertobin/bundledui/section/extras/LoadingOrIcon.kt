@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.xaviertobin.bundledui.animations.AnimateInHorizontally
+import com.xaviertobin.bundledui.animations.AnimatedHorizontalVisibility
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.base.iconColorForTone
 
@@ -24,7 +24,7 @@ fun LoadingOrIcon(
     size: Dp = 24.dp,
     endPadding: Dp = 6.dp
 ) {
-    AnimateInHorizontally(visible = loadingFromClick || icon != null) {
+    AnimatedHorizontalVisibility(visible = loadingFromClick || icon != null) {
         if (loadingFromClick) {
             CircularProgressIndicator(
                 modifier = Modifier

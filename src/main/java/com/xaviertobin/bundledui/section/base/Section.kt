@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -21,22 +23,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.Tone
+import com.xaviertobin.bundledui.base.conditional
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Section(
     modifier: Modifier = Modifier,
+    postModifier: Modifier = Modifier,
     first: Boolean = false,
     last: Boolean = false,
     orientation: SectionOrientation = SectionOrientation.VERTICAL,
     tone: Tone = Tone.NEUTRAL,
     focused: Boolean = false,
-    selected: Boolean = false,
+    selected: Boolean? = null,
     margin: PaddingValues = SectionDefaults.marginValues(orientation, last),
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),
-    containerColor: Color = SectionDefaults.containerColor(selected, focused, tone),
+    containerColor: Color = SectionDefaults.containerColor(
+        selected = selected,
+        focused = focused,
+        tone = tone
+    ),
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
@@ -44,12 +52,13 @@ fun Section(
 ) {
 
     val extraInternalPadding by animateDpAsState(
-        if (selected) 8.dp else 0.dp, label = "extraInternalPadding"
+        if (selected == true) 8.dp else 0.dp
     )
 
     Column(
         modifier = Modifier.section(
             modifier = modifier,
+            postModifier = postModifier,
             first = first,
             last = last,
             enabled = enabled,
@@ -74,16 +83,21 @@ fun Section(
 @Composable
 fun SectionRow(
     modifier: Modifier = Modifier,
+    postModifier: Modifier = Modifier,
     first: Boolean = false,
     last: Boolean = false,
     orientation: SectionOrientation = SectionOrientation.VERTICAL,
     tone: Tone = Tone.NEUTRAL,
     focused: Boolean = false,
-    selected: Boolean = false,
+    selected: Boolean? = null,
     margin: PaddingValues = SectionDefaults.marginValues(orientation, last),
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),
-    containerColor: Color = SectionDefaults.containerColor(selected, focused, tone),
+    containerColor: Color = SectionDefaults.containerColor(
+        selected = selected,
+        focused = focused,
+        tone = tone
+    ),
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
@@ -91,12 +105,14 @@ fun SectionRow(
 ) {
 
     val extraInternalPadding by animateDpAsState(
-        if (selected) 8.dp else 0.dp, label = "extraInternalPadding"
+        if (selected == true) 8.dp else 0.dp, label = "extraInternalPadding"
     )
 
     Row(
+        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.section(
             modifier = modifier,
+            postModifier = postModifier,
             first = first,
             last = last,
             enabled = enabled,
@@ -122,33 +138,36 @@ fun SectionRow(
 @Composable
 fun Modifier.section(
     modifier: Modifier = Modifier,
+    postModifier: Modifier = Modifier,
     first: Boolean = false,
     last: Boolean = false,
     enabled: Boolean = true,
     orientation: SectionOrientation = SectionOrientation.VERTICAL,
     tone: Tone = Tone.NEUTRAL,
     focused: Boolean = false,
-    selected: Boolean = false,
+    selected: Boolean? = null,
     margin: PaddingValues = SectionDefaults.marginValues(orientation, last),
     padding: PaddingValues = SectionDefaults.paddingValues(orientation, first, last),
     shape: RoundedCornerShape = SectionDefaults.shape(orientation, first, last),
-    containerColor: Color = SectionDefaults.containerColor(selected, focused, tone),
+    containerColor: Color = SectionDefaults.containerColor(
+        selected = selected,
+        focused = focused,
+        tone = tone
+    ),
     extraInternalPadding: Dp = 0.dp,
     onClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
 ) = this
-    .clip(shape)
     .padding(margin)
+    .then(modifier)
     .clip(shape)
     .combinedClickable(
         enabled = enabled && (onClick != null || onLongClick != null),
         onClick = { onClick?.invoke() },
-        onLongClick = { onLongClick?.invoke() }
+        onLongClick = onLongClick,
     )
     .focusable(onClick != null)
     .background(containerColor)
-    .clip(shape)
-    .then(modifier)
     .padding(padding)
     .padding(
         when (orientation) {
@@ -156,6 +175,10 @@ fun Modifier.section(
             SectionOrientation.HORIZONTAL -> PaddingValues(horizontal = extraInternalPadding)
         }
     )
+    .then(postModifier)
     .alpha(
         if (enabled) 1f else 0.5f
     )
+    .conditional(orientation == SectionOrientation.VERTICAL) {
+        fillMaxWidth()
+    }

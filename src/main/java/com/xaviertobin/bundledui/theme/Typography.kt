@@ -5,7 +5,6 @@ import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.sp
 
 fun buildCustomTypography(
@@ -18,93 +17,91 @@ fun buildCustomTypography(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            color = colorScheme.text
         ),
         displayMedium = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            color = colorScheme.text
         ),
         displaySmall = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            color = colorScheme.text
         ),
         headlineLarge = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.SemiBold,
             fontSize = 30.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            color = colorScheme.text
         ),
         headlineMedium = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            color = colorScheme.text
         ),
         headlineSmall = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            color = colorScheme.text
         ),
         titleLarge = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            color = colorScheme.text
         ),
         titleMedium = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            color = colorScheme.text
         ),
         titleSmall = TextStyle(
             fontFamily = font,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 17.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            fontWeight = FontWeight.Medium,
+            fontSize = 15.5.sp * fontScale,
+            color = colorScheme.text
         ),
         bodyLarge = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Medium,
-            fontSize = 15.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            fontSize = 14.5.sp * fontScale,
+            color = colorScheme.text
         ),
         bodyMedium = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
-            fontSize = 15.sp * fontScale,
-            color = colorScheme.onSurfaceVariant,
-            lineHeight = 18.sp * fontScale
+            fontSize = 14.sp * fontScale,
+            color = colorScheme.text,
         ),
         bodySmall = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
-            fontSize = 14.sp * fontScale,
-            color = colorScheme.onSurfaceVariant,
-            lineHeight = 16.sp * fontScale
+            fontSize = 13.5.sp * fontScale,
+            color = colorScheme.text,
         ),
         labelLarge = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            color = colorScheme.text
         ),
         labelMedium = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Medium,
-            fontSize = 12.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            fontSize = 13.sp * fontScale,
+            color = colorScheme.text
         ),
         labelSmall = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
-            fontSize = 16.sp * fontScale,
-            color = colorScheme.onSurfaceVariant
+            fontSize = 12.sp * fontScale,
+            color = colorScheme.text
         ),
     )
 }

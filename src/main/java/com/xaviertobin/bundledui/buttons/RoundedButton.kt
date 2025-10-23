@@ -45,10 +45,11 @@ fun RoundedButtonBase(
     enabled: Boolean = true,
     contentPadding: PaddingValues = RoundedButtonPadding,
     endContent: (@Composable () -> Unit)? = null,
-    onClick: UnitFunction,
+    onClick: UnitFunction?,
 ) {
     Button(
-        onClick = { onClick() },
+        enabled = enabled && onClick != null,
+        onClick = { onClick?.invoke() },
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             disabledContainerColor = containerColor
@@ -57,7 +58,6 @@ fun RoundedButtonBase(
             .alpha(if (enabled) 1f else 0.7f)
             .then(modifier),
         contentPadding = contentPadding,
-        enabled = enabled
     ) {
         Text(
             text = text,
@@ -73,21 +73,22 @@ fun RoundedButtonBase(
 @Composable
 fun RoundedLoadingButton(
     text: String,
-    loadingText: String,
+    loadingText: String? = null,
     modifier: Modifier = Modifier,
     tone: Tone = Tone.POSITIVE,
     containerColor: Color = vividContainerColorForTone(tone),
     textColor: Color = vividTextColorForTone(tone),
+    enabled: Boolean = true,
     icon: ImageVector? = null,
     loading: Boolean = false,
     onClick: UnitFunction,
 ) = RoundedButtonBase(
-    text = if (loading) loadingText else text,
+    text = if (loading && loadingText != null) loadingText else text,
     modifier = modifier,
     tone = tone,
     containerColor = containerColor,
     onClick = onClick,
-    enabled = !loading,
+    enabled = enabled && !loading,
     textColor = textColor,
     endContent = {
         LoadingOrIcon(
@@ -113,7 +114,7 @@ fun RoundedButton(
     textColor: Color = vividTextColorForTone(tone),
     contentPadding: PaddingValues = RoundedButtonPadding,
     icon: ImageVector? = null,
-    onClick: UnitFunction,
+    onClick: UnitFunction?,
 ) = RoundedButtonBase(
     text = text,
     modifier = modifier,

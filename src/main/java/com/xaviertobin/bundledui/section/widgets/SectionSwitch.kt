@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.xaviertobin.bundledui.color.alpha
 import com.xaviertobin.bundledui.section.base.SectionDefaults
 
 
@@ -35,8 +36,8 @@ fun SectionSwitch(
     padding = SectionDefaults.verticalPaddingValues(
         first = first,
         last = last,
-        bottom = 3.dp,
-        top = 3.dp
+        bottom = 0.dp,
+        top = 0.dp
     ),
     contentEnd = {
         Switch(
@@ -44,10 +45,12 @@ fun SectionSwitch(
             onCheckedChange = { onChecked(it) },
             colors = SwitchDefaults.colors(
                 uncheckedTrackColor = Color.Transparent,
+                uncheckedBorderColor = MaterialTheme.colorScheme.tertiary.alpha(0.6f),
+                uncheckedThumbColor = MaterialTheme.colorScheme.tertiary.alpha(0.7f),
                 checkedTrackColor = MaterialTheme.colorScheme.tertiary,
                 checkedThumbColor = MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)
             ),
-            modifier = Modifier.padding(end = 4.dp),
+            modifier = Modifier.padding(start = 6.dp, end = 0.dp, top = 2.dp, bottom = 2.dp),
         )
     }
 )

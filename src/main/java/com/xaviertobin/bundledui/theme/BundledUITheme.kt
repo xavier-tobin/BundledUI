@@ -97,16 +97,16 @@ fun getColorScheme(
 
     if (isMaterialYouEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         return when (theme) {
-            BaseTheme.LIGHT -> dynamicLightColorScheme(context)
-            BaseTheme.DARK -> dynamicDarkColorScheme(context)
-            BaseTheme.OLED -> dynamicDarkColorScheme(context).oledify()
+            BaseTheme.LIGHT -> dynamicLightColorScheme(context).adjust()
+            BaseTheme.DARK -> dynamicDarkColorScheme(context).adjust()
+            BaseTheme.OLED -> dynamicDarkColorScheme(context).adjustForOled()
         }
     }
 
     return when (theme) {
-        BaseTheme.LIGHT -> defaultLightColorScheme()
-        BaseTheme.DARK -> defaultDarkColorScheme()
-        BaseTheme.OLED -> defaultDarkColorScheme().oledify()
+        BaseTheme.LIGHT -> defaultLightColorScheme().adjust()
+        BaseTheme.DARK -> defaultDarkColorScheme().adjust()
+        BaseTheme.OLED -> defaultDarkColorScheme().adjustForOled()
     }
 }
 

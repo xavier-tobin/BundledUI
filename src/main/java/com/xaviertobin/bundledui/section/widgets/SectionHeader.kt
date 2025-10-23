@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -15,17 +16,18 @@ import androidx.compose.ui.unit.dp
 fun SectionHeader(
         @StringRes header: Int,
 ) {
-    SectionHeader(header = stringResource(id = header))
+    SectionHeader(text = stringResource(id = header))
 }
 
 @Composable
 fun SectionHeader(
-       header: String,
+    text: String,
+    color: Color? = null
 ) = Text(
         modifier = Modifier.padding(start = 26.dp, top = 10.dp, bottom = 6.dp),
-        text = header,
+        text = text,
         style = MaterialTheme.typography.labelLarge,
-        color = MaterialTheme.colorScheme.primary,
+        color = color ?: MaterialTheme.colorScheme.primary,
         fontWeight = FontWeight.Medium,
         textAlign = TextAlign.Start,
     )

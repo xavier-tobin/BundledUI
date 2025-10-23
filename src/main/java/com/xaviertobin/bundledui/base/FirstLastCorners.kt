@@ -1,20 +1,25 @@
 package com.xaviertobin.bundledui.base
 
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
  * Provides a shape to round the first and last Sections in a column (by default).
  */
+@Composable
 fun firstLastCornersVertical(
     first: Boolean = false,
     last: Boolean = false,
     defaultCornerRadius: Dp = 9.dp,
     pronouncedCornerRadius: Dp = 32.dp,
 ): RoundedCornerShape {
-    val topCorners = if (first) pronouncedCornerRadius else defaultCornerRadius
-    val bottomCorners = if (last) pronouncedCornerRadius else defaultCornerRadius
+    val topCorners by animateDpAsState(if (first) pronouncedCornerRadius else defaultCornerRadius, label = "topCorners")
+    val bottomCorners by animateDpAsState( if (last) pronouncedCornerRadius else defaultCornerRadius, label = "bottomCorners")
     return RoundedCornerShape(
         topStart = topCorners,
         topEnd = topCorners,
@@ -26,14 +31,15 @@ fun firstLastCornersVertical(
 /**
  * Provides a shape to round the first and last Sections in a row (by default).
  */
+@Composable
 fun firstLastCornersHorizontal(
     first: Boolean = false,
     last: Boolean = false,
-    defaultCornerRadius: Dp =  9.dp,
+    defaultCornerRadius: Dp = 9.dp,
     pronouncedCornerRadius: Dp = 32.dp,
 ): RoundedCornerShape {
-    val startCorners = if (first) pronouncedCornerRadius else defaultCornerRadius
-    val endCorners = if (last) pronouncedCornerRadius else defaultCornerRadius
+    val startCorners by animateDpAsState(if (first) pronouncedCornerRadius else defaultCornerRadius, label = "startCorners")
+    val endCorners by animateDpAsState(if (last) pronouncedCornerRadius else defaultCornerRadius, label = "endCorners")
     return RoundedCornerShape(
         topStart = startCorners,
         topEnd = endCorners,
@@ -45,6 +51,7 @@ fun firstLastCornersHorizontal(
 /**
  * Provides a shape to round the first and last Chips in a row (by default).
  */
+@Composable
 fun firstLastCornersChip(
     first: Boolean = false,
     last: Boolean = false,
@@ -57,3 +64,13 @@ fun firstLastCornersChip(
     pronouncedCornerRadius = pronouncedCornerRadius
 )
 
+fun RoundedCornerShape.adjustForParent(
+    first: Boolean,
+    last: Boolean,
+    defaultCornerRadius: Dp = 9.dp,
+): RoundedCornerShape = this.copy(
+    bottomStart = if (!last) CornerSize(defaultCornerRadius) else this.bottomStart,
+    bottomEnd = if (!last) CornerSize(defaultCornerRadius) else this.bottomEnd,
+    topStart = if (!first) CornerSize(defaultCornerRadius) else this.topStart,
+    topEnd = if (!first) CornerSize(defaultCornerRadius) else this.topEnd,
+)

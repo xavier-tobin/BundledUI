@@ -1,45 +1,114 @@
 package com.xaviertobin.bundledui.buttons
 
-import androidx.annotation.StringRes
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.UnitFunction
+import com.xaviertobin.bundledui.base.firstLastCornersChip
+import com.xaviertobin.bundledui.base.maybeClickable
+import com.xaviertobin.bundledui.color.alpha
+
+
+object IconButtonDefaults {
+    val margin = PaddingValues(end = 4.dp, top = 4.dp, bottom = 4.dp)
+    val padding = PaddingValues(8.dp)
+}
 
 @Composable
 fun IconButton(
     icon: ImageVector,
     contentDescription: String,
     modifier: Modifier = Modifier,
-    tint: Color = MaterialTheme.colorScheme.primary,
+    color: Color = MaterialTheme.colorScheme.primary,
+    margin: PaddingValues = IconButtonDefaults.margin,
+    padding: PaddingValues = IconButtonDefaults.padding,
+    size: Dp = 24.dp,
+    backgroundColor: Color = Color.Transparent,
+    enabled: Boolean = true,
     onClick: UnitFunction
 ) {
-    IconButton(onClick = onClick, modifier = modifier) {
+    Box(
+        modifier = modifier
+            .padding(margin)
+            .clip(CircleShape)
+            .background(
+                color = backgroundColor,
+                shape = CircleShape
+            )
+            .maybeClickable(
+                enabled = enabled,
+                onClick = onClick
+            )
+            .padding(padding)
+    ) {
         Icon(
             imageVector = icon,
             contentDescription = contentDescription,
-            tint = tint,
+            tint = color,
+            modifier = Modifier.size(size)
         )
     }
 }
 
-// TODO remove StringRes version
+
 @Composable
-fun IconButton(
+fun SectionIconButton(
     icon: ImageVector,
-    @StringRes contentDescription: Int,
+    contentDescription: String,
     modifier: Modifier = Modifier,
-    tint: Color = MaterialTheme.colorScheme.primary,
+    first: Boolean = false,
+    last: Boolean = false,
+    color: Color = MaterialTheme.colorScheme.primary,
+    margin: PaddingValues = PaddingValues(
+        end = 4.dp,
+    ),
+    padding: PaddingValues = PaddingValues(
+        start = if (first) 10.dp else  8.dp,
+        end = if (last) 10.dp else 8.dp,
+        top = 8.dp,
+        bottom = 8.dp
+    ),
+    backgroundColor: Color = MaterialTheme.colorScheme.tertiary.alpha(0.1f),
+    enabled: Boolean = true,
     onClick: UnitFunction
-) = IconButton(
-    icon = icon,
-    contentDescription = stringResource(contentDescription),
-    modifier = modifier,
-    tint = tint,
-    onClick = onClick
-)
+) {
+
+    val shape = firstLastCornersChip(
+        first,
+        last,
+    )
+
+    Box(
+        modifier = modifier
+            .padding(margin)
+            .clip(shape)
+            .background(
+                color = backgroundColor,
+                shape = shape
+            )
+            .clickable(
+                enabled = enabled,
+                onClick = onClick
+            )
+            .padding(padding)
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = contentDescription,
+            tint = color,
+        )
+    }
+}

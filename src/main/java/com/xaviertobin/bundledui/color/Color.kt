@@ -1,6 +1,7 @@
 package com.xaviertobin.bundledui.color
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.core.graphics.ColorUtils
 import com.xaviertobin.bundledui.theme.BaseTheme
 
@@ -15,35 +16,56 @@ fun test() {
 val Color.Companion.LighterGray
     get() = Color(0xFFF0F0F0)
 
+fun HSBColor.rotateHue(by: Float = 180f): HSBColor {
+    return this.copy(
+        hue = (this.hue + by) % 360
+    )
+}
+
 /**
  * Returns the complementary color on the Color wheel
  */
 fun Color.rotateHue(by: Float = 180f): Color {
-    val hsb = this.toHsb()
-    return hsb.copy(
-        hue = (hsb.hue + by) % 360
-    ).toComposeColor()
+  return  this.hsb().rotateHue(by = by).toColor()
+}
+
+fun Color.hue(): Float {
+    val hsb = this.hsb()
+    return hsb.hue
+}
+
+fun HSBColor.adjust(relativeSaturationBy: Float = 0.0f, relativeBrightnessBy: Float = 0.0f): HSBColor {
+    return this.copy(
+        saturation = (this.saturation + relativeSaturationBy).coerceIn(0f, 1f),
+        brightness = (this.brightness + relativeBrightnessBy).coerceIn(0f, 1f),
+    )
 }
 
 
-fun Color.adjust(relativeSaturationBy: Float = 0.0f, relativeBrightnessBy: Float = 0.0f): Color {
-    val current = this.toHsb()
+fun Color.adjust(saturationBy: Float = 0.0f, brightnessBy: Float = 0.0f): Color {
+    return hsb().adjust(
+        relativeSaturationBy = saturationBy,
+        relativeBrightnessBy = brightnessBy
+    ).toColor()
+}
 
-    return current.copy(
-        saturation = (current.saturation + relativeSaturationBy).coerceIn(0f, 1f),
-        brightness = (current.brightness + relativeBrightnessBy).coerceIn(0f, 1f),
-    ).toComposeColor()
+fun Color.deintensify(by: Float = 0.12f): Color {
+    val intensity = -this.getIntensityReduction(by)
+    return this.adjust(
+        saturationBy = intensity,
+        brightnessBy = intensity,
+    )
 }
 
 fun Color.deintensifySaturation(by: Float = 0.12f): Color {
     return this.adjust(
-        relativeSaturationBy = -this.getIntensityReduction(by),
+        saturationBy = -this.getIntensityReduction(by),
     )
 }
 
 fun Color.deintensifyBrightness(by: Float = 0.12f): Color {
     return this.adjust(
-        relativeBrightnessBy = -this.getIntensityReduction(by),
+        brightnessBy = -this.getIntensityReduction(by),
     )
 }
 
@@ -52,6 +74,9 @@ fun Color.perceivedLightness(): Float {
     return luminance.coerceIn(0.0f, 1.0f)
 }
 
+fun Color.normalizedLuminance(): Float {
+    return this.hsb().toColor(saturation = 1f, brightness = 1f).luminance()
+}
 
 fun Color.getIntensityReduction(degree: Float = 0.25f) =
     (degree * this.perceivedLightness()).toFloat()
@@ -81,10 +106,10 @@ fun Color.dulled(forTheme: BaseTheme, by: Float = 0.4f): Color {
         BaseTheme.OLED -> 0.9f - intensityGivenColor
     }
 
-    return this.toHsb().copy(
+    return this.hsb().copy(
         saturation = saturation.toFloat(),
         brightness = brightness
-    ).toComposeColor()
+    ).toColor()
 }
 
 fun Color.Companion.randomAestheticColor(): Color {
@@ -101,7 +126,7 @@ fun Color.Companion.randomAestheticColor(): Color {
         hue = niceHueRanges.random().random(),
         saturation = saturation,
         brightness = brightness
-    ).toComposeColor()
+    ).toColor()
 }
 
 fun ClosedFloatingPointRange<Float>.random(): Float {
