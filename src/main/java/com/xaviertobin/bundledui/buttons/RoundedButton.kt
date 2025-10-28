@@ -6,6 +6,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,6 +44,7 @@ fun RoundedButtonBase(
     containerColor: Color = vividContainerColorForTone(tone),
     textColor: Color = vividTextColorForTone(tone),
     enabled: Boolean = true,
+    elevation: ButtonElevation = ButtonDefaults.buttonElevation(),
     contentPadding: PaddingValues = RoundedButtonPadding,
     endContent: (@Composable () -> Unit)? = null,
     onClick: UnitFunction?,
@@ -54,6 +56,7 @@ fun RoundedButtonBase(
             containerColor = containerColor,
             disabledContainerColor = containerColor
         ),
+        elevation = elevation,
         modifier = Modifier
             .alpha(if (enabled) 1f else 0.7f)
             .then(modifier),
@@ -110,6 +113,7 @@ fun RoundedButton(
     modifier: Modifier = Modifier,
     tone: Tone = Tone.POSITIVE,
     enabled: Boolean = true,
+    elevation: ButtonElevation = ButtonDefaults.buttonElevation(),
     containerColor: Color = vividContainerColorForTone(tone),
     textColor: Color = vividTextColorForTone(tone),
     contentPadding: PaddingValues = RoundedButtonPadding,
@@ -121,6 +125,7 @@ fun RoundedButton(
     tone = tone,
     containerColor = containerColor,
     contentPadding = contentPadding,
+    elevation = elevation,
     onClick = onClick,
     enabled = enabled,
     textColor = textColor,
@@ -144,6 +149,7 @@ fun RoundedButtonSheet(
     modifier: Modifier = Modifier,
     tone: Tone = Tone.NEUTRAL,
     icon: ImageVector? = null,
+    elevation: ButtonElevation = ButtonDefaults.buttonElevation(),
     containerColor: Color = vividContainerColorForTone(tone),
     textColor: Color = vividTextColorForTone(tone),
     contentPadding: PaddingValues = RoundedButtonPadding,
@@ -155,6 +161,7 @@ fun RoundedButtonSheet(
                 modifier = modifier,
                 tone = tone,
                 icon = icon,
+                elevation = elevation,
                 containerColor = containerColor,
                 textColor = textColor,
                 contentPadding = contentPadding
