@@ -82,7 +82,7 @@ fun buildCustomTypography(
         bodySmall = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Normal,
-            fontSize = 13.5.sp * fontScale,
+            fontSize = 13.sp * fontScale,
             color = colorScheme.text,
         ),
         labelLarge = TextStyle(
