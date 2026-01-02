@@ -24,7 +24,7 @@ fun SectionHeader(
     text: String,
     color: Color? = null
 ) = Text(
-        modifier = Modifier.padding(start = 26.dp, top = 10.dp, bottom = 6.dp),
+        modifier = Modifier.padding(start = 26.dp, top = 10.dp, bottom = 8.dp),
         text = text,
         style = MaterialTheme.typography.labelLarge,
         color = color ?: MaterialTheme.colorScheme.primary,

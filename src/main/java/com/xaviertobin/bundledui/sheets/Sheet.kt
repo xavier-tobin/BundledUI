@@ -64,7 +64,7 @@ import com.xaviertobin.bundledui.theme.text
 typealias UnitFunction = () -> Unit
 typealias ComposableFunction = @Composable () -> Unit
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun Sheet(
     onDismiss: UnitFunction,
@@ -92,6 +92,16 @@ fun Sheet(
 
             if (userDismissible) {
                 SheetDragHandleShield(sheetValue = sheetState, isFullscreen = isFullscreen)
+            } else {
+                Spacer(
+                    modifier = Modifier
+                        .height(
+                            WindowInsets.statusBarsIgnoringVisibility
+                                .asPaddingValues()
+                                .calculateTopPadding()
+                        )
+                        .fillMaxWidth()
+                )
             }
 
 

@@ -6,6 +6,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
@@ -22,7 +23,8 @@ fun LoadingOrIcon(
     iconDescription: String,
     tint: Color = iconColorForTone(tone),
     size: Dp = 24.dp,
-    endPadding: Dp = 6.dp
+    endPadding: Dp = 6.dp,
+    alpha: Float = 1f
 ) {
     AnimatedHorizontalVisibility(visible = loadingFromClick || icon != null) {
         if (loadingFromClick) {
@@ -39,7 +41,8 @@ fun LoadingOrIcon(
                 iconDescription = iconDescription,
                 color = tint,
                 size = size,
-                endPadding = endPadding
+                endPadding = endPadding,
+                alpha = alpha
             )
         }
     }
@@ -51,7 +54,8 @@ fun EndIcon(
     color: Color,
     iconDescription: String,
     size: Dp = 24.dp,
-    endPadding: Dp = 6.dp
+    endPadding: Dp = 6.dp,
+    alpha: Float = 1f
 ) = Icon(
     imageVector = icon,
     contentDescription = iconDescription,
@@ -59,4 +63,5 @@ fun EndIcon(
     modifier = Modifier
         .padding(start = 10.dp, end = endPadding)
         .size(size)
+        .alpha(alpha)
 )

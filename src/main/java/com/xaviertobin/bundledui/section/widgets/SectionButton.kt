@@ -3,10 +3,15 @@ package com.xaviertobin.bundledui.section.widgets
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ChevronRight
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.base.UnitFunction
 import com.xaviertobin.bundledui.section.base.SectionDefaults
@@ -56,13 +61,26 @@ fun SectionButton(
     contentEnd = {
         LoadingOrIcon(
             loadingFromClick = loadingFromClick,
-            icon = icon,
+            icon = Icons.Rounded.ChevronRight,
             tone = tone,
             iconDescription = title,
             tint = SectionDefaults.iconColor(
                 selected = selected == true,
                 tone = tone
-            )
+            ),
+            endPadding = 0.dp,
+            alpha = 0.6f
+        )
+    },
+    contentStart = {
+        Icon(
+            imageVector = icon,
+            contentDescription = title,
+            tint = SectionDefaults.iconColor(
+                selected = selected == true,
+                tone = tone
+            ),
+            modifier = Modifier.padding(end = if (orientation == SectionOrientation.HORIZONTAL) 0.dp else 18.dp)
         )
     }
 )

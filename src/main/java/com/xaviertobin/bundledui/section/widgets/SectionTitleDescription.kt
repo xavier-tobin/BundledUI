@@ -146,7 +146,7 @@ fun SectionTitleDescription(
             title = title,
             description = description,
             textColor = textColor,
-            contentTop = contentEnd,
+            contentTop = contentStart,
             contentBottom = contentBottom,
         )
     }

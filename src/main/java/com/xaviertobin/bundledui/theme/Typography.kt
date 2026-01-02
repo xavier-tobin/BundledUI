@@ -64,7 +64,7 @@ fun buildCustomTypography(
         titleSmall = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Medium,
-            fontSize = 15.5.sp * fontScale,
+            fontSize = 16.sp * fontScale,
             color = colorScheme.text
         ),
         bodyLarge = TextStyle(

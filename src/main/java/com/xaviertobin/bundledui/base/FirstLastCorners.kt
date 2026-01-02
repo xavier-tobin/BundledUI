@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 fun firstLastCornersVertical(
     first: Boolean = false,
     last: Boolean = false,
-    defaultCornerRadius: Dp = 9.dp,
+    defaultCornerRadius: Dp = 6.dp,
     pronouncedCornerRadius: Dp = 32.dp,
 ): RoundedCornerShape {
     val topCorners by animateDpAsState(if (first) pronouncedCornerRadius else defaultCornerRadius, label = "topCorners")
