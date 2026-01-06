@@ -52,7 +52,7 @@ fun LoadingOrIcon(
 fun EndIcon(
     icon: ImageVector,
     color: Color,
-    iconDescription: String,
+    iconDescription: String?,
     size: Dp = 24.dp,
     endPadding: Dp = 6.dp,
     alpha: Float = 1f
