@@ -62,7 +62,7 @@ fun SectionTitleDescriptionIcon(
     containerColor = containerColor,
     textColor = textColor,
     enabled = enabled,
-    contentEnd = {
+    contentStart = {
         EndIcon(
             icon = icon,
             iconDescription = title,
