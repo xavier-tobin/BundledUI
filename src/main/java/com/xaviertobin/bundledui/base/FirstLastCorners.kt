@@ -16,7 +16,7 @@ fun firstLastCornersVertical(
     first: Boolean = false,
     last: Boolean = false,
     defaultCornerRadius: Dp = 6.dp,
-    pronouncedCornerRadius: Dp = 32.dp,
+    pronouncedCornerRadius: Dp = 30.dp,
 ): RoundedCornerShape {
     val topCorners by animateDpAsState(if (first) pronouncedCornerRadius else defaultCornerRadius, label = "topCorners")
     val bottomCorners by animateDpAsState( if (last) pronouncedCornerRadius else defaultCornerRadius, label = "bottomCorners")
@@ -35,8 +35,8 @@ fun firstLastCornersVertical(
 fun firstLastCornersHorizontal(
     first: Boolean = false,
     last: Boolean = false,
-    defaultCornerRadius: Dp = 9.dp,
-    pronouncedCornerRadius: Dp = 32.dp,
+    defaultCornerRadius: Dp = 6.dp,
+    pronouncedCornerRadius: Dp = 30.dp,
 ): RoundedCornerShape {
     val startCorners by animateDpAsState(if (first) pronouncedCornerRadius else defaultCornerRadius, label = "startCorners")
     val endCorners by animateDpAsState(if (last) pronouncedCornerRadius else defaultCornerRadius, label = "endCorners")

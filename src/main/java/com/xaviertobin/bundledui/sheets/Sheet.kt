@@ -71,7 +71,7 @@ fun Sheet(
     title: String? = null,
     forceFullscreen: Boolean = false,
     userDismissible: Boolean = true,
-    horizontalPadding: Dp = 22.dp,
+    horizontalPadding: Dp = 20.dp,
     disableScroll: Boolean = false,
     defaultContentPadding: PaddingValues = PaddingValues(
         start = horizontalPadding,
@@ -151,9 +151,9 @@ fun SheetTitle(
     title: String,
     isFullscreen: Boolean = false,
     padding: PaddingValues = PaddingValues(
-        top = 10.dp,
-        start = 38.dp,
-        bottom = 14.dp,
+        top = 4.dp,
+        start = 32.dp,
+        bottom = 16.dp,
         end = 20.dp
     )
 ) {

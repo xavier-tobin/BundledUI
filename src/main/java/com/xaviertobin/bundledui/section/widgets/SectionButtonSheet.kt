@@ -1,5 +1,6 @@
 package com.xaviertobin.bundledui.section.widgets
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -44,6 +45,41 @@ fun SectionButtonSheet(
         enabledContent = sheetLayout
     )
 }
+
+@Composable
+fun SectionButtonSheet(
+    title: String,
+    @StringRes icon: Int,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+    first: Boolean = false,
+    last: Boolean = false,
+    selected: Boolean? = null,
+    tone: Tone = Tone.NEUTRAL,
+    orientation: SectionOrientation = SectionOrientation.VERTICAL,
+    textColor: Color = sectionTextColorForTone(selected, tone),
+    sheetLayout: @Composable (onDismiss: () -> Unit) -> Unit
+) {
+    ToggleComposable(
+        defaultContent = { onShow ->
+            SectionButton(
+                title = title,
+                description = description,
+                icon = icon,
+                modifier = modifier,
+                first = first,
+                last = last,
+                selected = selected,
+                tone = tone,
+                textColor = textColor,
+                orientation = orientation,
+                onClick = { onShow() }
+            )
+        },
+        enabledContent = sheetLayout
+    )
+}
+
 
 @Composable
 fun RowScope.SectionButtonSheet(
