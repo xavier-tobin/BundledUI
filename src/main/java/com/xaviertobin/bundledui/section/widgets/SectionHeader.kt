@@ -40,7 +40,7 @@ fun SectionHeader(
         verticalAlignment = Alignment.Bottom,
     ) {
         Text(
-            modifier = Modifier.padding(bottom = 12.dp, top = 10.dp),
+            modifier = Modifier.padding(bottom = 10.dp, top = 10.dp),
             text = text,
             style = MaterialTheme.typography.labelLarge,
             color = color ?: MaterialTheme.colorScheme.primary,
