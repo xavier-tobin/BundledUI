@@ -11,6 +11,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -53,6 +54,9 @@ fun IconButton(
                 onClick = onClick
             )
             .padding(padding)
+            .alpha(
+                if (enabled) 1f else 0.6f
+            )
     ) {
         Icon(
             imageVector = icon,
