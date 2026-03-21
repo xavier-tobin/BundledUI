@@ -39,8 +39,8 @@ fun AnimatedVerticalVisibility(
 
 
 val fastSpring = spring(
-    stiffness = 500f,
-    dampingRatio = Spring.DampingRatioNoBouncy,
+    stiffness = 600f,
+    dampingRatio = Spring.DampingRatioLowBouncy,
     visibilityThreshold = IntSize.VisibilityThreshold
 )
 
