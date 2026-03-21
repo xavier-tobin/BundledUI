@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentType
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
@@ -70,7 +71,7 @@ fun SectionTextInput(
     enabled: Boolean = true,
     errorMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+    keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Next, capitalization = KeyboardCapitalization.Sentences),
     onValueChange: (value: String) -> Unit,
 ) {
 
@@ -123,7 +124,7 @@ fun SectionTextInput(
             interactionSource = interactionSource,
             keyboardOptions = keyboardOptions,
             enabled = enabled,
-            visualTransformation = visualTransformation
+            visualTransformation = visualTransformation,
         ) { innerTextField ->
             TextFieldDefaults.DecorationBox(
                 value = value,
@@ -134,6 +135,7 @@ fun SectionTextInput(
                 isError = isError,
                 enabled = enabled,
                 colors = sectionTextInputColors(),
+
                 placeholder = { SectionTextInputPlaceholder(placeholder, fontSize) },
                 contentPadding = sectionTextInputContentPadding,
             )

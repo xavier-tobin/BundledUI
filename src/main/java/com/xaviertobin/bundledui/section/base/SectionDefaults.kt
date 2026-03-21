@@ -83,15 +83,15 @@ object SectionDefaults {
     fun verticalMarginValues(
         last: Boolean = false,
     ): PaddingValues {
-        val result by animateDpAsState(if (last) 16.dp else 2.dp, label = "verticalMarginValues")
+        val result by animateDpAsState(if (last) 16.dp else 1.5.dp, label = "verticalMarginValues")
         return PaddingValues(
             bottom = result,
-            top = 2.dp
+            top = 1.5.dp
         )
     }
 
     fun horizontalMarginValues() = PaddingValues(
-        end = 5.dp,
+        end = 3.dp,
         start = 0.dp,
         bottom = 16.dp
     )

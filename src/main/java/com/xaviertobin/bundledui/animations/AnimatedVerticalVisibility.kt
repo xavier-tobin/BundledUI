@@ -2,6 +2,9 @@ package com.xaviertobin.bundledui.animations
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.VisibilityThreshold
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -12,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -29,5 +33,28 @@ fun AnimatedVerticalVisibility(
     modifier = Modifier
         .then(modifier)
         .clip(RoundedCornerShape(clipRadius)),
+    content = content
+)
+
+
+
+val fastSpring = spring(
+    stiffness = 600f,
+    dampingRatio = Spring.DampingRatioLowBouncy,
+    visibilityThreshold = IntSize.VisibilityThreshold
+)
+
+@Composable
+fun AnimatedFastVerticalVisibility(
+    visible: Boolean,
+    modifier: Modifier = Modifier,
+    content: @Composable (AnimatedVisibilityScope.() -> Unit)
+) = AnimatedVisibility(
+    visible = visible,
+    enter = fadeIn()
+            + expandVertically(fastSpring),
+    exit = shrinkVertically(fastSpring)
+            + fadeOut(),
+    modifier = modifier,
     content = content
 )

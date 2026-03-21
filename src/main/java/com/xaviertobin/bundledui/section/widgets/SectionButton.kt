@@ -1,6 +1,7 @@
 package com.xaviertobin.bundledui.section.widgets
 
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.xaviertobin.bundledui.base.Tone
 import com.xaviertobin.bundledui.base.UnitFunction
@@ -75,6 +77,72 @@ fun SectionButton(
     contentStart = {
         Icon(
             imageVector = icon,
+            contentDescription = title,
+            tint = SectionDefaults.iconColor(
+                selected = selected == true,
+                tone = tone
+            ),
+            modifier = Modifier.padding(end = if (orientation == SectionOrientation.HORIZONTAL) 0.dp else 16.dp)
+        )
+    }
+)
+
+
+@Composable
+fun SectionButton(
+    title: String,
+    @StringRes icon: Int,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+    first: Boolean = false,
+    last: Boolean = false,
+    selected: Boolean? = null,
+    tone: Tone = Tone.NEUTRAL,
+    orientation: SectionOrientation = SectionOrientation.VERTICAL,
+    containerColor : Color = SectionDefaults.containerColor(
+        selected = selected,
+        focused = false,
+        tone = tone
+    ),
+    margin: PaddingValues = SectionDefaults.marginValues(
+        orientation = orientation,
+        last = last
+    ),
+    textColor: Color = sectionTextColorForTone(selected, tone),
+    loadingFromClick: Boolean = false,
+    onLongClick: UnitFunction? = null,
+    onClick: UnitFunction,
+) = SectionTitleDescription(
+    first = first,
+    last = last,
+    onClick = onClick,
+    selected = selected,
+    modifier = modifier,
+    title = title,
+    description = description,
+    onLongClick = onLongClick,
+    tone = tone,
+    containerColor = containerColor,
+    textColor = textColor,
+    orientation = orientation,
+    margin = margin,
+    contentEnd = {
+        LoadingOrIcon(
+            loadingFromClick = loadingFromClick,
+            icon = Icons.Rounded.ChevronRight,
+            tone = tone,
+            iconDescription = title,
+            tint = SectionDefaults.iconColor(
+                selected = selected == true,
+                tone = tone
+            ),
+            endPadding = 0.dp,
+            alpha = 0.6f
+        )
+    },
+    contentStart = {
+        Icon(
+            painter = painterResource(id = icon),
             contentDescription = title,
             tint = SectionDefaults.iconColor(
                 selected = selected == true,
