@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,7 +33,6 @@ import com.xaviertobin.bundledui.section.base.Section
 import com.xaviertobin.bundledui.section.base.SectionDefaults
 import com.xaviertobin.bundledui.section.base.SectionOrientation
 import com.xaviertobin.bundledui.section.base.sectionTextColorForTone
-import com.xaviertobin.bundledui.section.extras.EndIcon
 
 
 @Composable
@@ -53,23 +53,27 @@ fun SectionTitleDescriptionIcon(
     enabled: Boolean = true,
     icon: ImageVector,
 ) = SectionTitleDescription(
-    title = title,
-    description = description,
     first = first,
     last = last,
     selected = selected,
+    modifier = modifier,
+    title = title,
+    description = description,
+    enabled = enabled,
     tone = tone,
     containerColor = containerColor,
     textColor = textColor,
-    enabled = enabled,
     contentStart = {
-        EndIcon(
-            icon = icon,
-            iconDescription = title,
-            color = textColor
+        Icon(
+            icon,
+            contentDescription = title,
+            tint = SectionDefaults.iconColor(
+                selected = selected == true,
+                tone = tone
+            ),
+            modifier = Modifier.padding(end = 18.dp)
         )
-    },
-    modifier = modifier,
+    }
 )
 
 
@@ -259,6 +263,8 @@ fun SectionTitleDescriptionsPreview() {
     Column {
 
         SectionButton(title = "Button", icon = Icons.Rounded.Add, first = true) { }
+
+        SectionTitleDescriptionIcon(title = "Button", icon = Icons.Rounded.Add)
         SectionSwitch(
             title = "Enable feature",
             checked = toggledOn1,
