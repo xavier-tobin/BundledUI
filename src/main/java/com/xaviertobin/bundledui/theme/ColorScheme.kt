@@ -11,7 +11,6 @@ import com.xaviertobin.bundledui.color.LighterGray
 import com.xaviertobin.bundledui.color.alpha
 import com.xaviertobin.bundledui.color.blend
 import com.xaviertobin.bundledui.color.dulled
-import com.xaviertobin.bundledui.color.rotateHue
 
 
 /**
@@ -53,7 +52,7 @@ fun defaultLightColorScheme() = lightColorScheme(
 
 data class CustomMaterialYouColors(
     val primary: Color,
-    val tertiary: Color = primary,
+    val tertiary: Color? = null
 )
 
 
@@ -67,7 +66,7 @@ fun customColorScheme(
 ): ColorScheme {
 
     val actualPrimary = colors.primary.dulled(theme)
-    val actualTertiary = colors.tertiary.rotateHue(180f).dulled(theme)
+    val actualTertiary = (colors.tertiary ?: colors.primary).dulled(theme)
 
     val baseTone = when (theme) {
         BaseTheme.LIGHT -> Color.White
