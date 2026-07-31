@@ -82,6 +82,7 @@ fun Sheet(
     subtitle: @Composable (() -> Unit)? = null,
     forceFullscreen: Boolean = false,
     autoFullscreenAfterInitialLoad: Boolean = true,
+    skipOpeningAnimation: Boolean = false,
     userDismissible: Boolean = true,
     horizontalPadding: Dp = 20.dp,
     disableScroll: Boolean = false,
@@ -108,6 +109,7 @@ fun Sheet(
         onDismiss = onDismiss,
         forceFullscreen = forceFullscreen,
         autoFullscreenAfterInitialLoad = autoFullscreenAfterInitialLoad,
+        skipOpeningAnimation = skipOpeningAnimation,
         userDismissible = userDismissible,
         naturalContentHeight = naturalContentHeight,
     ) { sheetState, isFullscreen ->
@@ -255,7 +257,7 @@ fun SheetSubtitle(text: String) {
         text = text,
         color = MaterialTheme.colorScheme.tertiary.alpha(0.85f),
         style = MaterialTheme.typography.bodyLarge,
-        modifier = Modifier.padding(top = 4.dp, start = 1.dp)
+        modifier = Modifier.padding(top = 4.dp, start = 10.dp)
     )
 }
 
@@ -333,6 +335,7 @@ fun SheetBase(
     properties: ModalBottomSheetProperties? = null,
     forceFullscreen: Boolean = false,
     autoFullscreenAfterInitialLoad: Boolean = true,
+    skipOpeningAnimation: Boolean = false,
     contentWindowInsets: @Composable () -> WindowInsets = { WindowInsets.ime },
     userDismissible: Boolean = true,
     naturalContentHeight: Int = 0,
@@ -340,7 +343,7 @@ fun SheetBase(
 ) {
 
     val modalSheetState = rememberBottomSheetState(
-        initialValue = SheetValue.Hidden,
+        initialValue = if (skipOpeningAnimation) SheetValue.Expanded else SheetValue.Hidden,
         enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
         confirmValueChange = { userDismissible || it == SheetValue.Expanded }
     )

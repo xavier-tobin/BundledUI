@@ -71,7 +71,7 @@ fun RoundedButtonBase(
             textAlign = TextAlign.End,
             fontSize = 15.sp,
             modifier = Modifier.padding(
-                end = if (endContent == null) 0.dp else 2.dp
+                end = if (endContent == null) 4.dp else 2.dp
             )
         )
         endContent?.invoke()

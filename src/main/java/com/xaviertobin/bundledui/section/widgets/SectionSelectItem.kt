@@ -75,9 +75,9 @@ fun <T> SectionSelectItem(
                 )
             }
             .padding(0.9.dp)
-            .animateContentSize()
+            .animateContentSize(animationSpec = MaterialTheme.motionScheme.defaultSpatialSpec())
             .clip(shape)
-            ,
+        ,
         verticalAlignment = Alignment.CenterVertically
     ) {
 

@@ -15,9 +15,8 @@ fun buildCustomTypography(
     return Typography(
         displayLarge = TextStyle(
             fontFamily = font,
-            fontWeight = FontWeight.Normal,
-            fontSize = 16.sp * fontScale,
-            color = colorScheme.text
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 32.sp * fontScale,
         ),
         displayMedium = TextStyle(
             fontFamily = font,
@@ -59,7 +58,6 @@ fun buildCustomTypography(
             fontFamily = font,
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp * fontScale,
-            color = colorScheme.text
         ),
         titleSmall = TextStyle(
             fontFamily = font,
