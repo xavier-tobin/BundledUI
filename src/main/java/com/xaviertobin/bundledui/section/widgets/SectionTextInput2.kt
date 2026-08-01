@@ -13,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TextFieldLabelPosition
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -89,6 +90,7 @@ fun SectionTextInput2(
             textStyle = MaterialTheme.typography.bodyLarge.copy(
                 fontSize = fontSize,
             ),
+            labelPosition = TextFieldLabelPosition.Above(),
             interactionSource = interactionSource,
             label = if (label != null) {
                 {
@@ -105,7 +107,7 @@ fun SectionTextInput2(
                 SectionTextInputPlaceholder(
                     placeholder = placeholder,
                     fontSize = fontSize,
-                    extraTopPadding = 2.5.dp
+                    extraTopPadding = 0.dp
                 )
             },
             isError = isError,
@@ -118,8 +120,8 @@ fun SectionTextInput2(
                 )
             } else {
                 TextFieldDefaults.contentPaddingWithLabel(
-                    top = 8.dp,
-                    bottom = 10.dp,
+                    top = 4.dp,
+                    bottom = 14.dp,
                     start = 4.dp,
                     end = 0.dp
                 )
@@ -152,7 +154,8 @@ fun SectionTextInput2Label(
         modifier = Modifier
             .padding(
                 bottom = 6.dp,
-                start = 4.dp
+                start = 4.dp,
+                top = 4.dp
             )
             .offset(x = (-4).dp)
     )
